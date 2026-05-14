@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ApplyForm from "@/components/ApplyForm";
 
 export const metadata: Metadata = {
   title: "Apply as a VA — Start Your VA Career",
@@ -67,47 +68,17 @@ export default function ApplyPage() {
             ))}
           </div>
 
-          {/* ── Tally form embed ────────────────────────────────────── */}
-          {/* Embed method: Tally popup button — cleaner than inline iframe;
-              avoids scroll-within-scroll on mobile; Tally's inline iframe
-              has known height-calculation issues with app router. */}
+          {/* ── Application form ────────────────────────────────────── */}
           <div
-            className="rounded-2xl p-10 md:p-14 text-center"
+            className="rounded-2xl p-10 md:p-14"
             style={{ backgroundColor: "#ffffff", border: "1px solid #cbd5e1" }}
           >
-            <span className="teal-accent mx-auto" />
-            <h2 className="mb-4">Ready to apply?</h2>
-            <p className="mb-8 max-w-md mx-auto" style={{ color: "#64748b" }}>
+            <h2 className="mb-2">Ready to apply?</h2>
+            <p className="mb-8" style={{ color: "#64748b" }}>
               Our application takes about 10 minutes. Be specific about your
               experience — it helps us match you with the right employers.
             </p>
-
-            {/* Tally form VLVZbE — opens in new tab for clean UX */}
-            <a
-              href="https://tally.so/r/VLVZbE"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary text-base inline-flex"
-            >
-              Open Application Form
-              <svg
-                className="w-4 h-4 ml-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </a>
-            <p className="text-xs mt-4" style={{ color: "#94a3b8" }}>
-              Opens in a new tab. Powered by Tally.
-            </p>
+            <ApplyForm />
           </div>
         </div>
       </section>

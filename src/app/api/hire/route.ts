@@ -71,5 +71,33 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Submission failed. Please try again.' }, { status: 502 });
   }
 
+  // Supabase insert — fire and forget, never fails the user submission
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+  if (supabaseUrl && supabaseKey) {
+    await fetch(`${supabaseUrl}/rest/v1/employer_leads`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`,
+        'Prefer': 'return=minimal',
+      },
+      body: JSON.stringify(body),
+    }).catch(err => console.error('Supabase employer_leads insert failed:', err));
+  }
+
+  // Discord alert — fire and forget
+  const discordWebhook = process.env.DISCORD_WEBHOOK_OPS;
+  if (discordWebhook) {
+    await fetch(discordWebhook, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content: `📋 **New Employer Lead** — ${body.company_name} (${body.employer_name})\nEmail: ${body.email} | Role: ${body.va_role || 'not specified'}`,
+      }),
+    }).catch(err => console.error('Discord alert failed:', err));
+  }
+
   return NextResponse.json({ ok: true });
 }
