@@ -64,7 +64,7 @@ export default function HirePage() {
             ))}
           </div>
 
-          {/* ── Hire form placeholder ───────────────────────────────── */}
+          {/* ── Hire form ──────────────────────────────────────────────── */}
           <div
             className="rounded-2xl p-10 md:p-14"
             style={{ backgroundColor: "#ffffff", border: "1px solid #cbd5e1" }}
@@ -75,9 +75,6 @@ export default function HirePage() {
               qualified candidates from our certified pipeline.
             </p>
 
-            {/* Form POSTs to NEXT_PUBLIC_HUBSPOT_EMPLOYER_WEBHOOK_URL (automation-hub:4020/va-intake).
-                Mako: add NEXT_PUBLIC_HUBSPOT_EMPLOYER_WEBHOOK_URL=http://146.190.145.245:4020/va-intake
-                to the Vercel project environment variables before go-live. */}
             <HireForm />
           </div>
         </div>

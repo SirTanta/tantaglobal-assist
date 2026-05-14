@@ -55,21 +55,18 @@ export default function HireForm() {
     setState({ status: "submitting", errorMessage: "" });
 
     try {
-      const endpoint = process.env.NEXT_PUBLIC_HUBSPOT_EMPLOYER_WEBHOOK_URL;
-
-      if (!endpoint) {
-        throw new Error("Webhook URL is not configured. Contact hire@tantaglobal.com.");
-      }
-
-      const res = await fetch(endpoint, {
+      const res = await fetch("/api/hire", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
+      const json = await res.json().catch(() => ({}));
+
       if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw new Error(text || `Server returned ${res.status}`);
+        throw new Error(
+          (json as { error?: string }).error || "Submission failed. Please try again."
+        );
       }
 
       setState({ status: "success", errorMessage: "" });
