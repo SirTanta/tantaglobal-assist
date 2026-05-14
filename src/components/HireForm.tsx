@@ -19,6 +19,8 @@ const inputFocusRing = "focus:ring-[#0D5C63] focus:border-[#0D5C63]";
 const labelClass = "text-sm font-semibold block mb-1.5";
 const labelStyle = { color: "#2D3748" };
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function HireForm() {
   const [state, setState] = useState<FormState>({
     status: "idle",
@@ -37,18 +39,24 @@ export default function HireForm() {
       employer_name: (data.get("employer_name") as string).trim(),
       company_name: (data.get("company_name") as string).trim(),
       email: (data.get("email") as string).trim(),
-      phone: (data.get("phone") as string).trim(),
-      website: (data.get("website") as string).trim(),
-      va_role: (data.get("va_role") as string).trim(),
-      hours_per_week: (data.get("hours_per_week") as string).trim(),
-      budget: (data.get("budget") as string).trim(),
-      start_date: (data.get("start_date") as string).trim(),
-      message: (data.get("message") as string).trim(),
+      phone: ((data.get("phone") as string) ?? "").trim(),
+      website: ((data.get("website") as string) ?? "").trim(),
+      va_role: ((data.get("va_role") as string) ?? "").trim(),
+      hours_per_week: ((data.get("hours_per_week") as string) ?? "").trim(),
+      budget: ((data.get("budget") as string) ?? "").trim(),
+      start_date: ((data.get("start_date") as string) ?? "").trim(),
+      message: ((data.get("message") as string) ?? "").trim(),
     };
 
     // Guard — required fields
     if (!payload.employer_name || !payload.company_name || !payload.email) {
       setState({ status: "error", errorMessage: "Please fill in all required fields." });
+      return;
+    }
+
+    // Client-side email format check (noValidate is set on the form)
+    if (!EMAIL_RE.test(payload.email)) {
+      setState({ status: "error", errorMessage: "Please enter a valid email address." });
       return;
     }
 
