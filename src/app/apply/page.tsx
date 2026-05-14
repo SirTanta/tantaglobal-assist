@@ -11,9 +11,7 @@ export default function ApplyPage() {
     <>
       {/* ── Page header ───────────────────────────────────────────────── */}
       <section
-        style={{
-          background: "linear-gradient(135deg, #0a1628 0%, #0f2044 50%, #0a1628 100%)",
-        }}
+        style={{ backgroundColor: "#F5FAFA" }}
         className="py-20"
       >
         <div className="section-container">
@@ -23,10 +21,10 @@ export default function ApplyPage() {
           >
             For VA Candidates
           </p>
-          <h1 className="text-white mb-6 max-w-2xl">
+          <h1 className="mb-6 max-w-2xl">
             Start Your VA Career
           </h1>
-          <p className="text-xl max-w-xl" style={{ color: "#94a3b8" }}>
+          <p className="text-xl max-w-xl" style={{ color: "#64748b" }}>
             Apply here, train at TGA Academy, get placed with a vetted
             employer. A real career path, built on proof of what you can do.
           </p>
@@ -115,13 +113,13 @@ export default function ApplyPage() {
       </section>
 
       {/* ── Academy link ──────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#0a1628" }} className="py-16">
+      <section style={{ backgroundColor: "#0D5C63" }} className="py-16">
         <div className="section-container flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-white mb-2">
               Already enrolled in TGA Academy?
             </h3>
-            <p style={{ color: "#94a3b8" }}>
+            <p style={{ color: "rgba(255,255,255,0.8)" }}>
               Complete your certification, then return here to enter the
               employer placement pipeline.
             </p>
@@ -131,7 +129,7 @@ export default function ApplyPage() {
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary shrink-0"
-            style={{ borderColor: "#94a3b8", color: "#94a3b8" }}
+            style={{ borderColor: "rgba(255,255,255,0.7)", color: "#ffffff" }}
           >
             Go to TGA Academy
           </a>

@@ -13,9 +13,7 @@ export default function HirePage() {
     <>
       {/* ── Page header ───────────────────────────────────────────────── */}
       <section
-        style={{
-          background: "linear-gradient(135deg, #0a1628 0%, #0f2044 50%, #0a1628 100%)",
-        }}
+        style={{ backgroundColor: "#F5FAFA" }}
         className="py-20"
       >
         <div className="section-container">
@@ -25,10 +23,10 @@ export default function HirePage() {
           >
             For Employers
           </p>
-          <h1 className="text-white mb-6 max-w-2xl">
+          <h1 className="mb-6 max-w-2xl">
             Hire a Trained, Job-Ready VA
           </h1>
-          <p className="text-xl max-w-xl" style={{ color: "#94a3b8" }}>
+          <p className="text-xl max-w-xl" style={{ color: "#64748b" }}>
             Every candidate in our pipeline has completed structured,
             scenario-based certification. You are not taking a chance on
             unvetted talent.
@@ -81,15 +79,19 @@ export default function HirePage() {
       </section>
 
       {/* ── Bottom CTA ────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#0a1628" }} className="py-16">
+      <section style={{ backgroundColor: "#0D5C63" }} className="py-16">
         <div className="section-container flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-white mb-2">Ready to build your remote team?</h3>
-            <p style={{ color: "#94a3b8" }}>
+            <p style={{ color: "rgba(255,255,255,0.8)" }}>
               Learn how the full placement process works before you submit.
             </p>
           </div>
-          <Link href="/how-it-works" className="btn-secondary shrink-0" style={{ borderColor: "#94a3b8", color: "#94a3b8" }}>
+          <Link
+            href="/how-it-works"
+            className="btn-secondary shrink-0"
+            style={{ borderColor: "rgba(255,255,255,0.7)", color: "#ffffff" }}
+          >
             See how it works
           </Link>
         </div>

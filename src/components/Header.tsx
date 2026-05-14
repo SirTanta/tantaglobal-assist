@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const navLinks = [
@@ -22,16 +23,17 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-white font-bold text-lg no-underline"
+            className="flex items-center gap-2 no-underline"
+            aria-label="TantaGlobal Assist — home"
           >
-            <span
-              className="inline-block w-8 h-8 rounded-lg flex items-center justify-center text-sm font-black"
-              style={{ background: "#0D5C63", color: "#ffffff" }}
-              aria-hidden="true"
-            >
-              TG
-            </span>
-            <span className="hidden sm:inline">TantaGlobal Assist</span>
+            <Image
+              src="/logo-transparent.png"
+              alt="TantaGlobal Assist"
+              width={160}
+              height={48}
+              style={{ width: "160px", height: "auto" }}
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -40,7 +42,8 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-slate-300 hover:text-white text-sm font-medium transition-colors no-underline"
+                className="text-sm font-medium transition-colors no-underline"
+                style={{ color: "#2D3748" }}
               >
                 {link.label}
               </Link>
@@ -55,7 +58,8 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden text-white p-2"
+            className="md:hidden p-2"
+            style={{ color: "#2D3748" }}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen(!menuOpen)}
@@ -87,12 +91,16 @@ export default function Header() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden border-t border-slate-700 py-4 flex flex-col gap-3">
+          <div
+            className="md:hidden border-t py-4 flex flex-col gap-3"
+            style={{ borderColor: "#cbd5e1" }}
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-slate-300 hover:text-white text-sm font-medium py-1 no-underline"
+                className="text-sm font-medium py-1 no-underline"
+                style={{ color: "#2D3748" }}
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}

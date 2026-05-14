@@ -12,14 +12,13 @@ export default function HowItWorksPage() {
     <>
       {/* ── Header ────────────────────────────────────────────────────── */}
       <section
-        style={{
-          background: "linear-gradient(135deg, #0a1628 0%, #0f2044 50%, #0a1628 100%)",
-        }}
+        style={{ backgroundColor: "#F5FAFA" }}
         className="py-20"
       >
         <div className="section-container">
-          <h1 className="text-white mb-6 max-w-2xl">How It Works</h1>
-          <p className="text-xl max-w-xl" style={{ color: "#94a3b8" }}>
+          <span className="teal-accent" />
+          <h1 className="mb-6 max-w-2xl">How It Works</h1>
+          <p className="text-xl max-w-xl" style={{ color: "#64748b" }}>
             Three stages. One clear outcome: a certified VA matched with an
             employer who needed exactly that.
           </p>

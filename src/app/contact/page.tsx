@@ -11,14 +11,13 @@ export default function ContactPage() {
     <>
       {/* ── Header ────────────────────────────────────────────────────── */}
       <section
-        style={{
-          background: "linear-gradient(135deg, #0a1628 0%, #0f2044 50%, #0a1628 100%)",
-        }}
+        style={{ backgroundColor: "#F5FAFA" }}
         className="py-20"
       >
         <div className="section-container">
-          <h1 className="text-white mb-6 max-w-2xl">Contact Us</h1>
-          <p className="text-xl max-w-xl" style={{ color: "#94a3b8" }}>
+          <span className="teal-accent" />
+          <h1 className="mb-6 max-w-2xl">Contact Us</h1>
+          <p className="text-xl max-w-xl" style={{ color: "#64748b" }}>
             Have a question about hiring, the application process, or something
             else? Reach out directly.
           </p>
