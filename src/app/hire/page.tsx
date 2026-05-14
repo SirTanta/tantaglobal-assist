@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import HirePlaceholderForm from "@/components/HirePlaceholderForm";
+import HireForm from "@/components/HireForm";
 
 export const metadata: Metadata = {
   title: "Hire a Trained, Job-Ready VA",
@@ -75,12 +75,10 @@ export default function HirePage() {
               qualified candidates from our certified pipeline.
             </p>
 
-            {/* TODO (Mako): Wire /hire form — HubSpot embed OR webhook to automation-hub:4020.
-                Mako to confirm endpoint and swap this placeholder.
-                HubSpot portal: 243753317, employer pipeline */}
-
-            {/* Placeholder form UI — extracted to client component to support future interactivity */}
-            <HirePlaceholderForm />
+            {/* Form POSTs to NEXT_PUBLIC_HUBSPOT_EMPLOYER_WEBHOOK_URL (automation-hub:4020/va-intake).
+                Mako: add NEXT_PUBLIC_HUBSPOT_EMPLOYER_WEBHOOK_URL=http://146.190.145.245:4020/va-intake
+                to the Vercel project environment variables before go-live. */}
+            <HireForm />
           </div>
         </div>
       </section>
