@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const FacebookIcon = () => (
   <svg
@@ -27,7 +28,7 @@ export default function Footer() {
 
   return (
     <footer
-      style={{ backgroundColor: "#0a1628", color: "#94a3b8" }}
+      style={{ backgroundColor: "#EAEEEE", color: "#2D3748" }}
       className="mt-auto"
     >
       <div className="gold-divider" />
@@ -35,13 +36,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div>
-            <p
-              className="font-bold text-white text-lg mb-2"
-              style={{ letterSpacing: "-0.01em" }}
-            >
-              TantaGlobal Assist
-            </p>
-            <p className="text-sm leading-relaxed" style={{ color: "#94a3b8" }}>
+            <Link href="/" aria-label="TantaGlobal Assist — home">
+              <Image
+                src="/logo-transparent.png"
+                alt="TantaGlobal Assist"
+                width={100}
+                height={30}
+                style={{ width: "100px", height: "auto", marginBottom: "0.75rem" }}
+              />
+            </Link>
+            <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>
               Professional VA placement connecting trained candidates with
               businesses that need them.
             </p>
@@ -52,8 +56,8 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TantaGlobal Assist on Facebook"
-                style={{ color: "#94a3b8" }}
-                className="hover:text-white transition-colors"
+                style={{ color: "#64748b" }}
+                className="hover:text-[#0D5C63] transition-colors"
               >
                 <FacebookIcon />
               </a>
@@ -62,8 +66,8 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TantaRemote on YouTube"
-                style={{ color: "#94a3b8" }}
-                className="hover:text-white transition-colors"
+                style={{ color: "#64748b" }}
+                className="hover:text-[#0D5C63] transition-colors"
               >
                 <YouTubeIcon />
               </a>
@@ -72,7 +76,10 @@ export default function Footer() {
 
           {/* Quick links */}
           <div>
-            <p className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">
+            <p
+              className="font-semibold mb-3 text-sm uppercase tracking-wider"
+              style={{ color: "#0a1628" }}
+            >
               Quick Links
             </p>
             <ul className="flex flex-col gap-2">
@@ -86,8 +93,8 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm hover:text-white transition-colors no-underline"
-                    style={{ color: "#94a3b8" }}
+                    className="text-sm transition-colors no-underline hover:text-[#0D5C63]"
+                    style={{ color: "#64748b" }}
                   >
                     {link.label}
                   </Link>
@@ -98,15 +105,18 @@ export default function Footer() {
 
           {/* Network */}
           <div>
-            <p className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">
+            <p
+              className="font-semibold mb-3 text-sm uppercase tracking-wider"
+              style={{ color: "#0a1628" }}
+            >
               Tanta Network
             </p>
             <ul className="flex flex-col gap-2">
               <li>
                 <a
                   href="https://academy.tantaglobal.com"
-                  className="text-sm hover:text-white transition-colors no-underline"
-                  style={{ color: "#94a3b8" }}
+                  className="text-sm transition-colors no-underline hover:text-[#0D5C63]"
+                  style={{ color: "#64748b" }}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -116,8 +126,8 @@ export default function Footer() {
               <li>
                 <a
                   href="https://tantaholdings.com"
-                  className="text-sm hover:text-white transition-colors no-underline"
-                  style={{ color: "#94a3b8" }}
+                  className="text-sm transition-colors no-underline hover:text-[#0D5C63]"
+                  style={{ color: "#64748b" }}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -127,8 +137,8 @@ export default function Footer() {
               <li>
                 <a
                   href="https://tantavisapathways.com"
-                  className="text-sm hover:text-white transition-colors no-underline"
-                  style={{ color: "#94a3b8" }}
+                  className="text-sm transition-colors no-underline hover:text-[#0D5C63]"
+                  style={{ color: "#64748b" }}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

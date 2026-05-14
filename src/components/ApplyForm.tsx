@@ -21,7 +21,7 @@ const labelStyle = { color: "#2D3748" };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function HireForm() {
+export default function ApplyForm() {
   const [state, setState] = useState<FormState>({
     status: "idle",
     errorMessage: "",
@@ -36,25 +36,23 @@ export default function HireForm() {
     const data = new FormData(form);
 
     const payload = {
-      employer_name: (data.get("employer_name") as string).trim(),
-      company_name: (data.get("company_name") as string).trim(),
+      full_name: (data.get("full_name") as string).trim(),
       email: (data.get("email") as string).trim(),
       phone: ((data.get("phone") as string) ?? "").trim(),
-      website: ((data.get("website") as string) ?? "").trim(),
-      va_role: ((data.get("va_role") as string) ?? "").trim(),
-      hours_per_week: ((data.get("hours_per_week") as string) ?? "").trim(),
-      budget: ((data.get("budget") as string) ?? "").trim(),
-      start_date: ((data.get("start_date") as string) ?? "").trim(),
+      location: ((data.get("location") as string) ?? "").trim(),
+      years_experience: ((data.get("years_experience") as string) ?? "").trim(),
+      skills: ((data.get("skills") as string) ?? "").trim(),
+      availability: ((data.get("availability") as string) ?? "").trim(),
       message: ((data.get("message") as string) ?? "").trim(),
     };
 
     // Guard — required fields
-    if (!payload.employer_name || !payload.company_name || !payload.email) {
+    if (!payload.full_name || !payload.email) {
       setState({ status: "error", errorMessage: "Please fill in all required fields." });
       return;
     }
 
-    // Client-side email format check (noValidate is set on the form)
+    // Client-side email format check
     if (!EMAIL_RE.test(payload.email)) {
       setState({ status: "error", errorMessage: "Please enter a valid email address." });
       return;
@@ -63,7 +61,7 @@ export default function HireForm() {
     setState({ status: "submitting", errorMessage: "" });
 
     try {
-      const res = await fetch("/api/hire", {
+      const res = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -83,7 +81,7 @@ export default function HireForm() {
       const msg =
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again or email hire@tantaglobal.com.";
+          : "Something went wrong. Please try again or email apply@tantaglobal.com.";
       setState({ status: "error", errorMessage: msg });
     }
   }
@@ -115,11 +113,10 @@ export default function HireForm() {
           </div>
         </div>
         <h3 className="text-xl font-bold mb-2" style={{ color: "#0D5C63" }}>
-          We received your request.
+          Your application has been received.
         </h3>
         <p className="text-sm" style={{ color: "#2D3748" }}>
-          Our team will review your requirements and follow up within 1 business day. Check your
-          inbox at the email you provided.
+          We&apos;ll be in touch within 3 business days.
         </p>
       </div>
     );
@@ -134,33 +131,16 @@ export default function HireForm() {
       noValidate
       className="grid grid-cols-1 md:grid-cols-2 gap-5"
     >
-      {/* Employer name */}
+      {/* Full name */}
       <div>
-        <label className={labelClass} style={labelStyle} htmlFor="employer_name">
-          Your full name <span style={{ color: "#e53e3e" }}>*</span>
+        <label className={labelClass} style={labelStyle} htmlFor="full_name">
+          Full Name <span style={{ color: "#e53e3e" }}>*</span>
         </label>
         <input
-          id="employer_name"
-          name="employer_name"
+          id="full_name"
+          name="full_name"
           type="text"
           placeholder="Jane Smith"
-          required
-          disabled={isSubmitting}
-          className={`${inputClass} ${inputFocusRing}`}
-          style={inputStyle}
-        />
-      </div>
-
-      {/* Company name */}
-      <div>
-        <label className={labelClass} style={labelStyle} htmlFor="company_name">
-          Company <span style={{ color: "#e53e3e" }}>*</span>
-        </label>
-        <input
-          id="company_name"
-          name="company_name"
-          type="text"
-          placeholder="Acme Inc."
           required
           disabled={isSubmitting}
           className={`${inputClass} ${inputFocusRing}`}
@@ -171,13 +151,13 @@ export default function HireForm() {
       {/* Email */}
       <div>
         <label className={labelClass} style={labelStyle} htmlFor="email">
-          Work email <span style={{ color: "#e53e3e" }}>*</span>
+          Email Address <span style={{ color: "#e53e3e" }}>*</span>
         </label>
         <input
           id="email"
           name="email"
           type="email"
-          placeholder="jane@company.com"
+          placeholder="jane@example.com"
           required
           disabled={isSubmitting}
           className={`${inputClass} ${inputFocusRing}`}
@@ -188,7 +168,7 @@ export default function HireForm() {
       {/* Phone */}
       <div>
         <label className={labelClass} style={labelStyle} htmlFor="phone">
-          Phone
+          Phone Number
         </label>
         <input
           id="phone"
@@ -201,89 +181,73 @@ export default function HireForm() {
         />
       </div>
 
-      {/* Website */}
+      {/* Location */}
       <div>
-        <label className={labelClass} style={labelStyle} htmlFor="website">
-          Company website
+        <label className={labelClass} style={labelStyle} htmlFor="location">
+          Location (City, Country)
         </label>
         <input
-          id="website"
-          name="website"
-          type="url"
-          placeholder="https://yourcompany.com"
-          disabled={isSubmitting}
-          className={`${inputClass} ${inputFocusRing}`}
-          style={inputStyle}
-        />
-      </div>
-
-      {/* VA role */}
-      <div>
-        <label className={labelClass} style={labelStyle} htmlFor="va_role">
-          VA role needed
-        </label>
-        <input
-          id="va_role"
-          name="va_role"
+          id="location"
+          name="location"
           type="text"
-          placeholder="Executive VA, Social Media VA, etc."
+          placeholder="Manila, Philippines"
           disabled={isSubmitting}
           className={`${inputClass} ${inputFocusRing}`}
           style={inputStyle}
         />
       </div>
 
-      {/* Hours per week */}
+      {/* Years experience */}
       <div>
-        <label className={labelClass} style={labelStyle} htmlFor="hours_per_week">
-          Hours per week
+        <label className={labelClass} style={labelStyle} htmlFor="years_experience">
+          Years of Experience
         </label>
         <select
-          id="hours_per_week"
-          name="hours_per_week"
+          id="years_experience"
+          name="years_experience"
           disabled={isSubmitting}
           className={`${inputClass} ${inputFocusRing}`}
           style={{ ...inputStyle, appearance: "auto" }}
         >
           <option value="">Select...</option>
-          <option value="10-20">10 to 20 hours</option>
-          <option value="20-30">20 to 30 hours</option>
-          <option value="30-40">30 to 40 hours</option>
-          <option value="40+">Full time (40+)</option>
+          <option value="less-than-1">Less than 1 year</option>
+          <option value="1-2">1-2 years</option>
+          <option value="3-5">3-5 years</option>
+          <option value="5+">5+ years</option>
         </select>
       </div>
 
-      {/* Budget */}
+      {/* Availability */}
       <div>
-        <label className={labelClass} style={labelStyle} htmlFor="budget">
-          Monthly budget
+        <label className={labelClass} style={labelStyle} htmlFor="availability">
+          Availability
         </label>
         <select
-          id="budget"
-          name="budget"
+          id="availability"
+          name="availability"
           disabled={isSubmitting}
           className={`${inputClass} ${inputFocusRing}`}
           style={{ ...inputStyle, appearance: "auto" }}
         >
           <option value="">Select...</option>
-          <option value="under-500">Under $500 / mo</option>
-          <option value="500-1000">$500 to $1,000 / mo</option>
-          <option value="1000-2000">$1,000 to $2,000 / mo</option>
-          <option value="2000+">$2,000+ / mo</option>
+          <option value="part-time">Part-time (under 20hrs/wk)</option>
+          <option value="full-time">Full-time (20-40hrs/wk)</option>
+          <option value="flexible">Flexible</option>
         </select>
       </div>
 
-      {/* Start date */}
+      {/* Skills */}
       <div className="md:col-span-2">
-        <label className={labelClass} style={labelStyle} htmlFor="start_date">
-          Target start date
+        <label className={labelClass} style={labelStyle} htmlFor="skills">
+          Skills &amp; Experience (VA work, tools, industries)
         </label>
-        <input
-          id="start_date"
-          name="start_date"
-          type="date"
+        <textarea
+          id="skills"
+          name="skills"
+          rows={4}
+          placeholder="List your VA skills, tools you're proficient in (e.g. Asana, HubSpot, Canva), and any industries you've worked in..."
           disabled={isSubmitting}
-          className={`${inputClass} ${inputFocusRing} md:max-w-xs`}
+          className={`${inputClass} ${inputFocusRing} resize-none`}
           style={inputStyle}
         />
       </div>
@@ -291,13 +255,13 @@ export default function HireForm() {
       {/* Message */}
       <div className="md:col-span-2">
         <label className={labelClass} style={labelStyle} htmlFor="message">
-          Role details and requirements
+          Anything else you&apos;d like us to know
         </label>
         <textarea
           id="message"
           name="message"
-          rows={5}
-          placeholder="Describe the role, key responsibilities, tools you use, and what success looks like in the first 90 days..."
+          rows={4}
+          placeholder="Share anything else relevant — your goals, work history highlights, or questions for us..."
           disabled={isSubmitting}
           className={`${inputClass} ${inputFocusRing} resize-none`}
           style={inputStyle}
@@ -326,11 +290,11 @@ export default function HireForm() {
           className="w-full sm:w-auto px-8 py-3.5 rounded-lg text-sm font-semibold text-white transition-opacity disabled:opacity-60"
           style={{ backgroundColor: "#0D5C63" }}
         >
-          {isSubmitting ? "Submitting..." : "Submit your requirements"}
+          {isSubmitting ? "Submitting..." : "Submit Application"}
         </button>
         <p className="text-xs mt-3" style={{ color: "#64748b" }}>
-          Required fields marked <span style={{ color: "#e53e3e" }}>*</span>. We respond within 1
-          business day.
+          Required fields marked <span style={{ color: "#e53e3e" }}>*</span>. We respond within 3
+          business days.
         </p>
       </div>
     </form>

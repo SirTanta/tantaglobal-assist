@@ -10,12 +10,10 @@ export default function HomePage() {
     <>
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section
-        style={{
-          background: "linear-gradient(135deg, #0a1628 0%, #0f2044 50%, #0a1628 100%)",
-        }}
+        style={{ backgroundColor: "#F5FAFA" }}
         className="relative overflow-hidden"
       >
-        {/* Subtle glow orbs */}
+        {/* Subtle teal glow orb */}
         <div
           aria-hidden="true"
           style={{
@@ -25,20 +23,7 @@ export default function HomePage() {
             width: "400px",
             height: "400px",
             borderRadius: "9999px",
-            background: "radial-gradient(circle, rgba(13,92,99,0.25) 0%, transparent 70%)",
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            bottom: "-60px",
-            left: "-60px",
-            width: "300px",
-            height: "300px",
-            borderRadius: "9999px",
-            background: "radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(13,92,99,0.08) 0%, transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -51,12 +36,12 @@ export default function HomePage() {
             >
               VA Placement &amp; Staffing
             </p>
-            <h1 className="text-white mb-6">
+            <h1 className="mb-6">
               We connect trained VAs with businesses that need them.
             </h1>
             <p
               className="text-xl leading-relaxed mb-10 max-w-2xl"
-              style={{ color: "#94a3b8" }}
+              style={{ color: "#64748b" }}
             >
               TantaGlobal Assist places certified, job-ready virtual assistants
               with employers who need real performance from day one. No guessing.
@@ -66,11 +51,7 @@ export default function HomePage() {
               <Link href="/hire" className="btn-primary text-base">
                 Hire a VA
               </Link>
-              <Link
-                href="/apply"
-                className="btn-secondary text-base"
-                style={{ borderColor: "#94a3b8", color: "#94a3b8" }}
-              >
+              <Link href="/apply" className="btn-secondary text-base">
                 Apply as a VA
               </Link>
             </div>
@@ -183,14 +164,14 @@ export default function HomePage() {
       </section>
 
       {/* ── Flywheel ──────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#0a1628" }} className="py-20">
+      <section style={{ backgroundColor: "#F0F4F4" }} className="py-20">
         <div className="section-container">
           <div className="max-w-2xl">
             <span className="teal-accent" />
-            <h2 className="text-white mb-6">
+            <h2 className="mb-6">
               Training and placement work together.
             </h2>
-            <p className="text-lg leading-relaxed mb-6" style={{ color: "#94a3b8" }}>
+            <p className="text-lg leading-relaxed mb-6" style={{ color: "#2D3748" }}>
               TantaGlobal Assist and TGA Academy operate as a single pipeline.
               Candidates train and certify at the Academy. Employers get
               candidates who have already proved they can perform. The cycle

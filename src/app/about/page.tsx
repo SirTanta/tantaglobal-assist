@@ -12,14 +12,13 @@ export default function AboutPage() {
     <>
       {/* ── Header ────────────────────────────────────────────────────── */}
       <section
-        style={{
-          background: "linear-gradient(135deg, #0a1628 0%, #0f2044 50%, #0a1628 100%)",
-        }}
+        style={{ backgroundColor: "#F5FAFA" }}
         className="py-20"
       >
         <div className="section-container max-w-3xl">
-          <h1 className="text-white mb-6">About TantaGlobal Assist</h1>
-          <p className="text-xl leading-relaxed" style={{ color: "#94a3b8" }}>
+          <span className="teal-accent" />
+          <h1 className="mb-6">About TantaGlobal Assist</h1>
+          <p className="text-xl leading-relaxed" style={{ color: "#64748b" }}>
             A professional VA placement service that takes training seriously.
           </p>
         </div>
@@ -116,23 +115,27 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ───────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#0a1628" }} className="py-16">
+      <section style={{ backgroundColor: "#0D5C63" }} className="py-16">
         <div className="section-container flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-white mb-2">Ready to get started?</h3>
-            <p style={{ color: "#94a3b8" }}>
+            <p style={{ color: "rgba(255,255,255,0.8)" }}>
               Whether you need a VA or want to become one, the process starts
               here.
             </p>
           </div>
           <div className="flex gap-4 flex-wrap">
-            <Link href="/hire" className="btn-primary">
+            <Link
+              href="/hire"
+              className="btn-primary"
+              style={{ backgroundColor: "#ffffff", color: "#0D5C63" }}
+            >
               Hire a VA
             </Link>
             <Link
               href="/apply"
               className="btn-secondary"
-              style={{ borderColor: "#94a3b8", color: "#94a3b8" }}
+              style={{ borderColor: "rgba(255,255,255,0.7)", color: "#ffffff" }}
             >
               Apply as VA
             </Link>

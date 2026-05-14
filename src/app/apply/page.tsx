@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ApplyForm from "@/components/ApplyForm";
 
 export const metadata: Metadata = {
   title: "Apply as a VA — Start Your VA Career",
@@ -11,9 +12,7 @@ export default function ApplyPage() {
     <>
       {/* ── Page header ───────────────────────────────────────────────── */}
       <section
-        style={{
-          background: "linear-gradient(135deg, #0a1628 0%, #0f2044 50%, #0a1628 100%)",
-        }}
+        style={{ backgroundColor: "#F5FAFA" }}
         className="py-20"
       >
         <div className="section-container">
@@ -23,10 +22,10 @@ export default function ApplyPage() {
           >
             For VA Candidates
           </p>
-          <h1 className="text-white mb-6 max-w-2xl">
+          <h1 className="mb-6 max-w-2xl">
             Start Your VA Career
           </h1>
-          <p className="text-xl max-w-xl" style={{ color: "#94a3b8" }}>
+          <p className="text-xl max-w-xl" style={{ color: "#64748b" }}>
             Apply here, train at TGA Academy, get placed with a vetted
             employer. A real career path, built on proof of what you can do.
           </p>
@@ -69,59 +68,29 @@ export default function ApplyPage() {
             ))}
           </div>
 
-          {/* ── Tally form embed ────────────────────────────────────── */}
-          {/* Embed method: Tally popup button — cleaner than inline iframe;
-              avoids scroll-within-scroll on mobile; Tally's inline iframe
-              has known height-calculation issues with app router. */}
+          {/* ── Application form ────────────────────────────────────── */}
           <div
-            className="rounded-2xl p-10 md:p-14 text-center"
+            className="rounded-2xl p-10 md:p-14"
             style={{ backgroundColor: "#ffffff", border: "1px solid #cbd5e1" }}
           >
-            <span className="teal-accent mx-auto" />
-            <h2 className="mb-4">Ready to apply?</h2>
-            <p className="mb-8 max-w-md mx-auto" style={{ color: "#64748b" }}>
+            <h2 className="mb-2">Ready to apply?</h2>
+            <p className="mb-8" style={{ color: "#64748b" }}>
               Our application takes about 10 minutes. Be specific about your
               experience — it helps us match you with the right employers.
             </p>
-
-            {/* Tally form VLVZbE — opens in new tab for clean UX */}
-            <a
-              href="https://tally.so/r/VLVZbE"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary text-base inline-flex"
-            >
-              Open Application Form
-              <svg
-                className="w-4 h-4 ml-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </a>
-            <p className="text-xs mt-4" style={{ color: "#94a3b8" }}>
-              Opens in a new tab. Powered by Tally.
-            </p>
+            <ApplyForm />
           </div>
         </div>
       </section>
 
       {/* ── Academy link ──────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#0a1628" }} className="py-16">
+      <section style={{ backgroundColor: "#0D5C63" }} className="py-16">
         <div className="section-container flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-white mb-2">
               Already enrolled in TGA Academy?
             </h3>
-            <p style={{ color: "#94a3b8" }}>
+            <p style={{ color: "rgba(255,255,255,0.8)" }}>
               Complete your certification, then return here to enter the
               employer placement pipeline.
             </p>
@@ -131,7 +100,7 @@ export default function ApplyPage() {
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary shrink-0"
-            style={{ borderColor: "#94a3b8", color: "#94a3b8" }}
+            style={{ borderColor: "rgba(255,255,255,0.7)", color: "#ffffff" }}
           >
             Go to TGA Academy
           </a>
