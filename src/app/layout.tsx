@@ -31,6 +31,21 @@ export const metadata: Metadata = {
     title: "TantaGlobal Assist — Hire Trained, Job-Ready Virtual Assistants",
     description:
       "Connect with trained, certified VAs. TantaGlobal Assist provides professional VA placement for businesses that need real results.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TantaGlobal Assist — Hire Trained, Job-Ready Virtual Assistants",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TantaGlobal Assist — Hire Trained, Job-Ready Virtual Assistants",
+    description:
+      "Connect with trained, certified VAs. TantaGlobal Assist provides professional VA placement for businesses that need real results.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
