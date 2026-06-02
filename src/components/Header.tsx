@@ -62,6 +62,7 @@ export default function Header() {
             style={{ color: "#2D3748" }}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             <svg
@@ -92,6 +93,7 @@ export default function Header() {
         {/* Mobile menu */}
         {menuOpen && (
           <div
+            id="mobile-menu"
             className="md:hidden border-t py-4 flex flex-col gap-3"
             style={{ borderColor: "#cbd5e1" }}
           >
