@@ -44,47 +44,58 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid email address.' }, { status: 400 });
   }
 
-  const webhookUrl = process.env.HUBSPOT_EMPLOYER_WEBHOOK_URL;
-  const webhookSecret = process.env.HUBSPOT_WEBHOOK_SECRET;
-  if (!webhookUrl) {
-    console.error('HUBSPOT_EMPLOYER_WEBHOOK_URL not set');
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+  if (!supabaseUrl || !supabaseKey) {
     return NextResponse.json({ error: 'Service temporarily unavailable.' }, { status: 503 });
   }
 
-  // Forward to VM webhook with shared secret
-  let upstream: Response;
-  try {
-    upstream = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(webhookSecret ? { 'X-Webhook-Secret': webhookSecret } : {}),
-      },
-      body: JSON.stringify(body),
-    });
-  } catch (err) {
-    console.error('Webhook POST failed:', err);
+  // Persist the lead first so an upstream delivery outage does not drop the submission.
+  const leadInsert = await fetch(`${supabaseUrl}/rest/v1/employer_leads`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': supabaseKey,
+      'Authorization': `Bearer ${supabaseKey}`,
+      'Prefer': 'return=minimal',
+    },
+    body: JSON.stringify(body),
+  }).catch(err => {
+    console.error('Supabase employer_leads insert failed:', err);
+    return null;
+  });
+
+  if (!leadInsert || !leadInsert.ok) {
     return NextResponse.json({ error: 'Failed to submit. Please try again.' }, { status: 502 });
   }
 
-  if (!upstream.ok) {
-    return NextResponse.json({ error: 'Submission failed. Please try again.' }, { status: 502 });
-  }
+  // Best-effort delivery to HubSpot webhook. Fail open so the user still gets a successful submission.
+  const webhookUrl = process.env.HUBSPOT_EMPLOYER_WEBHOOK_URL;
+  const webhookSecret = process.env.HUBSPOT_WEBHOOK_SECRET;
+  if (!webhookUrl) {
+    console.warn('HUBSPOT_EMPLOYER_WEBHOOK_URL not set; skipping HubSpot delivery');
+  } else {
+    const webhookAbort = new AbortController();
+    const webhookTimeout = setTimeout(() => webhookAbort.abort(), 5000);
+    try {
+      const upstream = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(webhookSecret ? { 'X-Webhook-Secret': webhookSecret } : {}),
+        },
+        body: JSON.stringify(body),
+        signal: webhookAbort.signal,
+      });
 
-  // Supabase insert — fire and forget, never fails the user submission
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
-  if (supabaseUrl && supabaseKey) {
-    await fetch(`${supabaseUrl}/rest/v1/employer_leads`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': supabaseKey,
-        'Authorization': `Bearer ${supabaseKey}`,
-        'Prefer': 'return=minimal',
-      },
-      body: JSON.stringify(body),
-    }).catch(err => console.error('Supabase employer_leads insert failed:', err));
+      if (!upstream.ok) {
+        console.error('Webhook returned non-OK:', upstream.status, upstream.statusText);
+      }
+    } catch (err) {
+      console.error('Webhook POST failed:', err);
+    } finally {
+      clearTimeout(webhookTimeout);
+    }
   }
 
   // Discord alert — fire and forget
