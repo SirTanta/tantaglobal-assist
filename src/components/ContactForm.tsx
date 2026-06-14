@@ -70,6 +70,13 @@ export default function ContactForm() {
 
       setState({ status: "success", errorMessage: "" });
       formRef.current?.reset();
+      // GA4 conversion event
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "contact_submitted", {
+          event_category: "conversion",
+          event_label: "contact_form",
+        });
+      }
     } catch (err) {
       const msg =
         err instanceof Error

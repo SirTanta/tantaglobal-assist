@@ -77,6 +77,13 @@ export default function ApplyForm() {
 
       setState({ status: "success", errorMessage: "" });
       formRef.current?.reset();
+      // GA4 conversion event
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "va_application_submitted", {
+          event_category: "conversion",
+          event_label: "va_apply_form",
+        });
+      }
     } catch (err) {
       const msg =
         err instanceof Error
