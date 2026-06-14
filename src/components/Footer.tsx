@@ -41,7 +41,7 @@ export default function Footer() {
                 src="/logo-transparent.png"
                 alt="TantaGlobal Assist"
                 width={100}
-                height={30}
+                height={100}
                 style={{ width: "100px", height: "auto", marginBottom: "0.75rem" }}
               />
             </Link>

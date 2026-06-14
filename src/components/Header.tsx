@@ -30,7 +30,7 @@ export default function Header() {
               src="/logo-transparent.png"
               alt="TantaGlobal Assist"
               width={160}
-              height={48}
+              height={160}
               style={{ width: "160px", height: "auto" }}
               priority
             />
