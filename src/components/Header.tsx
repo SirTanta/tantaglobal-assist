@@ -12,6 +12,7 @@ const navLinks = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const mobileMenuId = "mobile-menu";
 
   return (
     <header className="glass-nav sticky top-0 z-50">
@@ -62,6 +63,7 @@ export default function Header() {
             style={{ color: "#2D3748" }}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
+            aria-controls={mobileMenuId}
             onClick={() => setMenuOpen(!menuOpen)}
           >
             <svg
@@ -92,6 +94,7 @@ export default function Header() {
         {/* Mobile menu */}
         {menuOpen && (
           <div
+            id={mobileMenuId}
             className="md:hidden border-t py-4 flex flex-col gap-3"
             style={{ borderColor: "#cbd5e1" }}
           >

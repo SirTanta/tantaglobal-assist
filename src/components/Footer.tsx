@@ -55,7 +55,7 @@ export default function Footer() {
                 href="https://www.facebook.com/profile.php?id=867291873125261"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="TantaGlobal Assist on Facebook"
+                aria-label="Facebook"
                 style={{ color: "#64748b" }}
                 className="hover:text-[#0D5C63] transition-colors"
               >
@@ -65,7 +65,7 @@ export default function Footer() {
                 href="https://www.youtube.com/@TantaRemote"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="TantaRemote on YouTube"
+                aria-label="YouTube"
                 style={{ color: "#64748b" }}
                 className="hover:text-[#0D5C63] transition-colors"
               >
