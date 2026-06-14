@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact TantaGlobal Assist",
@@ -74,95 +75,7 @@ export default function ContactPage() {
               General inquiries, partnerships, or anything that does not fit
               the categories above.
             </p>
-
-            <form
-              action="mailto:hello@tantaglobal.com"
-              method="GET"
-              encType="text/plain"
-              className="flex flex-col gap-5"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    className="text-sm font-semibold"
-                    style={{ color: "#2D3748" }}
-                    htmlFor="contact-name"
-                  >
-                    Name
-                  </label>
-                  <input
-                    id="contact-name"
-                    name="name"
-                    type="text"
-                    required
-                    placeholder="Your name"
-                    className="rounded-lg px-4 py-3 text-sm border focus:outline-none"
-                    style={{
-                      borderColor: "#cbd5e1",
-                      backgroundColor: "#F5FAFA",
-                      color: "#2D3748",
-                    }}
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    className="text-sm font-semibold"
-                    style={{ color: "#2D3748" }}
-                    htmlFor="contact-email"
-                  >
-                    Email
-                  </label>
-                  <input
-                    id="contact-email"
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="you@example.com"
-                    className="rounded-lg px-4 py-3 text-sm border focus:outline-none"
-                    style={{
-                      borderColor: "#cbd5e1",
-                      backgroundColor: "#F5FAFA",
-                      color: "#2D3748",
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label
-                  className="text-sm font-semibold"
-                  style={{ color: "#2D3748" }}
-                  htmlFor="contact-message"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="contact-message"
-                  name="body"
-                  rows={5}
-                  required
-                  placeholder="What can we help you with?"
-                  className="rounded-lg px-4 py-3 text-sm border resize-none focus:outline-none"
-                  style={{
-                    borderColor: "#cbd5e1",
-                    backgroundColor: "#F5FAFA",
-                    color: "#2D3748",
-                  }}
-                />
-              </div>
-              <button type="submit" className="btn-primary self-start">
-                Send Message
-              </button>
-              <p className="text-xs" style={{ color: "#94a3b8" }}>
-                This form opens your email client. Alternatively, email{" "}
-                <a
-                  href="mailto:hello@tantaglobal.com"
-                  style={{ color: "#0D5C63" }}
-                >
-                  hello@tantaglobal.com
-                </a>{" "}
-                directly.
-              </p>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </section>
