@@ -5,7 +5,9 @@ import Image from "next/image";
 import { useState } from "react";
 
 const navLinks = [
-  { href: "/how-it-works", label: "How It Works" },
+  { href: "/", label: "Home" },
+  { href: "/employers", label: "Employers" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -21,7 +23,6 @@ export default function Header() {
           className="flex items-center justify-between h-16"
           aria-label="Main navigation"
         >
-          {/* Logo */}
           <Link
             href="/"
             className="flex items-center gap-2 no-underline"
@@ -37,7 +38,6 @@ export default function Header() {
             />
           </Link>
 
-          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
@@ -49,15 +49,14 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link href="/apply" className="btn-secondary text-sm px-4 py-2">
-              Apply as VA
+            <Link href="/va-pool/apply" className="btn-secondary text-sm px-4 py-2">
+              Apply to pool
             </Link>
-            <Link href="/hire" className="btn-primary text-sm px-4 py-2">
+            <Link href="/va-pool/hire" className="btn-primary text-sm px-4 py-2">
               Hire a VA
             </Link>
           </div>
 
-          {/* Mobile menu button */}
           <button
             className="md:hidden p-2"
             style={{ color: "#2D3748" }}
@@ -91,7 +90,6 @@ export default function Header() {
           </button>
         </nav>
 
-        {/* Mobile menu */}
         {menuOpen && (
           <div
             id={mobileMenuId}
@@ -111,14 +109,14 @@ export default function Header() {
             ))}
             <div className="flex flex-col gap-2 pt-2">
               <Link
-                href="/apply"
+                href="/va-pool/apply"
                 className="btn-secondary text-sm text-center"
                 onClick={() => setMenuOpen(false)}
               >
-                Apply as VA
+                Apply to pool
               </Link>
               <Link
-                href="/hire"
+                href="/va-pool/hire"
                 className="btn-primary text-sm text-center"
                 onClick={() => setMenuOpen(false)}
               >

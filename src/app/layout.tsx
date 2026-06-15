@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const GA4_ID = "G-44MNCME40P";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tantaglobal.com"),
   title: {
     default: "TantaGlobal Assist — Hire Trained, Job-Ready Virtual Assistants",
     template: "%s | TantaGlobal Assist",
   },
   description:
-    "TantaGlobal Assist connects businesses with trained, certified virtual assistants. Vetted candidates, professional placement, global workforce.",
+    "TantaGlobal Assist connects US employers with certified virtual assistants and gives VA candidates a clear route into the placement pipeline.",
   keywords: [
     "hire virtual assistant",
     "VA placement",
@@ -30,10 +33,10 @@ export const metadata: Metadata = {
     siteName: "TantaGlobal Assist",
     title: "TantaGlobal Assist — Hire Trained, Job-Ready Virtual Assistants",
     description:
-      "Connect with trained, certified VAs. TantaGlobal Assist provides professional VA placement for businesses that need real results.",
+      "Connect with trained, certified VAs. Employers hire through a vetted pipeline and candidates apply to the pool.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og/home.svg",
         width: 1200,
         height: 630,
         alt: "TantaGlobal Assist — Hire Trained, Job-Ready Virtual Assistants",
@@ -44,14 +47,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TantaGlobal Assist — Hire Trained, Job-Ready Virtual Assistants",
     description:
-      "Connect with trained, certified VAs. TantaGlobal Assist provides professional VA placement for businesses that need real results.",
-    images: ["/og-image.png"],
+      "Connect with trained, certified VAs. Employers hire through a vetted pipeline and candidates apply to the pool.",
+    images: ["/og/home.svg"],
   },
   robots: {
     index: true,
     follow: true,
   },
-  metadataBase: new URL("https://tantaglobal.com"),
 };
 
 const orgSchema = {
@@ -84,6 +86,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
         />
+        <Script
+          id="ga4-src"
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '${GA4_ID}');`}
+        </Script>
       </head>
       <body className="min-h-screen flex flex-col antialiased">
         <a href="#main-content" className="skip-link">

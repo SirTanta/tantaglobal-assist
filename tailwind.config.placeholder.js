@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const colors = require('./design-tokens/colors.placeholder.json');
 const typography = require('./design-tokens/typography.placeholder.json');
 const spacing = require('./design-tokens/spacing.placeholder.json');
