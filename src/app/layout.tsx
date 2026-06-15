@@ -1,88 +1,54 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { organizationJsonLd, site, absoluteUrl } from '@/lib/seo';
+import './globals.css';
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
-    default: "TantaGlobal Assist — Hire Trained, Job-Ready Virtual Assistants",
-    template: "%s | TantaGlobal Assist",
+    default: 'TantaGlobal Assist — Professional VA Placement',
+    template: '%s | TantaGlobal Assist',
   },
-  description:
-    "TantaGlobal Assist connects businesses with trained, certified virtual assistants. Vetted candidates, professional placement, global workforce.",
-  keywords: [
-    "hire virtual assistant",
-    "VA placement",
-    "trained virtual assistant",
-    "remote staffing",
-    "global VA",
-    "TantaGlobal Assist",
-    "VA certification",
-    "remote workforce",
-  ],
+  description: site.description,
+  alternates: {
+    canonical: absoluteUrl('/'),
+  },
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://tantaglobal.com",
-    siteName: "TantaGlobal Assist",
-    title: "TantaGlobal Assist — Hire Trained, Job-Ready Virtual Assistants",
-    description:
-      "Connect with trained, certified VAs. TantaGlobal Assist provides professional VA placement for businesses that need real results.",
+    type: 'website',
+    locale: 'en_US',
+    url: site.url,
+    siteName: site.name,
+    title: 'TantaGlobal Assist — Professional VA Placement',
+    description: site.description,
     images: [
       {
-        url: "/og-image.png",
+        url: absoluteUrl('/og-home.svg'),
         width: 1200,
         height: 630,
-        alt: "TantaGlobal Assist — Hire Trained, Job-Ready Virtual Assistants",
+        alt: 'TantaGlobal Assist',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "TantaGlobal Assist — Hire Trained, Job-Ready Virtual Assistants",
-    description:
-      "Connect with trained, certified VAs. TantaGlobal Assist provides professional VA placement for businesses that need real results.",
-    images: ["/og-image.png"],
+    card: 'summary_large_image',
+    title: 'TantaGlobal Assist — Professional VA Placement',
+    description: site.description,
+    images: [absoluteUrl('/og-home.svg')],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  metadataBase: new URL("https://tantaglobal.com"),
+  robots: { index: true, follow: true },
 };
 
-const orgSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "TantaGlobal Assist",
-  url: "https://tantaglobal.com",
-  description:
-    "VA placement and staffing service. We connect businesses with trained, certified virtual assistants.",
-  parentOrganization: {
-    "@type": "Organization",
-    name: "Tanta Holdings LLC",
-    url: "https://tantaholdings.com",
-  },
-  sameAs: [
-    "https://www.youtube.com/@TantaRemote",
-    "https://www.facebook.com/profile.php?id=867291873125261",
-  ],
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={inter.variable}>
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
       <body className="min-h-screen flex flex-col antialiased">

@@ -1,144 +1,115 @@
-import Link from "next/link";
-import type { Metadata } from "next";
+import Link from 'next/link';
+import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: "About TantaGlobal Assist",
+export const metadata = pageMetadata({
+  title: 'About TantaGlobal Assist',
   description:
-    "TantaGlobal Assist is a professional VA placement service. We connect businesses with globally trained, certified virtual assistants.",
-};
+    'Learn how TantaGlobal Assist connects training, screening, and placement for businesses that need dependable virtual assistants.',
+  path: '/about',
+  image: '/og-about.svg',
+});
+
+const breadcrumbs = breadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about' },
+]);
 
 export default function AboutPage() {
   return (
     <>
-      {/* ── Header ────────────────────────────────────────────────────── */}
-      <section
-        style={{ backgroundColor: "#F5FAFA" }}
-        className="py-20"
-      >
-        <div className="section-container max-w-3xl">
-          <span className="teal-accent" />
-          <h1 className="mb-6">About TantaGlobal Assist</h1>
-          <p className="text-xl leading-relaxed" style={{ color: "#64748b" }}>
-            A professional VA placement service that takes training seriously.
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+
+      <section className="section-pad">
+        <div className="section-container max-w-4xl space-y-6">
+          <p className="eyebrow">About</p>
+          <h1>Built around a simple idea: trained people should reach employers faster.</h1>
+          <p className="max-w-3xl text-lg leading-8 text-slate-600">
+            TantaGlobal Assist is the placement side of a larger Tanta workflow. Candidates enter here,
+            go through the academy step, and move into employer matching with a clearer standard than a typical
+            open marketplace can provide.
           </p>
         </div>
       </section>
 
-      {/* ── Mission ───────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#F5FAFA" }} className="py-20">
-        <div className="section-container max-w-3xl">
-          <span className="teal-accent" />
-          <h2 className="mb-6">What we do</h2>
-          <div className="flex flex-col gap-5" style={{ color: "#2D3748" }}>
-            <p className="text-lg leading-relaxed">
-              TantaGlobal Assist connects businesses with trained, certified
-              virtual assistants. We are not a job board. We are a placement
-              service with a pipeline — every VA we place has completed
-              structured certification through TGA Academy before they reach an
-              employer.
+      <section className="section-pad pt-0">
+        <div className="section-container grid gap-6 lg:grid-cols-2">
+          <div className="surface p-7">
+            <p className="eyebrow">What we do</p>
+            <h2 className="mt-3">Placement with a point of view.</h2>
+            <p className="mt-4 leading-8 text-slate-600">
+              We do not try to be everything to everyone. We focus on the path that matters most: a candidate who is
+              better prepared because they were trained, screened, and evaluated before they hit an employer inbox.
             </p>
-            <p className="leading-relaxed" style={{ color: "#64748b" }}>
-              The staffing industry has a noise problem. Platforms filled with
-              unvetted applicants, no clear standard, no proof of readiness.
-              Hiring becomes a series of expensive experiments.
-            </p>
-            <p className="leading-relaxed" style={{ color: "#64748b" }}>
-              We built TantaGlobal Assist to fix that. The same organization
-              that trains VAs is the one placing them. The standard is
-              consistent. Employers know what they are getting before the first
-              conversation.
+            <p className="mt-4 leading-8 text-slate-600">
+              If an employer has to spend less time filtering noise and more time deciding between good options,
+              the process is doing its job.
             </p>
           </div>
 
-          <div className="gold-divider my-12" />
-
-          <h2 className="mb-6">Who we serve</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            <div className="card">
-              <span className="teal-accent" />
-              <h3 className="text-lg mb-2">Employers</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>
-                Small and mid-size businesses that need reliable remote
-                support. Founders, operators, and team leads who want a VA
-                that is ready to contribute, not one that needs six weeks of
-                ramp-up to become productive.
-              </p>
-            </div>
-            <div className="card">
-              <span
-                className="block h-1 w-12 rounded-full mb-4"
-                style={{ backgroundColor: "#D4AF37" }}
-              />
-              <h3 className="text-lg mb-2">VA Candidates</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>
-                Global professionals building careers in virtual assistance.
-                People who want more than a platform — a path with real
-                credentials, real placement, and real employer relationships.
-              </p>
+          <div className="surface-soft p-7">
+            <p className="eyebrow">Who it serves</p>
+            <div className="mt-4 space-y-4">
+              {[
+                {
+                  title: 'Employers',
+                  body: 'Founders, operators, and team leads who need reliable remote support without a long sorting cycle.',
+                },
+                {
+                  title: 'Candidates',
+                  body: 'VA professionals who want a more serious route into client work and placement support.',
+                },
+                {
+                  title: 'Training partners',
+                  body: 'The academy side keeps standards consistent before placement starts.',
+                },
+              ].map((item) => (
+                <div key={item.title} className="rounded-2xl bg-white p-5 shadow-sm">
+                  <h3 className="text-xl">{item.title}</h3>
+                  <p className="mt-2 leading-7 text-slate-600">{item.body}</p>
+                </div>
+              ))}
             </div>
           </div>
-
-          <div className="gold-divider my-12" />
-
-          <h2 className="mb-6">Part of a larger network</h2>
-          <p className="leading-relaxed mb-6" style={{ color: "#64748b" }}>
-            TantaGlobal Assist operates under{" "}
-            <a
-              href="https://tantaholdings.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "#0D5C63" }}
-              className="font-semibold hover:underline"
-            >
-              Tanta Holdings LLC
-            </a>
-            , a veteran-owned company building the infrastructure for global
-            workforce readiness. Our sister organization,{" "}
-            <a
-              href="https://academy.tantaglobal.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "#0D5C63" }}
-              className="font-semibold hover:underline"
-            >
-              TGA Academy
-            </a>
-            , is where VA candidates train and certify before entering our
-            placement pipeline.
-          </p>
-          <p className="leading-relaxed" style={{ color: "#64748b" }}>
-            The model is intentional: training and placement should not be
-            separate organizations with separate standards. When they are the
-            same organization, the quality floor is the same floor.
-          </p>
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#0D5C63" }} className="py-16">
-        <div className="section-container flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-white mb-2">Ready to get started?</h3>
-            <p style={{ color: "rgba(255,255,255,0.8)" }}>
-              Whether you need a VA or want to become one, the process starts
-              here.
+      <section className="section-pad pt-0">
+        <div className="section-container grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="surface p-7">
+            <p className="eyebrow">The network</p>
+            <h2 className="mt-3">Training and placement stay close.</h2>
+            <p className="mt-4 leading-8 text-slate-600">
+              The academy lives at{' '}
+              <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#0d5c63] underline-offset-4 hover:underline">
+                academy.tantaglobal.com
+              </a>
+              . Tanta Holdings provides the parent structure. TantaGlobal Assist focuses on matching and placement.
             </p>
           </div>
-          <div className="flex gap-4 flex-wrap">
-            <Link
-              href="/hire"
-              className="btn-primary"
-              style={{ backgroundColor: "#ffffff", color: "#0D5C63" }}
-            >
-              Hire a VA
-            </Link>
-            <Link
-              href="/apply"
-              className="btn-secondary"
-              style={{ borderColor: "rgba(255,255,255,0.7)", color: "#ffffff" }}
-            >
-              Apply as VA
-            </Link>
+          <div className="surface p-7">
+            <p className="eyebrow">What we value</p>
+            <h2 className="mt-3">Clear standards, no inflated language.</h2>
+            <ul className="mt-4 space-y-3 text-slate-600">
+              <li>• Real screening before placement</li>
+              <li>• Clear handoffs between training and client work</li>
+              <li>• Practical communication and measurable expectations</li>
+              <li>• A clean path for employers and candidates alike</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad pt-0">
+        <div className="section-container">
+          <div className="surface-soft flex flex-col gap-4 p-7 md:flex-row md:items-center md:justify-between">
+            <div className="max-w-2xl">
+              <p className="eyebrow">Next step</p>
+              <h2 className="mt-3">Choose the route that fits your situation.</h2>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/hire" className="btn-primary">Request VA shortlist</Link>
+              <Link href="/apply" className="btn-secondary">Apply for placement</Link>
+            </div>
           </div>
         </div>
       </section>

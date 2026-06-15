@@ -1,239 +1,185 @@
-import Link from "next/link";
-import type { Metadata } from "next";
+import Link from 'next/link';
+import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: "TantaGlobal Assist — We Connect Trained VAs with Businesses That Need Them",
-};
+export const metadata = pageMetadata({
+  title: 'TantaGlobal Assist — Professional VA Placement',
+  description:
+    'Connect your business with trained virtual assistants or apply for placement through a certification-led pipeline.',
+  path: '/',
+  image: '/og-home.svg',
+});
+
+const breadcrumbs = breadcrumbJsonLd([{ name: 'Home', path: '/' }]);
 
 export default function HomePage() {
   return (
     <>
-      {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <section
-        style={{ backgroundColor: "#F5FAFA" }}
-        className="relative overflow-hidden"
-      >
-        {/* Subtle teal glow orb */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: "-80px",
-            right: "-80px",
-            width: "400px",
-            height: "400px",
-            borderRadius: "9999px",
-            background: "radial-gradient(circle, rgba(13,92,99,0.08) 0%, transparent 70%)",
-            pointerEvents: "none",
-          }}
-        />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
 
-        <div className="section-container relative py-24 md:py-32">
-          <div className="max-w-3xl">
-            <p
-              className="text-sm font-semibold uppercase tracking-widest mb-4"
-              style={{ color: "#0D5C63" }}
-            >
-              VA Placement &amp; Staffing
-            </p>
-            <h1 className="mb-6">
-              We connect trained VAs with businesses that need them.
+      <section className="section-pad">
+        <div className="section-container grid gap-8 lg:grid-cols-[1.25fr_0.95fr] lg:items-center">
+          <div className="space-y-6">
+            <p className="eyebrow">VA placement and candidate training</p>
+            <h1>
+              A clearer way to hire virtual assistants — and a clearer way to
+              enter the pipeline.
             </h1>
-            <p
-              className="text-xl leading-relaxed mb-10 max-w-2xl"
-              style={{ color: "#64748b" }}
-            >
-              TantaGlobal Assist places certified, job-ready virtual assistants
-              with employers who need real performance from day one. No guessing.
-              No onboarding surprises.
+            <p className="max-w-2xl text-lg leading-8 text-slate-600">
+              TantaGlobal Assist connects employers with trained, certified virtual assistants.
+              Candidates apply here, complete TGA Academy certification, and move into an employer-ready
+              placement workflow with real screening and follow-up.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/hire" className="btn-primary text-base">
-                Hire a VA
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link href="/hire" className="btn-primary">
+                Request VA shortlist
               </Link>
-              <Link href="/apply" className="btn-secondary text-base">
-                Apply as a VA
+              <Link href="/apply" className="btn-secondary">
+                Apply for placement
               </Link>
             </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {[
+                'Employer brief intake',
+                'Certification-led candidate pipeline',
+                'Follow-up through placement',
+              ].map((item) => (
+                <div key={item} className="surface px-4 py-4 text-sm font-semibold text-slate-700">
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* ── Trust bar ─────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#ffffff" }}>
-        <div className="section-container py-10">
-          <div className="gold-divider mb-8" />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[
-              { stat: "Certified", label: "Academy-trained candidates only" },
-              { stat: "Vetted", label: "Screened before placement" },
-              { stat: "Global", label: "Remote-ready from day one" },
-              { stat: "Supported", label: "Ongoing placement follow-up" },
-            ].map((item) => (
-              <div key={item.stat}>
-                <p
-                  className="text-2xl font-black mb-1"
-                  style={{ color: "#0D5C63" }}
-                >
-                  {item.stat}
-                </p>
-                <p className="text-sm" style={{ color: "#64748b" }}>
-                  {item.label}
+          <div className="surface-soft p-6 sm:p-8">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0d5c63]">Dual path</p>
+                <h2 className="mt-2 text-2xl">Employers and candidates, one system.</h2>
+              </div>
+              <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-[#0d5c63] shadow-sm">
+                TGA
+              </span>
+            </div>
+            <div className="mt-6 grid gap-4">
+              <div className="rounded-2xl bg-white p-5 shadow-sm">
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">For employers</p>
+                <p className="mt-3 text-slate-600">
+                  Share the role, hours, and expectations. We review the brief and route you toward
+                  a shortlist built for the work you actually need done.
                 </p>
               </div>
-            ))}
-          </div>
-          <div className="gold-divider mt-8" />
-        </div>
-      </section>
-
-      {/* ── How it works preview ───────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#F5FAFA" }} className="py-20">
-        <div className="section-container">
-          <div className="text-center mb-14">
-            <span className="teal-accent mx-auto" />
-            <h2>How the process works</h2>
-            <p className="mt-4 text-lg max-w-xl mx-auto" style={{ color: "#64748b" }}>
-              A clear, three-step pipeline from application to placement.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                step: "01",
-                title: "Apply at TantaGlobal Assist",
-                body: "VA candidates submit their application here. We screen for professionalism, communication, and baseline readiness.",
-                cta: { href: "/apply", label: "Apply now" },
-              },
-              {
-                step: "02",
-                title: "Train at TGA Academy",
-                body: "Qualified candidates complete certification at academy.tantaglobal.com — scenario-based training that proves client-facing readiness.",
-                cta: {
-                  href: "https://academy.tantaglobal.com",
-                  label: "View training",
-                  external: true,
-                },
-              },
-              {
-                step: "03",
-                title: "Get Placed with an Employer",
-                body: "Certified VAs enter our employer pipeline. Businesses post roles, review candidates, and get matched with job-ready professionals.",
-                cta: { href: "/hire", label: "Hire a VA" },
-              },
-            ].map((item) => (
-              <div key={item.step} className="card">
-                <span
-                  className="text-5xl font-black leading-none block mb-4"
-                  style={{ color: "#E0F5F5", userSelect: "none" }}
-                >
-                  {item.step}
-                </span>
-                <h3 className="text-lg mb-2">{item.title}</h3>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: "#64748b" }}>
-                  {item.body}
+              <div className="rounded-2xl bg-white p-5 shadow-sm">
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">For candidates</p>
+                <p className="mt-3 text-slate-600">
+                  Submit your background, complete the academy step, and enter a placement pipeline that
+                  values readiness over volume.
                 </p>
-                {item.cta.external ? (
-                  <a
-                    href={item.cta.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-ghost text-sm"
-                    style={{ color: "#0D5C63" }}
-                  >
-                    {item.cta.label} &rarr;
+              </div>
+              <div className="rounded-2xl border border-dashed border-[#b9d8d8] bg-[#f9fdfd] p-5">
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0d5c63]">Training partner</p>
+                <p className="mt-3 text-slate-600">
+                  Academy training lives at{' '}
+                  <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#0d5c63] underline-offset-4 hover:underline">
+                    academy.tantaglobal.com
                   </a>
-                ) : (
-                  <Link
-                    href={item.cta.href}
-                    className="btn-ghost text-sm"
-                    style={{ color: "#0D5C63" }}
-                  >
-                    {item.cta.label} &rarr;
-                  </Link>
-                )}
+                  .
+                </p>
               </div>
-            ))}
-          </div>
-          <div className="text-center mt-10">
-            <Link href="/how-it-works" className="btn-secondary">
-              See the full process
-            </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Flywheel ──────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#F0F4F4" }} className="py-20">
+      <section className="section-pad pt-0">
         <div className="section-container">
-          <div className="max-w-2xl">
-            <span className="teal-accent" />
-            <h2 className="mb-6">
-              Training and placement work together.
-            </h2>
-            <p className="text-lg leading-relaxed mb-6" style={{ color: "#2D3748" }}>
-              TantaGlobal Assist and TGA Academy operate as a single pipeline.
-              Candidates train and certify at the Academy. Employers get
-              candidates who have already proved they can perform. The cycle
-              produces better VAs and more confident hiring decisions.
-            </p>
-            <p className="text-base leading-relaxed" style={{ color: "#64748b" }}>
-              This is not a job board. We are a placement service backed by a
-              real training program. Every VA in our pipeline has completed
-              structured, scenario-based certification at{" "}
-              <a
-                href="https://academy.tantaglobal.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#0D5C63" }}
-                className="font-semibold hover:underline"
-              >
-                academy.tantaglobal.com
-              </a>
-              .
-            </p>
+          <div className="subtle-rule mb-8" />
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className="surface p-7">
+              <p className="eyebrow">Employers</p>
+              <h2 className="mt-3">More signal, less sorting.</h2>
+              <p className="mt-4 leading-8 text-slate-600">
+                This is a placement service, not a generic directory. We collect the role brief,
+                align it with the candidate pipeline, and keep the process grounded in professional standards.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/hire" className="btn-primary">Request VA shortlist</Link>
+                <Link href="/pricing" className="btn-secondary">Review pricing model</Link>
+              </div>
+            </div>
+
+            <div className="surface p-7">
+              <p className="eyebrow">Candidates</p>
+              <h2 className="mt-3">A measured route into client work.</h2>
+              <p className="mt-4 leading-8 text-slate-600">
+                If you are building a VA career, the process is straightforward: apply here, complete the academy
+                step, and enter the placement queue with a stronger profile than a raw application alone.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/apply" className="btn-primary">Apply for placement</Link>
+                <Link href="/how-it-works" className="btn-secondary">See the full process</Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Dual CTA ──────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#ffffff" }} className="py-20">
+      <section className="section-pad pt-0">
         <div className="section-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Employer */}
-            <div
-              className="rounded-2xl p-10 flex flex-col"
-              style={{ backgroundColor: "#E0F5F5", border: "1px solid rgba(13,92,99,0.2)" }}
-            >
-              <span className="teal-accent" />
-              <h3 className="mb-3">For Employers</h3>
-              <p className="mb-6 leading-relaxed" style={{ color: "#64748b" }}>
-                Get matched with a trained, certified VA who is ready to
-                contribute from the first week. No trial-and-error hiring.
-              </p>
-              <Link href="/hire" className="btn-primary self-start">
-                Hire a VA
-              </Link>
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <p className="eyebrow">How the pipeline works</p>
+              <h2 className="mt-3 max-w-xl">Three steps, one outcome: a ready-to-work VA.</h2>
             </div>
-            {/* VA */}
-            <div
-              className="rounded-2xl p-10 flex flex-col"
-              style={{ backgroundColor: "#F5FAFA", border: "1px solid #cbd5e1" }}
-            >
-              <span
-                className="block h-1 w-12 rounded-full mb-4"
-                style={{ backgroundColor: "#D4AF37" }}
-              />
-              <h3 className="mb-3">For VA Candidates</h3>
-              <p className="mb-6 leading-relaxed" style={{ color: "#64748b" }}>
-                Start your VA career with real credentials. Train at TGA
-                Academy, get placed with a vetted employer. Your career, built
-                on proof.
-              </p>
-              <Link href="/apply" className="btn-secondary self-start">
-                Apply as a VA
-              </Link>
+            <div className="grid gap-4">
+              {[
+                {
+                  step: '01',
+                  title: 'Apply or submit a role brief',
+                  body: 'Candidates share their background; employers submit the work that needs doing.',
+                },
+                {
+                  step: '02',
+                  title: 'Complete academy certification',
+                  body: 'Candidates move through structured training before they are considered for placement.',
+                },
+                {
+                  step: '03',
+                  title: 'Match, review, and place',
+                  body: 'We support the shortlist, candidate review, and handoff so the process stays tidy.',
+                },
+              ].map((item) => (
+                <div key={item.step} className="surface flex gap-5 p-5">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#0d5c63] text-lg font-black text-white">
+                    {item.step}
+                  </div>
+                  <div>
+                    <h3 className="text-xl">{item.title}</h3>
+                    <p className="mt-2 leading-7 text-slate-600">{item.body}</p>
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad pt-0">
+        <div className="section-container grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+          <div className="surface p-7">
+            <p className="eyebrow">Contact</p>
+            <h2 className="mt-3">Need a direct line for a question?</h2>
+            <p className="mt-4 leading-8 text-slate-600">
+              Employer questions go to {site.emailEmployer}. Candidate questions go to {site.emailCandidates}.
+              If your question is general, send it to {site.emailGeneral}.
+            </p>
+          </div>
+          <div className="surface p-7">
+            <p className="eyebrow">Network</p>
+            <h2 className="mt-3">Part of the Tanta ecosystem.</h2>
+            <p className="mt-4 leading-8 text-slate-600">
+              TantaGlobal Assist sits alongside Tanta Holdings and TGA Academy, keeping training and placement close
+              enough to share standards without mixing the actual workflows.
+            </p>
           </div>
         </div>
       </section>

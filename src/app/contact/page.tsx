@@ -1,81 +1,86 @@
-import type { Metadata } from "next";
-import ContactForm from "@/components/ContactForm";
+import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
+import ContactForm from '@/components/ContactForm';
 
-export const metadata: Metadata = {
-  title: "Contact TantaGlobal Assist",
+export const metadata = pageMetadata({
+  title: 'Contact TantaGlobal Assist',
   description:
-    "Get in touch with TantaGlobal Assist. Questions about hiring, applying, or the placement process.",
-};
+    'Reach the employer, candidate, or general contact routes at TantaGlobal Assist.',
+  path: '/contact',
+  image: '/og-contact.svg',
+});
+
+const breadcrumbs = breadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'Contact', path: '/contact' },
+]);
 
 export default function ContactPage() {
   return (
     <>
-      {/* ── Header ────────────────────────────────────────────────────── */}
-      <section
-        style={{ backgroundColor: "#F5FAFA" }}
-        className="py-20"
-      >
-        <div className="section-container">
-          <span className="teal-accent" />
-          <h1 className="mb-6 max-w-2xl">Contact Us</h1>
-          <p className="text-xl max-w-xl" style={{ color: "#64748b" }}>
-            Have a question about hiring, the application process, or something
-            else? Reach out directly.
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+
+      <section className="section-pad">
+        <div className="section-container max-w-4xl space-y-6">
+          <p className="eyebrow">Contact</p>
+          <h1>Reach the right team without guessing the inbox.</h1>
+          <p className="max-w-3xl text-lg leading-8 text-slate-600">
+            Use the direct email routes if you already know what you need. Otherwise, send a message below and we will
+            route it to the right place.
           </p>
         </div>
       </section>
 
-      {/* ── Contact options ───────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#F5FAFA" }} className="py-20">
-        <div className="section-container max-w-3xl">
-          {/* Quick contact cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">
-            <div className="card">
-              <span className="teal-accent" />
-              <h3 className="text-lg mb-2">Employers</h3>
-              <p className="text-sm leading-relaxed mb-4" style={{ color: "#64748b" }}>
-                Questions about placement, the candidate pipeline, or getting
-                started? Email our employer team.
-              </p>
-              <a
-                href="mailto:hire@tantaglobal.com"
-                style={{ color: "#0D5C63" }}
-                className="text-sm font-semibold hover:underline"
-              >
-                hire@tantaglobal.com
+      <section className="section-pad pt-0">
+        <div className="section-container grid gap-6 lg:grid-cols-3">
+          {[
+            {
+              title: 'Employers',
+              body: 'Questions about role briefs, shortlist timing, or the placement workflow.',
+              email: site.emailEmployer,
+            },
+            {
+              title: 'Candidates',
+              body: 'Questions about the application path, academy step, or placement expectations.',
+              email: site.emailCandidates,
+            },
+            {
+              title: 'General',
+              body: 'Partnerships, general questions, and anything that does not fit the two routes above.',
+              email: site.emailGeneral,
+            },
+          ].map((card) => (
+            <div key={card.title} className="surface p-6">
+              <p className="eyebrow">Direct route</p>
+              <h2 className="mt-3 text-2xl">{card.title}</h2>
+              <p className="mt-3 leading-7 text-slate-600">{card.body}</p>
+              <a className="mt-5 inline-flex font-semibold text-[#0d5c63] underline-offset-4 hover:underline" href={`mailto:${card.email}`}>
+                {card.email}
               </a>
             </div>
-            <div className="card">
-              <span
-                className="block h-1 w-12 rounded-full mb-4"
-                style={{ backgroundColor: "#D4AF37" }}
-              />
-              <h3 className="text-lg mb-2">VA Candidates</h3>
-              <p className="text-sm leading-relaxed mb-4" style={{ color: "#64748b" }}>
-                Questions about the application or training process? Reach the
-                candidate team here.
-              </p>
-              <a
-                href="mailto:apply@tantaglobal.com"
-                style={{ color: "#0D5C63" }}
-                className="text-sm font-semibold hover:underline"
-              >
-                apply@tantaglobal.com
-              </a>
-            </div>
-          </div>
+          ))}
+        </div>
+      </section>
 
-          {/* General contact form */}
-          <div
-            className="rounded-2xl p-10 md:p-14"
-            style={{ backgroundColor: "#ffffff", border: "1px solid #cbd5e1" }}
-          >
-            <h2 className="mb-2">Send a message</h2>
-            <p className="mb-8" style={{ color: "#64748b" }}>
-              General inquiries, partnerships, or anything that does not fit
-              the categories above.
+      <section className="section-pad pt-0">
+        <div className="section-container grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="surface-soft p-7">
+            <p className="eyebrow">What to send</p>
+            <h2 className="mt-3">A useful message is short and specific.</h2>
+            <ul className="mt-4 space-y-3 text-slate-600">
+              <li>• The page or workflow you are asking about</li>
+              <li>• The role or candidate type you need</li>
+              <li>• Any deadline or constraint we should know</li>
+              <li>• A direct email address for the reply</li>
+            </ul>
+          </div>
+          <div className="surface p-6 sm:p-8">
+            <h2 className="text-3xl">Send a message</h2>
+            <p className="mt-3 leading-7 text-slate-600">
+              If you do not want to email directly, use the form below.
             </p>
-            <ContactForm />
+            <div className="mt-6">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </section>

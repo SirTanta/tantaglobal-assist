@@ -1,0 +1,20 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0A1628"/>
+      <stop offset="0.6" stop-color="#0D5C63"/>
+      <stop offset="1" stop-color="#D4AF37"/>
+    </linearGradient>
+    <radialGradient id="g2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(950 120) rotate(125) scale(260 330)">
+      <stop stop-color="#E0F5F5" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#E0F5F5" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g1)"/>
+  <circle cx="950" cy="140" r="240" fill="url(#g2)"/>
+  <rect x="72" y="72" width="1056" height="486" rx="32" stroke="rgba(255,255,255,0.15)"/>
+  <text x="110" y="185" fill="#D4AF37" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800" letter-spacing="5">TANTA GLOBAL ASSIST</text>
+  <text x="110" y="275" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="62" font-weight="800">Contact the team</text>
+  <text x="110" y="345" fill="#EAF3F4" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="500">Get the right inbox for employers, candidates, or general questions.</text>
+  <text x="110" y="460" fill="#D9EBFF" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600">Professional VA placement • Academy-trained candidates • Clear standards</text>
+</svg>
