@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 import ApplyForm from '@/components/ApplyForm';
 
+const tallyFormUrl = 'https://tally.so/r/VLVZbE';
+
 export const metadata = pageMetadata({
   title: 'Apply for Placement',
   description:
@@ -57,9 +59,17 @@ export default function ApplyPage() {
           <div className="surface p-6 sm:p-8">
             <h2 className="text-3xl">Application form</h2>
             <p className="mt-3 leading-7 text-slate-600">
-              The form below is the first step. Once submitted, your profile can be evaluated against the academy and
-              placement workflow.
+              The preferred application path is the Tally form. If you need an on-page fallback, the intake form
+              below will still send your details into the placement workflow.
             </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <a href={tallyFormUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                Open Tally application
+              </a>
+              <Link href="/how-it-works" className="btn-secondary">
+                See the process
+              </Link>
+            </div>
             <div className="mt-6">
               <ApplyForm />
             </div>

@@ -41,7 +41,8 @@ export default function HirePage() {
             <h1>Request a VA shortlist built from trained, certified candidates.</h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-600">
               Use the form to share the role, time commitment, and expectations. We review the brief, then route you
-              toward candidates who are closer to the work you need done.
+              toward candidates who are closer to the work you need done and into the HubSpot portal 243753317
+              workflow on automation-hub.
             </p>
             <div className="surface p-6">
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">What helps us match well</p>

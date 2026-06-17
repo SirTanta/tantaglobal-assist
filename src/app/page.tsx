@@ -20,21 +20,18 @@ export default function HomePage() {
         <div className="section-container grid gap-8 lg:grid-cols-[1.25fr_0.95fr] lg:items-center">
           <div className="space-y-6">
             <p className="eyebrow">VA placement and candidate training</p>
-            <h1>
-              A clearer way to hire virtual assistants — and a clearer way to
-              enter the pipeline.
-            </h1>
+            <h1>We connect trained VAs with businesses that need them.</h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-600">
-              TantaGlobal Assist connects employers with trained, certified virtual assistants.
               Candidates apply here, complete TGA Academy certification, and move into an employer-ready
-              placement workflow with real screening and follow-up.
+              placement workflow. Employers share the role they need filled and we route them toward the
+              right shortlist.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link href="/hire" className="btn-primary">
-                Request VA shortlist
+                Hire a VA
               </Link>
               <Link href="/apply" className="btn-secondary">
-                Apply for placement
+                Apply as a VA
               </Link>
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
