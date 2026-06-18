@@ -2,7 +2,7 @@
 
 export default function HirePlaceholderForm() {
   return (
-    <form
+    <form method="post"
       onSubmit={(e) => e.preventDefault()}
       className="grid grid-cols-1 md:grid-cols-2 gap-5"
     >
