@@ -1,0 +1,4 @@
+Contact: mailto:security@tantaholdings.com
+Expires: 2027-06-18T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://tantaglobal.com/.well-known/security.txt
