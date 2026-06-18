@@ -14,6 +14,13 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // Restrict CORS on all non-API routes — prevents wildcard CDN default from leaking
+        source: "/((?!api).*)",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "https://tantaglobal.com" },
+        ],
+      },
+      {
         source: "/(.*)",
         headers: [
           { key: "X-DNS-Prefetch-Control",   value: "on" },

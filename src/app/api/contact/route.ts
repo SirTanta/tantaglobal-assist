@@ -15,7 +15,14 @@ function isRateLimited(key: string): boolean {
   return false;
 }
 
+const ALLOWED_ORIGINS = ['https://tantaglobal.com', 'https://www.tantaglobal.com'];
+
 export async function POST(req: NextRequest) {
+  const origin = req.headers.get('origin');
+  if (origin && !ALLOWED_ORIGINS.includes(origin) && !origin.startsWith('http://localhost')) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+
   const key = req.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? 'unknown';
   if (isRateLimited(key)) {
     return NextResponse.json({ error: 'Too many submissions. Please try again later.' }, { status: 429 });
