@@ -118,7 +118,7 @@ export default function ContactForm() {
   const isSubmitting = state.status === "submitting";
 
   return (
-    <form
+    <form method="post"
       ref={formRef}
       onSubmit={handleSubmit}
       noValidate

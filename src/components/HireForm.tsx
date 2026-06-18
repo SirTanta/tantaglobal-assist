@@ -128,7 +128,7 @@ export default function HireForm() {
   const isSubmitting = state.status === "submitting";
 
   return (
-    <form
+    <form method="post"
       ref={formRef}
       onSubmit={handleSubmit}
       noValidate

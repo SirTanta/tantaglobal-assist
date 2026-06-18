@@ -125,7 +125,7 @@ export default function ApplyForm() {
   const isSubmitting = state.status === "submitting";
 
   return (
-    <form
+    <form method="post"
       ref={formRef}
       onSubmit={handleSubmit}
       noValidate
