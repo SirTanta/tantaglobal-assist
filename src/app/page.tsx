@@ -160,6 +160,34 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Ecosystem strip */}
+      <section className="border-y border-slate-200 bg-slate-50 py-6">
+        <div className="section-container">
+          <p className="text-center text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-6">
+            Part of the Tanta Holdings ecosystem
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-8">
+            {[
+              { name: 'Tanta Holdings LLC',    role: 'Parent company',         href: 'https://tantaholdings.com' },
+              { name: 'Tanta Global Academy',  role: 'VA certification',        href: 'https://academy.tantaglobal.com' },
+              { name: 'Tanta Visa Pathways',   role: 'US immigration tools',    href: 'https://tantavisapathways.com' },
+              { name: 'Tanta Solutions',       role: 'AI enablement consulting',href: 'https://tantaholdings.com/solutions' },
+            ].map((co) => (
+              <a
+                key={co.name}
+                href={co.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-center group"
+              >
+                <p className="text-sm font-bold text-slate-700 group-hover:text-[#0d5c63] transition-colors">{co.name}</p>
+                <p className="text-[11px] text-slate-400 mt-0.5">{co.role}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section-pad pt-0">
         <div className="section-container grid gap-6 lg:grid-cols-[1fr_0.9fr]">
           <div className="surface p-7">
