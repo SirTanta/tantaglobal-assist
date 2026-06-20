@@ -18,10 +18,12 @@ const TALA_MODEL = process.env.TALA_MODEL || "openrouter/deepseek/deepseek-chat-
 const SYSTEM_PROMPT = buildSystemPrompt();
 
 function hasGatewayAccess(): boolean {
+  // Only treat the route as gateway-enabled when an actual credential exists.
+  // VERCEL=1 alone is insufficient — the AI Gateway also requires a payment
+  // method on file. Without credentials we fall back to the deterministic
+  // persona reply below.
   return Boolean(
-    process.env.AI_GATEWAY_API_KEY ||
-      process.env.VERCEL_OIDC_TOKEN ||
-      process.env.VERCEL
+    process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN
   );
 }
 
