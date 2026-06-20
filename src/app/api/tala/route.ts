@@ -231,10 +231,11 @@ export async function POST(request: NextRequest) {
     return createUIMessageStreamResponse({ stream });
   }
 
+  const modelMessages = await convertToModelMessages(messages);
   const result = streamText({
     model: TALA_MODEL,
     system: SYSTEM_PROMPT,
-    messages: convertToModelMessages(messages),
+    messages: modelMessages,
     temperature: 0.3,
     maxOutputTokens: 450,
     onError: ({ error }) => {
