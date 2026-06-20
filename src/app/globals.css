@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-sans:    "Inter Tight", var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: "Bricolage Grotesque", "Inter Tight", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+
   --color-brand-navy: #0a1628;
   --color-brand-teal: #0d5c63;
   --color-brand-teal-dark: #094d54;
@@ -12,6 +16,19 @@
   --color-brand-slate: #2d3748;
   --color-brand-muted: #64748b;
   --color-brand-border: #cbd5e1;
+
+  /* Instruments of Passage — family system */
+  --color-instruments-gold:         #E7B029;
+  --color-instruments-gold-bright:  #F5C842;
+  --color-instruments-bronze:       #A88450;
+  --color-instruments-shadow:       #5A4632;
+  --color-instruments-teak:         #2B1F12;
+  --color-instruments-daylight:     #EFEDE4;
+  --color-instruments-vellum:       #F8F7F2;
+  --color-instruments-sea:          #0D5C63;
+  --color-instruments-sea-deep:     #093F44;
+  --color-instruments-ink:          #0B1F2E;
+  --color-instruments-ink-deep:     #071420;
 }
 
 @layer base {
@@ -224,5 +241,58 @@
     .section-pad {
       padding: 6rem 0;
     }
+  }
+
+  /* === Instruments of Passage — family system (Assist) === */
+  .instr-display {
+    font-family: "Bricolage Grotesque", "Inter Tight", system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+  .instr-meta {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #A88450;
+  }
+  .instr-filing {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #A88450;
+  }
+  .instr-stamp {
+    display: inline-block;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #0d5c63;
+    border: 1px solid rgba(13, 92, 99, 0.6);
+    padding: 4px 8px;
+  }
+  .instr-rule-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #E7B029 18%, #E7B029 82%, transparent);
+  }
+  .instr-numeral {
+    font-family: "Bricolage Grotesque", "Inter Tight", system-ui, sans-serif;
+    font-weight: 500;
+    color: #2B1F12;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .instr-sun-orbit-teal {
+    background: radial-gradient(circle at center, rgba(13, 92, 99, 0.10) 0%, rgba(13, 92, 99, 0.03) 38%, transparent 70%);
+  }
+  @keyframes needleSettle {
+    0%   { opacity: 0; transform: rotate(-4deg); }
+    70%  { opacity: 1; transform: rotate(1deg); }
+    100% { opacity: 1; transform: rotate(0deg); }
+  }
+  .instr-needle { animation: needleSettle 0.6s cubic-bezier(0.16,1,0.3,1) both; }
+  @media (prefers-reduced-motion: reduce) {
+    .instr-needle { animation: none; }
   }
 }

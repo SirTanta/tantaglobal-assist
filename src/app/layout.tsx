@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import TalaChatWidget from '@/components/TalaChatWidget';
 import { organizationJsonLd, site, absoluteUrl } from '@/lib/seo';
 import './globals.css';
 
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
         </main>
         <Footer />
+        <TalaChatWidget />
       </body>
     </html>
   );
