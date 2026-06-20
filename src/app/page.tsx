@@ -16,11 +16,27 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
 
-      <section className="section-pad">
-        <div className="section-container grid gap-8 lg:grid-cols-[1.25fr_0.95fr] lg:items-center">
+      {/* Filing strip — Instruments family signature */}
+      <div className="border-b border-slate-200 bg-white/60">
+        <div className="section-container py-2.5 flex items-center justify-between gap-4">
+          <span className="instr-filing">Tantaglobal Assist · Rio Rancho, NM · Cebu, PH</span>
+          <a
+            href="https://tantaholdings.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="instr-filing hover:text-[#0d5c63] transition-colors"
+          >
+            Tanta Holdings →
+          </a>
+        </div>
+      </div>
+
+      <section className="section-pad relative overflow-hidden">
+        <div className="absolute inset-0 instr-sun-orbit-teal pointer-events-none" aria-hidden />
+        <div className="section-container relative grid gap-8 lg:grid-cols-[1.25fr_0.95fr] lg:items-center">
           <div className="space-y-6">
-            <p className="eyebrow">VA placement and candidate training</p>
-            <h1>We connect trained VAs with businesses that need them.</h1>
+            <span className="instr-stamp">Placement · Assist</span>
+            <h1 className="instr-display">We connect trained VAs with businesses that need them.</h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-600">
               Candidates apply here, complete TGA Academy certification, and move into an employer-ready
               placement workflow. Employers share the role they need filled and we route them toward the
@@ -124,8 +140,9 @@ export default function HomePage() {
         <div className="section-container">
           <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
-              <p className="eyebrow">How the pipeline works</p>
-              <h2 className="mt-3 max-w-xl">Three steps, one outcome: a ready-to-work VA.</h2>
+              <span className="instr-stamp">The Pipeline</span>
+              <h2 className="instr-display mt-4 max-w-xl">Three steps, one outcome: a ready-to-work VA.</h2>
+              <div className="instr-rule-gold mt-6 max-w-[12rem]" />
             </div>
             <div className="grid gap-4">
               {[
@@ -145,12 +162,12 @@ export default function HomePage() {
                   body: 'We support the shortlist, candidate review, and handoff so the process stays tidy.',
                 },
               ].map((item) => (
-                <div key={item.step} className="surface flex gap-5 p-5">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#0d5c63] text-lg font-black text-white">
+                <div key={item.step} className="surface flex items-start gap-6 p-5">
+                  <div className="instr-numeral shrink-0 text-5xl sm:text-6xl">
                     {item.step}
                   </div>
-                  <div>
-                    <h3 className="text-xl">{item.title}</h3>
+                  <div className="border-l border-slate-200 pl-5">
+                    <h3 className="instr-display text-xl">{item.title}</h3>
                     <p className="mt-2 leading-7 text-slate-600">{item.body}</p>
                   </div>
                 </div>
