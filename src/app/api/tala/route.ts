@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import {
+  convertToModelMessages,
   createUIMessageStream,
   createUIMessageStreamResponse,
   streamText,
@@ -233,9 +234,12 @@ export async function POST(request: NextRequest) {
   const result = streamText({
     model: TALA_MODEL,
     system: SYSTEM_PROMPT,
-    messages,
+    messages: convertToModelMessages(messages),
     temperature: 0.3,
     maxOutputTokens: 450,
+    onError: ({ error }) => {
+      console.error("[tala] streamText error:", error);
+    },
   });
 
   return result.toUIMessageStreamResponse({
