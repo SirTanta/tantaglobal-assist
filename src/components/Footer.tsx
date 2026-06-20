@@ -20,7 +20,7 @@ export default function Footer() {
   return (
     <footer className="mt-auto border-t border-[#d8e4e4] bg-[#eef4f3] text-slate-700">
       <div className="section-container py-12">
-        <div className="grid gap-10 md:grid-cols-3">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" aria-label="TantaGlobal Assist home" className="inline-flex">
               <Image src="/logo-transparent.png" alt="TantaGlobal Assist" width={140} height={48} style={{ width: '140px', height: 'auto' }} />
@@ -51,13 +51,21 @@ export default function Footer() {
           </div>
 
           <div>
+            <p className="footer-heading">Tanta Network</p>
+            <ul className="footer-list">
+              <li><a href="https://tantaholdings.com" target="_blank" rel="noopener noreferrer">Tanta Holdings</a></li>
+              <li><a href={site.academyUrl} target="_blank" rel="noopener noreferrer">TGA Academy</a></li>
+              <li><a href="https://tantavisapathways.com" target="_blank" rel="noopener noreferrer">Tanta Visa Pathways</a></li>
+            </ul>
+          </div>
+
+          <div>
             <p className="footer-heading">Contact and legal</p>
             <ul className="footer-list">
               <li><a href={`mailto:${site.emailEmployer}`}>{site.emailEmployer}</a></li>
               <li><a href={`mailto:${site.emailCandidates}`}>{site.emailCandidates}</a></li>
               <li><a href="/privacy">Privacy policy</a></li>
               <li><a href="/sitemap.xml">Sitemap</a></li>
-              <li><a href={site.academyUrl} target="_blank" rel="noopener noreferrer">TGA Academy</a></li>
             </ul>
           </div>
         </div>
