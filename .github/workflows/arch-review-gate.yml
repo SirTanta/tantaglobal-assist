@@ -1,0 +1,70 @@
+name: Architecture Review Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main, master]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  arch-review-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for new external dependencies
+        id: check_deps
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require("child_process");
+            const diffResult = execSync(
+              'git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD',
+              { encoding: "utf8", maxBuffer: 50 * 1024 * 1024 }
+            ).trim();
+            const depPatterns = [
+              /package\.json$/, /package-lock\.json$/, /yarn\.lock$/, /pnpm-lock\.yaml$/,
+              /requirements\.txt$/, /Pipfile/, /pyproject\.toml$/, /poetry\.lock$/,
+              /Cargo\.toml$/, /Cargo\.lock$/, /go\.mod$/, /go\.sum$/,
+              /Gemfile/, /Gemfile\.lock$/, /composer\.json$/, /composer\.lock$/,
+              /\.csproj$/, /packages\.config$/,
+            ];
+            const changedFiles = diffResult.split("\n").filter(Boolean);
+            const depFilesChanged = changedFiles.filter(f => depPatterns.some(p => p.test(f)));
+
+            const codePatterns = [/\.(js|jsx|ts|tsx|mjs|cjs)$/, /\.(py)$/, /\.(rs)$/, /\.(go)$/];
+            let newImportsDetected = false;
+            const codeFilesChanged = changedFiles.filter(f => codePatterns.some(p => p.test(f)));
+            for (const file of codeFilesChanged) {
+              try {
+                const c = execSync('git diff origin/${{ github.event.pull_request.base.ref }}...HEAD -- "' + file + '"', { encoding: "utf8", maxBuffer: 10 * 1024 * 1024 });
+                const addedLines = c.split("\n").filter(l => l.startsWith("+") && !l.startsWith("+++"));
+                const importPatterns = [/^\+import\s+.*from\s+["']@?[a-zA-Z]/, /^\+const\s+.*=\s*require\(["'][^.\/]/, /^\+import\s+["'][^.\/]/, /^\+from\s+["'][^.\/]/];
+                for (const line of addedLines) { if (importPatterns.some(p => p.test(line))) { newImportsDetected = true; break; } }
+              } catch(e) {}
+              if (newImportsDetected) break;
+            }
+
+            const needsReview = depFilesChanged.length > 0 || newImportsDetected;
+            core.setOutput("needs_review", needsReview.toString());
+            core.setOutput("dep_files", depFilesChanged.join(", "));
+
+      - name: Add label and comment if new dependencies detected
+        if: steps.check_deps.outputs.needs_review == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+            await github.rest.issues.addLabels({ owner, repo, issue_number, labels: ["needs-arch-review"] });
+            const depFiles = "${{ steps.check_deps.outputs.dep_files }}";
+            await github.rest.issues.createComment({
+              owner, repo, issue_number,
+              body: "## Architecture Review Suggested\n\nThis PR introduces changes to dependency files or new external imports that may warrant an architecture review.\n\n**Affected files:** " + (depFiles || "New external imports detected") + "\n\n> Advisory only - this does not block merging. Tag @Washu for architecture review if this introduces a significant new dependency or integration.\n\ncc: @SirTanta"
+            });
