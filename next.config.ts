@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         destination: "https://tantaholdings.com/blog",
         permanent: true,
       },
+      {
+        source: "/privacy-policy",
+        destination: "/privacy",
+        permanent: true,
+      },
     ];
   },
   async headers() {
