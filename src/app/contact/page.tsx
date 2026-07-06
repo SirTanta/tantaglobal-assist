@@ -1,5 +1,6 @@
 import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 import ContactForm from '@/components/ContactForm';
+import PageHero from '@/components/PageHero';
 
 export const metadata = pageMetadata({
   title: 'Contact TantaGlobal Assist',
@@ -14,47 +15,54 @@ const breadcrumbs = breadcrumbJsonLd([
   { name: 'Contact', path: '/contact' },
 ]);
 
+const routes = [
+  {
+    title: 'Employers',
+    body: 'Questions about role briefs, shortlist timing, or the placement workflow.',
+    email: site.emailEmployer,
+  },
+  {
+    title: 'Candidates',
+    body: 'Questions about the application path, academy step, or placement expectations.',
+    email: site.emailCandidates,
+  },
+  {
+    title: 'General',
+    body: 'Partnerships, general questions, and anything that does not fit the two routes above.',
+    email: site.emailGeneral,
+  },
+];
+
+const messageTips = [
+  'The page or workflow you are asking about',
+  'The role or candidate type you need',
+  'Any deadline or constraint we should know',
+  'A direct email address for the reply',
+];
+
 export default function ContactPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
 
-      <section className="section-pad">
-        <div className="section-container max-w-4xl space-y-6">
-          <p className="eyebrow">Contact</p>
-          <h1>Reach the right team without guessing the inbox.</h1>
-          <p className="max-w-3xl text-lg leading-8 text-slate-600">
-            Use the direct email routes if you already know what you need. Otherwise, send a message below and we will
-            route it to the right place.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        kicker="Contact / three direct routes"
+        title="Reach the right team without guessing the inbox."
+        lede="Use the direct email routes if you already know what you need. Otherwise, send a message below and it gets routed to the right place."
+      />
 
-      <section className="section-pad pt-0">
-        <div className="section-container grid gap-6 lg:grid-cols-3">
-          {[
-            {
-              title: 'Employers',
-              body: 'Questions about role briefs, shortlist timing, or the placement workflow.',
-              email: site.emailEmployer,
-            },
-            {
-              title: 'Candidates',
-              body: 'Questions about the application path, academy step, or placement expectations.',
-              email: site.emailCandidates,
-            },
-            {
-              title: 'General',
-              body: 'Partnerships, general questions, and anything that does not fit the two routes above.',
-              email: site.emailGeneral,
-            },
-          ].map((card) => (
-            <div key={card.title} className="surface p-6">
-              <p className="eyebrow">Direct route</p>
+      <section className="section-pad">
+        <div className="section-container grid gap-px overflow-hidden rounded-lg border border-line bg-line lg:grid-cols-3">
+          {routes.map((card) => (
+            <div key={card.title} className="flex flex-col bg-panel p-7">
+              <p className="mono-label">Direct route</p>
               <h2 className="mt-3 text-2xl">{card.title}</h2>
-              <p className="mt-3 leading-7 text-slate-600">{card.body}</p>
-              <a className="mt-5 inline-flex font-semibold text-[#0d5c63] underline-offset-4 hover:underline" href={`mailto:${card.email}`}>
-                {card.email}
+              <p className="mt-3 leading-7 text-muted">{card.body}</p>
+              <a
+                className="mt-auto inline-flex pt-5 font-mono text-sm text-sea-600 hover:text-sea-700"
+                href={`mailto:${card.email}`}
+              >
+                {card.email} →
               </a>
             </div>
           ))}
@@ -63,19 +71,22 @@ export default function ContactPage() {
 
       <section className="section-pad pt-0">
         <div className="section-container grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="surface-soft p-7">
-            <p className="eyebrow">What to send</p>
-            <h2 className="mt-3">A useful message is short and specific.</h2>
-            <ul className="mt-4 space-y-3 text-slate-600">
-              <li>• The page or workflow you are asking about</li>
-              <li>• The role or candidate type you need</li>
-              <li>• Any deadline or constraint we should know</li>
-              <li>• A direct email address for the reply</li>
+          <div className="surface-soft p-8">
+            <p className="kicker">What to send</p>
+            <h2 className="mt-4">A useful message is short and specific.</h2>
+            <ul className="mt-6 space-y-4">
+              {messageTips.map((item, index) => (
+                <li key={item} className="flex gap-4">
+                  <span className="pipeline-num pt-0 text-sea-600">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="text-body">{item}</span>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="surface p-6 sm:p-8">
-            <h2 className="text-3xl">Send a message</h2>
-            <p className="mt-3 leading-7 text-slate-600">
+            <p className="kicker">Message form</p>
+            <h2 className="mt-3 text-3xl">Send a message</h2>
+            <p className="mt-3 leading-7 text-muted">
               If you do not want to email directly, use the form below.
             </p>
             <div className="mt-6">

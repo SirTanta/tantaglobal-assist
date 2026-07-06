@@ -18,21 +18,25 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-[#d8e4e4] bg-[#eef4f3] text-slate-700">
-      <div className="section-container py-12">
+    <footer className="band-dark mt-auto border-t border-daylight/10">
+      <div className="section-container py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href="/" aria-label="TantaGlobal Assist home" className="inline-flex">
-              <Image src="/logo-transparent.png" alt="TantaGlobal Assist" width={140} height={48} style={{ width: '140px', height: 'auto' }} />
+            <Link href="/" aria-label="TantaGlobal Assist home" className="inline-flex items-center gap-3">
+              <Image src="/logo-mark.png" alt="" width={36} height={35} style={{ width: '36px', height: '35px' }} />
+              <span className="font-display text-lg font-semibold tracking-tight text-daylight">
+                TantaGlobal Assist
+              </span>
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-6 text-slate-600">
-              Professional VA placement for employers, paired with certification-led training for candidates.
+            <p className="mt-4 max-w-sm text-sm leading-6 text-daylight/60">
+              VA placement for US employers, backed by certification-led training for candidates.
+              Rio Rancho, NM and Cebu, PH.
             </p>
-            <div className="mt-4 flex gap-4 text-slate-500">
-              <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-colors hover:text-[#0D5C63]">
+            <div className="mt-5 flex gap-4 text-daylight/50">
+              <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-colors hover:text-sea-300">
                 <FacebookIcon />
               </a>
-              <a href={site.youtubeUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-colors hover:text-[#0D5C63]">
+              <a href={site.youtubeUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-colors hover:text-sea-300">
                 <YouTubeIcon />
               </a>
             </div>
@@ -41,7 +45,7 @@ export default function Footer() {
           <div>
             <p className="footer-heading">Pages</p>
             <ul className="footer-list">
-              <li><Link href="/hire">Request VA shortlist</Link></li>
+              <li><Link href="/hire">Hire a VA</Link></li>
               <li><Link href="/apply">Apply for placement</Link></li>
               <li><Link href="/pricing">Pricing</Link></li>
               <li><Link href="/how-it-works">How it works</Link></li>
@@ -51,7 +55,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="footer-heading">Tanta Network</p>
+            <p className="footer-heading">Tanta network</p>
             <ul className="footer-list">
               <li><a href="https://tantaholdings.com" target="_blank" rel="noopener noreferrer">Tanta Holdings</a></li>
               <li><a href={site.academyUrl} target="_blank" rel="noopener noreferrer">TGA Academy</a></li>
@@ -62,17 +66,17 @@ export default function Footer() {
           <div>
             <p className="footer-heading">Contact and legal</p>
             <ul className="footer-list">
-              <li><a href={`mailto:${site.emailEmployer}`}>{site.emailEmployer}</a></li>
-              <li><a href={`mailto:${site.emailCandidates}`}>{site.emailCandidates}</a></li>
+              <li><a href={`mailto:${site.emailEmployer}`} className="font-mono text-[0.82rem]">{site.emailEmployer}</a></li>
+              <li><a href={`mailto:${site.emailCandidates}`} className="font-mono text-[0.82rem]">{site.emailCandidates}</a></li>
               <li><a href="/privacy">Privacy policy</a></li>
               <li><a href="/sitemap.xml">Sitemap</a></li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 border-t border-slate-300 pt-5 text-xs text-slate-500 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-2 border-t border-daylight/10 pt-5 text-xs text-daylight/60 sm:flex-row sm:items-center sm:justify-between">
           <p>© {currentYear} TantaGlobal Assist. A Tanta Holdings LLC company.</p>
-          <p>Global talent. Clear standards. Real placement.</p>
+          <p className="font-mono uppercase tracking-[0.18em] text-[0.62rem]">Global talent / clear standards / real placement</p>
         </div>
       </div>
     </footer>

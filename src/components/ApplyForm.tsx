@@ -8,16 +8,16 @@ interface FormState {
 }
 
 const inputClass =
-  "rounded-lg px-4 py-3 text-sm border w-full transition-colors focus:outline-none focus:ring-2";
+  "rounded px-4 py-3 text-sm border w-full transition-colors focus:outline-none focus:ring-2";
 const inputStyle = {
-  borderColor: "#cbd5e1",
-  backgroundColor: "#F5FAFA",
-  color: "#2D3748",
+  borderColor: "#ddd9cc",
+  backgroundColor: "#faf9f5",
+  color: "#1d2b33",
 };
 const inputFocusRing = "focus:ring-[#0D5C63] focus:border-[#0D5C63]";
 
 const labelClass = "text-sm font-semibold block mb-1.5";
-const labelStyle = { color: "#2D3748" };
+const labelStyle = { color: "#1d2b33" };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -294,7 +294,7 @@ export default function ApplyForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:w-auto px-8 py-3.5 rounded-lg text-sm font-semibold text-white transition-opacity disabled:opacity-60"
+          className="w-full sm:w-auto px-8 py-3.5 rounded text-sm font-semibold text-white transition-opacity disabled:opacity-60"
           style={{ backgroundColor: "#0D5C63" }}
         >
           {isSubmitting ? "Submitting..." : "Submit Application"}
