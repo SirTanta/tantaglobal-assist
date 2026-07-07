@@ -18,21 +18,21 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-[#d8e4e4] bg-[#eef4f3] text-slate-700">
+    <footer className="mt-auto border-t border-border bg-parchment text-ink-muted">
       <div className="section-container py-12">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" aria-label="TantaGlobal Assist home" className="inline-flex">
               <Image src="/logo-transparent.png" alt="TantaGlobal Assist" width={140} height={48} style={{ width: '140px', height: 'auto' }} />
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-6 text-slate-600">
+            <p className="mt-4 max-w-sm text-sm leading-6 text-ink-muted">
               Professional VA placement for employers, paired with certification-led training for candidates.
             </p>
-            <div className="mt-4 flex gap-4 text-slate-500">
-              <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-colors hover:text-[#0D5C63]">
+            <div className="mt-4 flex gap-4 text-ink-muted">
+              <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-colors hover:text-accent">
                 <FacebookIcon />
               </a>
-              <a href={site.youtubeUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-colors hover:text-[#0D5C63]">
+              <a href={site.youtubeUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-colors hover:text-accent">
                 <YouTubeIcon />
               </a>
             </div>
@@ -70,8 +70,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-slate-300 pt-5 text-xs text-slate-500 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {currentYear} TantaGlobal Assist. A Tanta Holdings LLC company.</p>
+        <div className="mt-10 border-t border-border pt-5 text-xs text-ink-faint flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <p>&copy; {currentYear} TantaGlobal Assist. A Tanta Holdings LLC company.</p>
           <p>Global talent. Clear standards. Real placement.</p>
         </div>
       </div>

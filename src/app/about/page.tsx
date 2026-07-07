@@ -23,7 +23,7 @@ export default function AboutPage() {
         <div className="section-container max-w-4xl space-y-6">
           <p className="eyebrow">About</p>
           <h1>Built around a simple idea: trained people should reach employers faster.</h1>
-          <p className="max-w-3xl text-lg leading-8 text-slate-600">
+          <p className="max-w-3xl text-lg leading-8 text-ink-muted">
             TantaGlobal Assist is the placement side of a larger Tanta workflow. Candidates enter here,
             go through the academy step, and move into employer matching with a clearer standard than a typical
             open marketplace can provide.
@@ -36,17 +36,17 @@ export default function AboutPage() {
           <div className="surface p-7">
             <p className="eyebrow">What we do</p>
             <h2 className="mt-3">Placement with a point of view.</h2>
-            <p className="mt-4 leading-8 text-slate-600">
+            <p className="mt-4 leading-8 text-ink-muted">
               We do not try to be everything to everyone. We focus on the path that matters most: a candidate who is
               better prepared because they were trained, screened, and evaluated before they hit an employer inbox.
             </p>
-            <p className="mt-4 leading-8 text-slate-600">
+            <p className="mt-4 leading-8 text-ink-muted">
               If an employer has to spend less time filtering noise and more time deciding between good options,
               the process is doing its job.
             </p>
           </div>
 
-          <div className="surface-soft p-7">
+          <div className="surface p-7">
             <p className="eyebrow">Who it serves</p>
             <div className="mt-4 space-y-4">
               {[
@@ -63,9 +63,9 @@ export default function AboutPage() {
                   body: 'The academy side keeps standards consistent before placement starts.',
                 },
               ].map((item) => (
-                <div key={item.title} className="rounded-2xl bg-white p-5 shadow-sm">
+                <div key={item.title} className="rounded-2xl bg-parchment-light p-5 shadow-sm border border-border">
                   <h3 className="text-xl">{item.title}</h3>
-                  <p className="mt-2 leading-7 text-slate-600">{item.body}</p>
+                  <p className="mt-2 leading-7 text-ink-muted">{item.body}</p>
                 </div>
               ))}
             </div>
@@ -78,9 +78,9 @@ export default function AboutPage() {
           <div className="surface p-7">
             <p className="eyebrow">The network</p>
             <h2 className="mt-3">Training and placement stay close.</h2>
-            <p className="mt-4 leading-8 text-slate-600">
+            <p className="mt-4 leading-8 text-ink-muted">
               The academy lives at{' '}
-              <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#0d5c63] underline-offset-4 hover:underline">
+              <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-accent underline-offset-4 hover:underline">
                 academy.tantaglobal.com
               </a>
               . Tanta Holdings provides the parent structure. TantaGlobal Assist focuses on matching and placement.
@@ -89,11 +89,11 @@ export default function AboutPage() {
           <div className="surface p-7">
             <p className="eyebrow">What we value</p>
             <h2 className="mt-3">Clear standards, no inflated language.</h2>
-            <ul className="mt-4 space-y-3 text-slate-600">
-              <li>• Real screening before placement</li>
-              <li>• Clear handoffs between training and client work</li>
-              <li>• Practical communication and measurable expectations</li>
-              <li>• A clean path for employers and candidates alike</li>
+            <ul className="mt-4 space-y-3 text-ink-muted">
+              <li>&bull; Real screening before placement</li>
+              <li>&bull; Clear handoffs between training and client work</li>
+              <li>&bull; Practical communication and measurable expectations</li>
+              <li>&bull; A clean path for employers and candidates alike</li>
             </ul>
           </div>
         </div>
@@ -101,14 +101,14 @@ export default function AboutPage() {
 
       <section className="section-pad pt-0">
         <div className="section-container">
-          <div className="surface-soft flex flex-col gap-4 p-7 md:flex-row md:items-center md:justify-between">
+          <div className="surface flex flex-col gap-4 p-7 md:flex-row md:items-center md:justify-between">
             <div className="max-w-2xl">
               <p className="eyebrow">Next step</p>
               <h2 className="mt-3">Choose the route that fits your situation.</h2>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link href="/hire" className="btn-primary">Request VA shortlist</Link>
-              <Link href="/apply" className="btn-secondary">Apply for placement</Link>
+              <Link href="/hire" className="btn btn-primary">Request VA shortlist</Link>
+              <Link href="/apply" className="btn btn-secondary">Apply for placement</Link>
             </div>
           </div>
         </div>

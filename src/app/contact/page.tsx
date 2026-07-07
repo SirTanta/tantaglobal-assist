@@ -23,7 +23,7 @@ export default function ContactPage() {
         <div className="section-container max-w-4xl space-y-6">
           <p className="eyebrow">Contact</p>
           <h1>Reach the right team without guessing the inbox.</h1>
-          <p className="max-w-3xl text-lg leading-8 text-slate-600">
+          <p className="max-w-3xl text-lg leading-8 text-ink-muted">
             Use the direct email routes if you already know what you need. Otherwise, send a message below and we will
             route it to the right place.
           </p>
@@ -52,8 +52,8 @@ export default function ContactPage() {
             <div key={card.title} className="surface p-6">
               <p className="eyebrow">Direct route</p>
               <h2 className="mt-3 text-2xl">{card.title}</h2>
-              <p className="mt-3 leading-7 text-slate-600">{card.body}</p>
-              <a className="mt-5 inline-flex font-semibold text-[#0d5c63] underline-offset-4 hover:underline" href={`mailto:${card.email}`}>
+              <p className="mt-3 leading-7 text-ink-muted">{card.body}</p>
+              <a className="mt-5 inline-flex font-semibold text-accent underline-offset-4 hover:underline" href={`mailto:${card.email}`}>
                 {card.email}
               </a>
             </div>
@@ -63,19 +63,19 @@ export default function ContactPage() {
 
       <section className="section-pad pt-0">
         <div className="section-container grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="surface-soft p-7">
+          <div className="surface p-7">
             <p className="eyebrow">What to send</p>
             <h2 className="mt-3">A useful message is short and specific.</h2>
-            <ul className="mt-4 space-y-3 text-slate-600">
-              <li>• The page or workflow you are asking about</li>
-              <li>• The role or candidate type you need</li>
-              <li>• Any deadline or constraint we should know</li>
-              <li>• A direct email address for the reply</li>
+            <ul className="mt-4 space-y-3 text-ink-muted">
+              <li>&bull; The page or workflow you are asking about</li>
+              <li>&bull; The role or candidate type you need</li>
+              <li>&bull; Any deadline or constraint we should know</li>
+              <li>&bull; A direct email address for the reply</li>
             </ul>
           </div>
           <div className="surface p-6 sm:p-8">
             <h2 className="text-3xl">Send a message</h2>
-            <p className="mt-3 leading-7 text-slate-600">
+            <p className="mt-3 leading-7 text-ink-muted">
               If you do not want to email directly, use the form below.
             </p>
             <div className="mt-6">
