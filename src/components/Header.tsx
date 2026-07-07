@@ -41,10 +41,10 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link href="/apply" className="btn-secondary text-sm px-4 py-2">
+            <Link href="/apply" className="btn btn-secondary text-sm px-4 py-2">
               Apply for placement
             </Link>
-            <Link href="/hire" className="btn-primary text-sm px-4 py-2">
+            <Link href="/hire" className="btn btn-primary text-sm px-4 py-2">
               Request VA shortlist
             </Link>
           </div>
@@ -67,23 +67,23 @@ export default function Header() {
         </nav>
 
         {menuOpen && (
-          <div id={mobileMenuId} className="lg:hidden border-t border-slate-200 pb-4 pt-3">
+          <div id={mobileMenuId} className="lg:hidden border-t border-border pb-4 pt-3">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100"
+                  className="rounded-xl px-3 py-2 text-sm font-semibold text-ink-muted hover:bg-surface-hover"
                   onClick={() => setMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
               <div className="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
-                <Link href="/apply" className="btn-secondary text-sm text-center" onClick={() => setMenuOpen(false)}>
+                <Link href="/apply" className="btn btn-secondary text-sm text-center" onClick={() => setMenuOpen(false)}>
                   Apply for placement
                 </Link>
-                <Link href="/hire" className="btn-primary text-sm text-center" onClick={() => setMenuOpen(false)}>
+                <Link href="/hire" className="btn btn-primary text-sm text-center" onClick={() => setMenuOpen(false)}>
                   Request VA shortlist
                 </Link>
               </div>

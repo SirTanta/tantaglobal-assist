@@ -41,32 +41,32 @@ export default function ApplyPage() {
           <div className="space-y-6">
             <p className="eyebrow">For candidates</p>
             <h1>Apply for placement and start the route into client work.</h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-600">
+            <p className="max-w-2xl text-lg leading-8 text-ink-muted">
               Tell us about your background, availability, and the kind of work you want to do. If the fit is there,
               you move to the academy step and then into placement.
             </p>
             <div className="surface p-6">
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">What to include</p>
-              <ul className="mt-4 space-y-3 text-slate-600">
-                <li>• Your core VA skills and tools</li>
-                <li>• Relevant client or employer experience</li>
-                <li>• Time zone and availability</li>
-                <li>• The type of client work you want next</li>
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-ink-faint">What to include</p>
+              <ul className="mt-4 space-y-3 text-ink-muted">
+                <li>&bull; Your core VA skills and tools</li>
+                <li>&bull; Relevant client or employer experience</li>
+                <li>&bull; Time zone and availability</li>
+                <li>&bull; The type of client work you want next</li>
               </ul>
             </div>
           </div>
 
           <div className="surface p-6 sm:p-8">
             <h2 className="text-3xl">Application form</h2>
-            <p className="mt-3 leading-7 text-slate-600">
+            <p className="mt-3 leading-7 text-ink-muted">
               The preferred application path is the Tally form. If you need an on-page fallback, the intake form
               below will still send your details into the placement workflow.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <a href={tallyFormUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
+              <a href={tallyFormUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                 Open Tally application
               </a>
-              <Link href="/how-it-works" className="btn-secondary">
+              <Link href="/how-it-works" className="btn btn-secondary">
                 See the process
               </Link>
             </div>
@@ -79,28 +79,28 @@ export default function ApplyPage() {
 
       <section className="section-pad pt-0">
         <div className="section-container grid gap-6 lg:grid-cols-2">
-          <div className="surface-soft p-7">
+          <div className="surface p-7">
             <p className="eyebrow">Training partner</p>
             <h2 className="mt-3">Certification lives at TGA Academy.</h2>
-            <p className="mt-4 leading-8 text-slate-600">
+            <p className="mt-4 leading-8 text-ink-muted">
               The academy step helps separate interested applicants from candidates ready for client work.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
+              <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                 Visit TGA Academy
               </a>
-              <Link href="/how-it-works" className="btn-secondary">See the full process</Link>
+              <Link href="/how-it-works" className="btn btn-secondary">See the full process</Link>
             </div>
           </div>
           <div className="surface p-7">
             <p className="eyebrow">Need help first?</p>
             <h2 className="mt-3">Ask before you apply if the path is unclear.</h2>
-            <p className="mt-4 leading-8 text-slate-600">
-              Candidate questions go to {site.emailCandidates}. General questions go to {site.emailGeneral}.
+            <p className="mt-4 leading-8 text-ink-muted">
+              Candidate questions go to <a href={`mailto:${site.emailCandidates}`} className="font-semibold text-accent underline-offset-4 hover:underline">{site.emailCandidates}</a>. General questions go to <a href={`mailto:${site.emailGeneral}`} className="font-semibold text-accent underline-offset-4 hover:underline">{site.emailGeneral}</a>.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/contact" className="btn-primary">Contact us</Link>
-              <Link href="/pricing" className="btn-secondary">Review pricing model</Link>
+              <Link href="/contact" className="btn btn-primary">Contact us</Link>
+              <Link href="/pricing" className="btn btn-secondary">Review pricing model</Link>
             </div>
           </div>
         </div>
