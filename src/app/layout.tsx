@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Bricolage_Grotesque, Inter_Tight, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -7,7 +7,9 @@ import TalaChatWidget from '@/components/TalaChatWidget';
 import { organizationJsonLd, websiteJsonLd, breadcrumbSchema, site, absoluteUrl } from '@/lib/seo';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const displayFont = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-display-src' });
+const bodyFont = Inter_Tight({ subsets: ['latin'], variable: '--font-body-src' });
+const monoFont = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono-src' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}>
       <head>
         <script
           type="application/ld+json"

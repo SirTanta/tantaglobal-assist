@@ -28,64 +28,68 @@ const serviceSchema = {
   serviceType: 'Virtual assistant placement',
 };
 
+const briefItems = [
+  'The tasks the VA will actually own',
+  'Weekly hours and preferred overlap',
+  'Tools or systems they will use',
+  'Timeline for start and onboarding',
+];
+
 export default function HirePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
 
+      <section className="band-dark">
+        <div className="section-container py-16 md:py-20">
+          <p className="kicker">For employers / role brief intake</p>
+          <h1 className="mt-5 max-w-4xl">
+            The shortlist starts with your brief, not our inventory.
+          </h1>
+          <p className="lede mt-6 max-w-3xl">
+            Share the role, time commitment, and expectations. The brief gets reviewed by a person,
+            matched against certified candidates, and answered within 1 business day.
+          </p>
+        </div>
+      </section>
+
       <section className="section-pad">
-        <div className="section-container grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div className="section-container grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div className="space-y-6">
-            <p className="eyebrow">For employers</p>
-            <h1>Request a VA shortlist built from trained, certified candidates.</h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-600">
-              Use the form to share the role, time commitment, and expectations. We review the brief, then route you
-              toward candidates who are closer to the work you need done and into the HubSpot portal 243753317
-              workflow on automation-hub.
-            </p>
-            <div className="surface p-6">
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">What helps us match well</p>
-              <ul className="mt-4 space-y-3 text-slate-600">
-                <li>• The tasks the VA will actually own</li>
-                <li>• Weekly hours and preferred overlap</li>
-                <li>• Tools or systems they will use</li>
-                <li>• Timeline for start and onboarding</li>
+            <div className="surface p-7">
+              <p className="mono-label">What makes a brief matchable</p>
+              <ul className="mt-5 space-y-4">
+                {briefItems.map((item, index) => (
+                  <li key={item} className="flex gap-4">
+                    <span className="pipeline-num pt-0 text-sea-600">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="text-body">{item}</span>
+                  </li>
+                ))}
               </ul>
+            </div>
+            <div className="surface-soft p-7">
+              <p className="mono-label">Before you submit</p>
+              <h2 className="mt-3 text-2xl">A clearer brief gets a clearer shortlist.</h2>
+              <p className="mt-3 leading-7 text-muted">
+                Enough detail to understand the job beats a polished job description. A practical
+                brief keeps the placement process moving.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Link href="/pricing" className="btn-secondary">Review pricing</Link>
+                <Link href="/how-it-works" className="btn-secondary">See the process</Link>
+              </div>
             </div>
           </div>
 
           <div className="surface p-6 sm:p-8">
-            <h2 className="text-3xl">Role brief</h2>
-            <p className="mt-3 leading-7 text-slate-600">
-              Fill out the form below and we will follow up with the next step in the placement process.
+            <p className="kicker">Role brief</p>
+            <h2 className="mt-3 text-3xl">Define the work. The rest follows.</h2>
+            <p className="mt-3 leading-7 text-muted">
+              Fill out the form and the next step in the placement process comes back to your inbox.
             </p>
-            <div className="mt-6">
+            <div className="mt-7">
               <HireForm />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-pad pt-0">
-        <div className="section-container grid gap-6 lg:grid-cols-2">
-          <div className="surface-soft p-7">
-            <p className="eyebrow">Before you submit</p>
-            <h2 className="mt-3">A clearer brief gets a clearer shortlist.</h2>
-            <p className="mt-4 leading-8 text-slate-600">
-              We are looking for enough detail to understand the job, not a polished job description. A practical
-              brief keeps the placement process moving.
-            </p>
-          </div>
-          <div className="surface p-7">
-            <p className="eyebrow">Need context?</p>
-            <h2 className="mt-3">See the pricing model first.</h2>
-            <p className="mt-4 leading-8 text-slate-600">
-              Pricing is scoped by engagement type rather than a one-size-fits-all directory fee.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/pricing" className="btn-primary">Review pricing model</Link>
-              <Link href="/how-it-works" className="btn-secondary">See the process</Link>
             </div>
           </div>
         </div>

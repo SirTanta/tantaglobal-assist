@@ -11,217 +11,240 @@ export const metadata = pageMetadata({
 
 const breadcrumbs = breadcrumbJsonLd([{ name: 'Home', path: '/' }]);
 
+const pipeline = [
+  {
+    num: '01',
+    stage: 'Intake',
+    body: 'Employer submits the role brief. Candidate submits the application.',
+  },
+  {
+    num: '02',
+    stage: 'Screen',
+    body: 'Background, availability, and fit reviewed before anything moves forward.',
+  },
+  {
+    num: '03',
+    stage: 'Certify',
+    body: 'Candidates clear TGA Academy certification before entering placement.',
+  },
+  {
+    num: '04',
+    stage: 'Match',
+    body: 'Shortlist built against the brief, not a keyword search.',
+  },
+  {
+    num: '05',
+    stage: 'Place',
+    body: 'Interview, handoff, and follow-up through the first weeks on the job.',
+  },
+];
+
+const failureModes = [
+  {
+    label: 'Undefined roles',
+    body: 'A VA hired without a defined role spends the first month guessing. The role brief forces the definition up front: tasks, hours, tools, and what success looks like in the first 90 days.',
+  },
+  {
+    label: 'Unvetted candidates',
+    body: 'A resume says available. It does not say reliable. Candidates here pass screening and TGA Academy certification before they reach a shortlist.',
+  },
+  {
+    label: 'No follow-through',
+    body: 'Placement is not the finish line. The handoff, onboarding, and early check-ins decide whether the hire sticks. Those stay part of the process here.',
+  },
+];
+
+const network = [
+  { name: 'Tanta Holdings LLC', role: 'Parent company', href: 'https://tantaholdings.com' },
+  { name: 'Tanta Global Academy', role: 'VA certification', href: 'https://academy.tantaglobal.com' },
+  { name: 'Tanta Visa Pathways', role: 'US immigration tools', href: 'https://tantavisapathways.com' },
+  { name: 'Tanta Solutions', role: 'AI enablement consulting', href: 'https://tantaholdings.com/solutions' },
+];
+
+const routes = [
+  {
+    label: 'Employers',
+    email: site.emailEmployer,
+    body: 'Role briefs, shortlist timing, and the placement workflow.',
+  },
+  {
+    label: 'Candidates',
+    email: site.emailCandidates,
+    body: 'Applications, the academy step, and placement expectations.',
+  },
+  {
+    label: 'General',
+    email: site.emailGeneral,
+    body: 'Partnerships and anything that does not fit the routes above.',
+  },
+];
+
 export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
 
-      {/* Filing strip — Instruments family signature */}
-      <div className="border-b border-slate-200 bg-white/60">
-        <div className="section-container py-2.5 flex items-center justify-between gap-4">
-          <span className="instr-filing">Tantaglobal Assist · Rio Rancho, NM · Cebu, PH</span>
-          <a
-            href="https://tantaholdings.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="instr-filing hover:text-[#0d5c63] transition-colors"
-          >
-            Tanta Holdings →
-          </a>
-        </div>
-      </div>
-
-      <section className="section-pad relative overflow-hidden">
-        <div className="absolute inset-0 instr-sun-orbit-teal pointer-events-none" aria-hidden />
-        <div className="section-container relative grid gap-8 lg:grid-cols-[1.25fr_0.95fr] lg:items-center">
-          <div className="space-y-6">
-            <span className="instr-stamp">Placement · Assist</span>
-            <h1 className="instr-display">We connect trained VAs with businesses that need them.</h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-600">
-              Candidates apply here, complete TGA Academy certification, and move into an employer-ready
-              placement workflow. Employers share the role they need filled and we route them toward the
-              right shortlist.
+      {/* Hero */}
+      <section className="band-dark">
+        <div className="section-container grid gap-14 py-16 md:py-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-10">
+          <div>
+            <p className="kicker">VA placement / Rio Rancho NM · Cebu PH</p>
+            <h1 className="mt-6 max-w-2xl">
+              Hire a VA who was screened and certified before you ever saw a name.
+            </h1>
+            <p className="lede mt-6 max-w-xl">
+              Most VA hires fail for two reasons: the role was never defined, and the candidate was
+              never vetted. TantaGlobal Assist fixes both. Employers submit a role brief. Candidates
+              clear TGA Academy certification. Matching happens against the work you actually need done.
             </p>
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/hire" className="btn-primary">
-                Hire a VA
+                Submit a role brief
               </Link>
               <Link href="/apply" className="btn-secondary">
                 Apply as a VA
               </Link>
             </div>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {[
-                'Employer brief intake',
-                'Certification-led candidate pipeline',
-                'Follow-up through placement',
-              ].map((item) => (
-                <div key={item} className="surface px-4 py-4 text-sm font-semibold text-slate-700">
-                  {item}
-                </div>
-              ))}
-            </div>
           </div>
 
-          <div className="surface-soft p-6 sm:p-8">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0d5c63]">Dual path</p>
-                <h2 className="mt-2 text-2xl">Employers and candidates, one system.</h2>
-              </div>
-              <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-[#0d5c63] shadow-sm">
-                TGA
-              </span>
+          <div className="surface-dark p-6 sm:p-7">
+            <div className="flex items-center justify-between gap-4 border-b border-daylight/10 pb-4">
+              <p className="mono-label">Placement pipeline</p>
+              <p className="mono-label text-sea-300">Intake → Place</p>
             </div>
-            <div className="mt-6 grid gap-4">
-              <div className="rounded-2xl bg-white p-5 shadow-sm">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">For employers</p>
-                <p className="mt-3 text-slate-600">
-                  Share the role, hours, and expectations. We review the brief and route you toward
-                  a shortlist built for the work you actually need done.
-                </p>
-              </div>
-              <div className="rounded-2xl bg-white p-5 shadow-sm">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">For candidates</p>
-                <p className="mt-3 text-slate-600">
-                  Submit your background, complete the academy step, and enter a placement pipeline that
-                  values readiness over volume.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-dashed border-[#b9d8d8] bg-[#f9fdfd] p-5">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0d5c63]">Training partner</p>
-                <p className="mt-3 text-slate-600">
-                  Academy training lives at{' '}
-                  <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#0d5c63] underline-offset-4 hover:underline">
-                    academy.tantaglobal.com
-                  </a>
-                  .
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-pad pt-0">
-        <div className="section-container">
-          <div className="subtle-rule mb-8" />
-          <div className="grid gap-6 lg:grid-cols-2">
-            <div className="surface p-7">
-              <p className="eyebrow">Employers</p>
-              <h2 className="mt-3">More signal, less sorting.</h2>
-              <p className="mt-4 leading-8 text-slate-600">
-                This is a placement service, not a generic directory. We collect the role brief,
-                align it with the candidate pipeline, and keep the process grounded in professional standards.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/hire" className="btn-primary">Request VA shortlist</Link>
-                <Link href="/pricing" className="btn-secondary">Review pricing model</Link>
-              </div>
-            </div>
-
-            <div className="surface p-7">
-              <p className="eyebrow">Candidates</p>
-              <h2 className="mt-3">A measured route into client work.</h2>
-              <p className="mt-4 leading-8 text-slate-600">
-                If you are building a VA career, the process is straightforward: apply here, complete the academy
-                step, and enter the placement queue with a stronger profile than a raw application alone.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/apply" className="btn-primary">Apply for placement</Link>
-                <Link href="/how-it-works" className="btn-secondary">See the full process</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-pad pt-0">
-        <div className="section-container">
-          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <div>
-              <span className="instr-stamp">The Pipeline</span>
-              <h2 className="instr-display mt-4 max-w-xl">Three steps, one outcome: a ready-to-work VA.</h2>
-              <div className="instr-rule-gold mt-6 max-w-[12rem]" />
-            </div>
-            <div className="grid gap-4">
-              {[
-                {
-                  step: '01',
-                  title: 'Apply or submit a role brief',
-                  body: 'Candidates share their background; employers submit the work that needs doing.',
-                },
-                {
-                  step: '02',
-                  title: 'Complete academy certification',
-                  body: 'Candidates move through structured training before they are considered for placement.',
-                },
-                {
-                  step: '03',
-                  title: 'Match, review, and place',
-                  body: 'We support the shortlist, candidate review, and handoff so the process stays tidy.',
-                },
-              ].map((item) => (
-                <div key={item.step} className="surface flex items-start gap-6 p-5">
-                  <div className="instr-numeral shrink-0 text-5xl sm:text-6xl">
-                    {item.step}
-                  </div>
-                  <div className="border-l border-slate-200 pl-5">
-                    <h3 className="instr-display text-xl">{item.title}</h3>
-                    <p className="mt-2 leading-7 text-slate-600">{item.body}</p>
+            <div className="mt-2">
+              {pipeline.map((item) => (
+                <div key={item.num} className="pipeline-row stage-in">
+                  <span className="pipeline-num">{item.num}</span>
+                  <div>
+                    <p className="font-mono text-[0.78rem] font-medium uppercase tracking-[0.14em] text-daylight">
+                      {item.stage}
+                    </p>
+                    <p className="mt-1 text-sm leading-6 text-daylight/60">{item.body}</p>
                   </div>
                 </div>
               ))}
             </div>
+            <p className="mt-4 border-t border-daylight/10 pt-4 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-daylight/60">
+              Every submission reviewed / response within 1 business day
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Ecosystem strip */}
-      <section className="border-y border-slate-200 bg-slate-50 py-6">
+      {/* Failure modes */}
+      <section className="section-pad">
         <div className="section-container">
-          <p className="text-center text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-6">
-            Part of the Tanta Holdings ecosystem
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8">
-            {[
-              { name: 'Tanta Holdings LLC',    role: 'Parent company',         href: 'https://tantaholdings.com' },
-              { name: 'Tanta Global Academy',  role: 'VA certification',        href: 'https://academy.tantaglobal.com' },
-              { name: 'Tanta Visa Pathways',   role: 'US immigration tools',    href: 'https://tantavisapathways.com' },
-              { name: 'Tanta Solutions',       role: 'AI enablement consulting',href: 'https://tantaholdings.com/solutions' },
-            ].map((co) => (
+          <p className="kicker">The problem</p>
+          <h2 className="mt-4 max-w-3xl">
+            Most VA relationships fail early. The causes are boring and fixable.
+          </h2>
+          <div className="mt-10 grid gap-px overflow-hidden rounded-lg border border-line bg-line lg:grid-cols-3">
+            {failureModes.map((item, index) => (
+              <div key={item.label} className="bg-panel p-7">
+                <p className="mono-label">{String(index + 1).padStart(2, '0')}</p>
+                <h3 className="mt-3">{item.label}</h3>
+                <p className="mt-3 leading-7 text-muted">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Dual path */}
+      <section className="section-pad pt-0">
+        <div className="section-container grid gap-6 lg:grid-cols-2">
+          <div className="surface flex flex-col p-8">
+            <p className="kicker">For employers</p>
+            <h2 className="mt-4 text-3xl">Submit the role. Get a shortlist that already cleared the basics.</h2>
+            <p className="mt-4 leading-8 text-muted">
+              This is a placement service, not a directory. The role brief goes in, the pipeline does
+              its screening and certification work, and the shortlist that comes back is built for the
+              job you described. Less sorting, more deciding.
+            </p>
+            <div className="mt-auto flex flex-wrap gap-3 pt-6">
+              <Link href="/hire" className="btn-primary">Request a shortlist</Link>
+              <Link href="/pricing" className="btn-secondary">Review pricing</Link>
+            </div>
+          </div>
+
+          <div className="surface-soft flex flex-col p-8">
+            <p className="kicker">For candidates</p>
+            <h2 className="mt-4 text-3xl">A measured route into client work.</h2>
+            <p className="mt-4 leading-8 text-muted">
+              If you are building a VA career, the process is direct: apply here, complete the academy
+              step, and enter the placement queue with a stronger profile than a raw application alone.
+              Certification lives at{' '}
+              <a
+                href={site.academyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-sea-600 underline-offset-4 hover:underline"
+              >
+                academy.tantaglobal.com
+              </a>
+              .
+            </p>
+            <div className="mt-auto flex flex-wrap gap-3 pt-6">
+              <Link href="/apply" className="btn-primary">Apply for placement</Link>
+              <Link href="/how-it-works" className="btn-secondary">See the full process</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Network */}
+      <section className="border-y border-line bg-tint py-10">
+        <div className="section-container">
+          <p className="mono-label mb-6 text-center">Part of the Tanta Holdings ecosystem</p>
+          <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            {network.map((co) => (
               <a
                 key={co.name}
                 href={co.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-center group"
+                className="group bg-panel px-5 py-5 no-underline"
               >
-                <p className="text-sm font-bold text-slate-700 group-hover:text-[#0d5c63] transition-colors">{co.name}</p>
-                <p className="text-[11px] text-slate-400 mt-0.5">{co.role}</p>
+                <p className="text-sm font-semibold text-body transition-colors group-hover:text-sea-600">
+                  {co.name}
+                </p>
+                <p className="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-muted">
+                  {co.role}
+                </p>
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-pad pt-0">
-        <div className="section-container grid gap-6 lg:grid-cols-[1fr_0.9fr]">
-          <div className="surface p-7">
-            <p className="eyebrow">Contact</p>
-            <h2 className="mt-3">Need a direct line for a question?</h2>
-            <p className="mt-4 leading-8 text-slate-600">
-              Employer questions go to {site.emailEmployer}. Candidate questions go to {site.emailCandidates}.
-              If your question is general, send it to {site.emailGeneral}.
+      {/* Contact routes */}
+      <section className="section-pad">
+        <div className="section-container grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <p className="kicker">Direct routes</p>
+            <h2 className="mt-4">Skip the generic inbox.</h2>
+            <p className="mt-4 leading-8 text-muted">
+              Each route lands with the team that owns the answer. Pick the one that matches your
+              question and expect a reply from a person, not an autoresponder chain.
             </p>
           </div>
-          <div className="surface p-7">
-            <p className="eyebrow">Network</p>
-            <h2 className="mt-3">Part of the Tanta ecosystem.</h2>
-            <p className="mt-4 leading-8 text-slate-600">
-              TantaGlobal Assist sits alongside Tanta Holdings and TGA Academy, keeping training and placement close
-              enough to share standards without mixing the actual workflows.
-            </p>
+          <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line">
+            {routes.map((route) => (
+              <a
+                key={route.email}
+                href={`mailto:${route.email}`}
+                className="group flex flex-col gap-2 bg-panel px-6 py-5 no-underline sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div>
+                  <p className="mono-label">{route.label}</p>
+                  <p className="mt-1 text-sm leading-6 text-muted">{route.body}</p>
+                </div>
+                <span className="shrink-0 font-mono text-sm text-sea-600 transition-colors group-hover:text-sea-700">
+                  {route.email} →
+                </span>
+              </a>
+            ))}
           </div>
         </div>
       </section>

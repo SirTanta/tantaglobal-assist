@@ -30,77 +30,88 @@ const applicationSchema = {
   serviceType: 'Virtual assistant application and placement',
 };
 
+const includeItems = [
+  'Your core VA skills and tools',
+  'Relevant client or employer experience',
+  'Time zone and availability',
+  'The type of client work you want next',
+];
+
 export default function ApplyPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(applicationSchema) }} />
 
+      <section className="band-dark">
+        <div className="section-container py-16 md:py-20">
+          <p className="kicker">For candidates / application intake</p>
+          <h1 className="mt-5 max-w-4xl">Apply for placement and start the route into client work.</h1>
+          <p className="lede mt-6 max-w-3xl">
+            Tell us about your background, availability, and the kind of work you want to do. If the
+            fit is there, you move to the academy step and then into placement.
+          </p>
+        </div>
+      </section>
+
       <section className="section-pad">
-        <div className="section-container grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+        <div className="section-container grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div className="space-y-6">
-            <p className="eyebrow">For candidates</p>
-            <h1>Apply for placement and start the route into client work.</h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-600">
-              Tell us about your background, availability, and the kind of work you want to do. If the fit is there,
-              you move to the academy step and then into placement.
-            </p>
-            <div className="surface p-6">
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">What to include</p>
-              <ul className="mt-4 space-y-3 text-slate-600">
-                <li>• Your core VA skills and tools</li>
-                <li>• Relevant client or employer experience</li>
-                <li>• Time zone and availability</li>
-                <li>• The type of client work you want next</li>
+            <div className="surface p-7">
+              <p className="mono-label">What to include</p>
+              <ul className="mt-5 space-y-4">
+                {includeItems.map((item, index) => (
+                  <li key={item} className="flex gap-4">
+                    <span className="pipeline-num pt-0 text-sea-600">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="text-body">{item}</span>
+                  </li>
+                ))}
               </ul>
+            </div>
+            <div className="surface-soft p-7">
+              <p className="mono-label">Training partner</p>
+              <h2 className="mt-3 text-2xl">Certification lives at TGA Academy.</h2>
+              <p className="mt-3 leading-7 text-muted">
+                The academy step separates interested applicants from candidates ready for client work.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                  Visit TGA Academy
+                </a>
+                <Link href="/how-it-works" className="btn-secondary">See the full process</Link>
+              </div>
+            </div>
+            <div className="surface p-7">
+              <p className="mono-label">Questions first?</p>
+              <p className="mt-3 leading-7 text-muted">
+                Candidate questions go to{' '}
+                <a href={`mailto:${site.emailCandidates}`} className="font-mono text-sm text-sea-600 hover:underline">
+                  {site.emailCandidates}
+                </a>
+                . General questions go to{' '}
+                <a href={`mailto:${site.emailGeneral}`} className="font-mono text-sm text-sea-600 hover:underline">
+                  {site.emailGeneral}
+                </a>
+                .
+              </p>
             </div>
           </div>
 
           <div className="surface p-6 sm:p-8">
-            <h2 className="text-3xl">Application form</h2>
-            <p className="mt-3 leading-7 text-slate-600">
-              The preferred application path is the Tally form. If you need an on-page fallback, the intake form
-              below will still send your details into the placement workflow.
+            <p className="kicker">Application</p>
+            <h2 className="mt-3 text-3xl">Two ways in. Same pipeline.</h2>
+            <p className="mt-3 leading-7 text-muted">
+              The preferred application path is the Tally form. If you need an on-page fallback, the
+              intake form below still sends your details into the placement workflow.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <a href={tallyFormUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
                 Open Tally application
               </a>
-              <Link href="/how-it-works" className="btn-secondary">
-                See the process
-              </Link>
             </div>
-            <div className="mt-6">
+            <div className="subtle-rule mt-7" />
+            <div className="mt-7">
               <ApplyForm />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-pad pt-0">
-        <div className="section-container grid gap-6 lg:grid-cols-2">
-          <div className="surface-soft p-7">
-            <p className="eyebrow">Training partner</p>
-            <h2 className="mt-3">Certification lives at TGA Academy.</h2>
-            <p className="mt-4 leading-8 text-slate-600">
-              The academy step helps separate interested applicants from candidates ready for client work.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                Visit TGA Academy
-              </a>
-              <Link href="/how-it-works" className="btn-secondary">See the full process</Link>
-            </div>
-          </div>
-          <div className="surface p-7">
-            <p className="eyebrow">Need help first?</p>
-            <h2 className="mt-3">Ask before you apply if the path is unclear.</h2>
-            <p className="mt-4 leading-8 text-slate-600">
-              Candidate questions go to {site.emailCandidates}. General questions go to {site.emailGeneral}.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/contact" className="btn-primary">Contact us</Link>
-              <Link href="/pricing" className="btn-secondary">Review pricing model</Link>
             </div>
           </div>
         </div>
