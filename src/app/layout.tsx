@@ -4,7 +4,7 @@ import Script from 'next/script';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TalaChatWidget from '@/components/TalaChatWidget';
-import { organizationJsonLd, site, absoluteUrl } from '@/lib/seo';
+import { organizationJsonLd, websiteJsonLd, breadcrumbSchema, site, absoluteUrl } from '@/lib/seo';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: 'TantaGlobal Assist — Professional VA Placement',
+    default: 'TantaGlobal Assist — Hire Trained Virtual Assistants from the Philippines',
     template: '%s | TantaGlobal Assist',
   },
   description: site.description,
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: site.url,
     siteName: site.name,
-    title: 'TantaGlobal Assist — Professional VA Placement',
+    title: 'TantaGlobal Assist — Hire Trained Virtual Assistants from the Philippines',
     description: site.description,
     images: [
       {
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TantaGlobal Assist — Professional VA Placement',
+    title: 'TantaGlobal Assist — Hire Trained Virtual Assistants from the Philippines',
     description: site.description,
     images: [absoluteUrl('/og-home.svg')],
   },
@@ -51,6 +51,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
