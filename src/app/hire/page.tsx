@@ -84,8 +84,8 @@ export default function HirePage() {
               Pricing is scoped by engagement type rather than a one-size-fits-all directory fee.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/pricing" data-ga4-action="cta_pricing_hire" data-ga4-label="hire" className="instr-btn-primary">Review pricing model</Link>
-              <Link href="/how-it-works" data-ga4-action="cta_hiw_hire" data-ga4-label="hire" className="instr-btn-ghost">See the process</Link>
+              <Link href="/pricing" data-ga4-action="click_cta__global_assist__hire" data-ga4-label="Review pricing model" data-ga4-destination="/pricing" data-ga4-zone="Z5" data-ga4-page-type="FORM" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-primary">Review pricing model</Link>
+              <Link href="/how-it-works" data-ga4-action="click_cta__global_assist__hire" data-ga4-label="See the process" data-ga4-destination="/how-it-works" data-ga4-zone="Z5" data-ga4-page-type="FORM" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-ghost">See the process</Link>
             </div>
           </div>
         </div>

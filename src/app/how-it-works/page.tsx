@@ -77,8 +77,8 @@ export default function HowItWorksPage() {
               to decide whether you move to the academy step and how you should be considered.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/apply" data-ga4-action="cta_apply_hiw_candidate" data-ga4-label="how-it-works" className="instr-btn-primary">Apply for placement</Link>
-              <Link href="/contact" data-ga4-action="cta_contact_hiw" data-ga4-label="how-it-works" className="instr-btn-ghost">Ask a question</Link>
+              <Link href="/apply" data-ga4-action="click_cta__global_assist__how-it-works" data-ga4-label="Apply for placement" data-ga4-destination="/apply" data-ga4-zone="Z1" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-primary">Apply for placement</Link>
+              <Link href="/contact" data-ga4-action="click_cta__global_assist__how-it-works" data-ga4-label="Ask a question" data-ga4-destination="/contact" data-ga4-zone="Z1" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-ghost">Ask a question</Link>
             </div>
           </div>
           <div className="surface p-7">
@@ -88,8 +88,8 @@ export default function HowItWorksPage() {
               Hours, tools, core responsibilities, and timeline matter. The clearer the brief, the better the shortlist.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/hire" data-ga4-action="cta_hire_hiw_employer" data-ga4-label="how-it-works" className="instr-btn-primary">Request VA shortlist</Link>
-              <Link href="/pricing" data-ga4-action="cta_pricing_hiw" data-ga4-label="how-it-works" className="instr-btn-ghost">Review pricing model</Link>
+              <Link href="/hire" data-ga4-action="click_cta__global_assist__how-it-works" data-ga4-label="Request VA shortlist" data-ga4-destination="/hire" data-ga4-zone="Z5" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-primary">Request VA shortlist</Link>
+              <Link href="/pricing" data-ga4-action="click_cta__global_assist__how-it-works" data-ga4-label="Review pricing model" data-ga4-destination="/pricing" data-ga4-zone="Z5" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-ghost">Review pricing model</Link>
             </div>
           </div>
         </div>

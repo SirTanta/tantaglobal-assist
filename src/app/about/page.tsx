@@ -107,8 +107,8 @@ export default function AboutPage() {
               <h2 className="mt-3">Choose the route that fits your situation.</h2>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link href="/hire" className="btn-primary">Request VA shortlist</Link>
-              <Link href="/apply" className="btn-secondary">Apply for placement</Link>
+              <Link href="/hire" data-ga4-action="click_cta__global_assist__about" data-ga4-label="Request VA shortlist" data-ga4-destination="/hire" data-ga4-zone="Z5" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-primary">Request VA shortlist</Link>
+              <Link href="/apply" data-ga4-action="click_cta__global_assist__about" data-ga4-label="Apply for placement" data-ga4-destination="/apply" data-ga4-zone="Z5" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-ghost">Apply for placement</Link>
             </div>
           </div>
         </div>

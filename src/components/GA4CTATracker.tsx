@@ -6,8 +6,15 @@ import { ga4Event } from "@/lib/analytics";
 /**
  * GA4CTATracker — mounts once in RootLayout and observes all CTA clicks via event delegation.
  *
- * Usage — add data-ga4-action (required) and data-ga4-label (optional) to any clickable element:
- *   <a href="/hire" data-ga4-action="cta_hire_click" data-ga4-label="homepage" className="instr-btn-primary">
+ * Usage — add data-ga4-action (required) and optional tracking attributes to any clickable element:
+ *   <a href="/hire" data-ga4-action="click_cta__global_assist__home"
+ *      data-ga4-label="Hire a VA"
+ *      data-ga4-destination="/hire"
+ *      data-ga4-zone="Z1"
+ *      data-ga4-page-type="HOME"
+ *      data-ga4-ia-level="1"
+ *      data-ga4-element-type="button"
+ *      className="instr-btn-primary">
  *     Hire a VA
  *   </a>
  *
@@ -20,10 +27,23 @@ export default function GA4CTATracker() {
       const target = (e.target as Element).closest("[data-ga4-action]");
       if (!target) return;
       const action = target.getAttribute("data-ga4-action");
-      const label = target.getAttribute("data-ga4-label") ?? undefined;
-      if (action) {
-        ga4Event(action, label ? { event_label: label } : undefined);
-      }
+      if (!action) return;
+
+      const params: Record<string, unknown> = {};
+      const label = target.getAttribute("data-ga4-label");
+      if (label) params.cta_label = label;
+      const destination = target.getAttribute("data-ga4-destination");
+      if (destination) params.cta_destination = destination;
+      const zone = target.getAttribute("data-ga4-zone");
+      if (zone) params.cta_zone = zone;
+      const pageType = target.getAttribute("data-ga4-page-type");
+      if (pageType) params.page_type = pageType;
+      const iaLevel = target.getAttribute("data-ga4-ia-level");
+      if (iaLevel) params.ia_level = Number(iaLevel);
+      const elementType = target.getAttribute("data-ga4-element-type");
+      if (elementType) params.element_type = elementType;
+
+      ga4Event(action, Object.keys(params).length > 0 ? params : undefined);
     };
 
     document.addEventListener("click", handler);
