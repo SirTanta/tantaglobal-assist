@@ -43,10 +43,10 @@ export default function HomePage() {
               right shortlist.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href="/hire" className="btn-primary">
+              <Link href="/hire" data-ga4-action="cta_hire_home_hero" data-ga4-label="homepage" className="instr-btn-primary">
                 Hire a VA
               </Link>
-              <Link href="/apply" className="btn-secondary">
+              <Link href="/apply" data-ga4-action="cta_apply_home_hero" data-ga4-label="homepage" className="instr-btn-ghost">
                 Apply as a VA
               </Link>
             </div>
@@ -115,8 +115,8 @@ export default function HomePage() {
                 align it with the candidate pipeline, and keep the process grounded in professional standards.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/hire" className="btn-primary">Request VA shortlist</Link>
-                <Link href="/pricing" className="btn-secondary">Review pricing model</Link>
+                <Link href="/hire" data-ga4-action="cta_hire_employer_card" data-ga4-label="homepage" className="instr-btn-primary">Request VA shortlist</Link>
+                <Link href="/pricing" data-ga4-action="cta_pricing_employer_card" data-ga4-label="homepage" className="instr-btn-ghost">Review pricing model</Link>
               </div>
             </div>
 
@@ -128,8 +128,8 @@ export default function HomePage() {
                 step, and enter the placement queue with a stronger profile than a raw application alone.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/apply" className="btn-primary">Apply for placement</Link>
-                <Link href="/how-it-works" className="btn-secondary">See the full process</Link>
+                <Link href="/apply" data-ga4-action="cta_apply_candidate_card" data-ga4-label="homepage" className="instr-btn-primary">Apply for placement</Link>
+                <Link href="/how-it-works" data-ga4-action="cta_hiw_candidate_card" data-ga4-label="homepage" className="instr-btn-ghost">See the full process</Link>
               </div>
             </div>
           </div>
