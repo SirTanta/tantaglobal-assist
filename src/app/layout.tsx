@@ -1,45 +1,45 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import Script from 'next/script';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import TalaChatWidget from '@/components/TalaChatWidget';
-import { organizationJsonLd, site, absoluteUrl } from '@/lib/seo';
-import './globals.css';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Script from "next/script";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import GA4CTATracker from "@/components/GA4CTATracker";
+import { organizationJsonLd, site, absoluteUrl } from "@/lib/seo";
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: 'TantaGlobal Assist — Professional VA Placement',
-    template: '%s | TantaGlobal Assist',
+    default: "TantaGlobal Assist — Professional VA Placement",
+    template: "%s | TantaGlobal Assist",
   },
   description: site.description,
   alternates: {
-    canonical: absoluteUrl('/'),
+    canonical: absoluteUrl("/"),
   },
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
+    type: "website",
+    locale: "en_US",
     url: site.url,
     siteName: site.name,
-    title: 'TantaGlobal Assist — Professional VA Placement',
+    title: "TantaGlobal Assist — Professional VA Placement",
     description: site.description,
     images: [
       {
-        url: absoluteUrl('/og-home.svg'),
+        url: absoluteUrl("/og-home.svg"),
         width: 1200,
         height: 630,
-        alt: 'TantaGlobal Assist',
+        alt: "TantaGlobal Assist",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'TantaGlobal Assist — Professional VA Placement',
+    card: "summary_large_image",
+    title: "TantaGlobal Assist — Professional VA Placement",
     description: site.description,
-    images: [absoluteUrl('/og-home.svg')],
+    images: [absoluteUrl("/og-home.svg")],
   },
   robots: { index: true, follow: true },
 };
@@ -70,6 +70,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </Script>
           </>
         )}
+
+        {/* GA4 CTA event delegation — mounts silently, observes all [data-ga4-action] clicks */}
+        <GA4CTATracker />
+
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
@@ -78,7 +82,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
         </main>
         <Footer />
-        <TalaChatWidget />
       </body>
     </html>
   );

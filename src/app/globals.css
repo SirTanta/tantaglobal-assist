@@ -196,7 +196,7 @@
     width: 2.5rem;
     height: 3px;
     border-radius: 9999px;
-    background: linear-gradient(90deg, #0d5c63, #d4af37);
+    background: linear-gradient(90deg, #0d5c63, #E7B029);
   }
 
   .subtle-rule {
@@ -285,6 +285,67 @@
   }
   .instr-sun-orbit-teal {
     background: radial-gradient(circle at center, rgba(13, 92, 99, 0.10) 0%, rgba(13, 92, 99, 0.03) 38%, transparent 70%);
+  }
+  .instr-rule-bronze {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #A88450 18%, #A88450 82%, transparent);
+  }
+
+  /* === Instruments of Passage — Button System === */
+  /* Primary CTA — pill, instruments-teak fill */
+  .instr-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.75rem 1.5rem;
+    font-family: "Inter Tight", system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: #F8F7F2;
+    background-color: #2B1F12;
+    border: 1.5px solid #2B1F12;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(43,31,18,0.18);
+  }
+  .instr-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(43,31,18,0.22), 0 0 0 2px rgba(231,176,41,0.35);
+  }
+  .instr-btn-primary:active {
+    transform: translateY(0);
+  }
+
+  /* Ghost CTA — pill, transparent with border */
+  .instr-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.75rem 1.5rem;
+    font-family: "Inter Tight", system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: #2B1F12;
+    background-color: transparent;
+    border: 1.5px solid rgba(90,70,50,0.4);
+    transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+    white-space: nowrap;
+  }
+  .instr-btn-ghost:hover {
+    border-color: #2B1F12;
+    background-color: rgba(43,31,18,0.04);
+    transform: translateY(-1px);
+  }
+  .instr-btn-ghost:active {
+    transform: translateY(0);
   }
   @keyframes needleSettle {
     0%   { opacity: 0; transform: rotate(-4deg); }
