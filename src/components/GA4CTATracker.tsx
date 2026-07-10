@@ -4,22 +4,26 @@ import { useEffect } from "react";
 import { ga4Event } from "@/lib/analytics";
 
 /**
- * GA4CTATracker — mounts once in RootLayout and observes all CTA clicks via event delegation.
+ * GA4CTATracker — mounts once in RootLayout and observes all CTA clicks.
  *
- * Usage — add data-ga4-action (required) and optional tracking attributes to any clickable element:
- *   <a href="/hire" data-ga4-action="click_cta__global_assist__home"
- *      data-ga4-label="Hire a VA"
- *      data-ga4-destination="/hire"
- *      data-ga4-zone="Z1"
- *      data-ga4-page-type="HOME"
- *      data-ga4-ia-level="1"
- *      data-ga4-element-type="button"
- *      className="instr-btn-primary">
- *     Hire a VA
+ * Uses event delegation so any element with [data-ga4-action] fires the
+ * corresponding GA4 event automatically. No per-element onClick needed.
+ *
+ * Canonical event format:
+ *   data-ga4-action  → event name (e.g. "click_cta__assist__home")
+ *   data-ga4-label   → cta_label  (button text or aria-label)
+ *   data-ga4-zone    → cta_zone   (Z1–Z8 from IA map)
+ *   data-ga4-page    → page_type  (HOME / SECTION / FORM / etc.)
+ *
+ * Usage:
+ *   <a href="/contact"
+ *      data-ga4-action="click_cta__assist__contact"
+ *      data-ga4-label="Get in Touch"
+ *      data-ga4-zone="Z5"
+ *      data-ga4-page="SECTION"
+ *      className="btn-primary">
+ *     Get in Touch
  *   </a>
- *
- * Every CTA on the site should be instrumented. The Tracker fires the event on click
- * and the browser's default navigation proceeds normally.
  */
 export default function GA4CTATracker() {
   useEffect(() => {
@@ -29,19 +33,16 @@ export default function GA4CTATracker() {
       const action = target.getAttribute("data-ga4-action");
       if (!action) return;
 
+      const label     = target.getAttribute("data-ga4-label") ?? undefined;
+      const zone      = target.getAttribute("data-ga4-zone") ?? undefined;
+      const pageType  = target.getAttribute("data-ga4-page") ?? undefined;
+      const dest      = (target as HTMLAnchorElement).href ?? undefined;
+
       const params: Record<string, unknown> = {};
-      const label = target.getAttribute("data-ga4-label");
-      if (label) params.cta_label = label;
-      const destination = target.getAttribute("data-ga4-destination");
-      if (destination) params.cta_destination = destination;
-      const zone = target.getAttribute("data-ga4-zone");
-      if (zone) params.cta_zone = zone;
-      const pageType = target.getAttribute("data-ga4-page-type");
-      if (pageType) params.page_type = pageType;
-      const iaLevel = target.getAttribute("data-ga4-ia-level");
-      if (iaLevel) params.ia_level = Number(iaLevel);
-      const elementType = target.getAttribute("data-ga4-element-type");
-      if (elementType) params.element_type = elementType;
+      if (label)    params.cta_label      = label;
+      if (zone)     params.cta_zone       = zone;
+      if (pageType) params.page_type     = pageType;
+      if (dest)     params.cta_destination = dest;
 
       ga4Event(action, Object.keys(params).length > 0 ? params : undefined);
     };
