@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { ga4Event } from "@/lib/analytics";
 
 interface FormState {
   status: "idle" | "submitting" | "success" | "error";
@@ -79,13 +80,12 @@ export default function HireForm() {
 
       setState({ status: "success", errorMessage: "" });
       formRef.current?.reset();
-      // GA4 conversion event
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", "hire_request_submitted", {
-          event_category: "conversion",
-          event_label: "employer_hire_form",
-        });
-      }
+      // Canonical GA4 form submit event — ga4-event-spec.md §3
+      ga4Event("submit_form__global_assist__hire", {
+        form_name: "placement_inquiry",
+        form_fields_completed: Object.values(payload).filter(Boolean).length,
+        submission_status: "success",
+      });
     } catch (err) {
       const msg =
         err instanceof Error
