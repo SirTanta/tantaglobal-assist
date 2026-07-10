@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import NewsletterSubscribeForm from "@/components/NewsletterSubscribeForm";
+import BeehiivSubscribeForm from "@/components/BeehiivSubscribeForm";
 
 /**
  * Global Assist Footer — Instruments of Passage dark section.
@@ -116,7 +116,7 @@ export default function Footer() {
         </div>
 
         {/* Newsletter bar */}
-        <div className="rounded-3xl border border-instruments-vellum/10 bg-instruments-ink-deep px-8 py-6 mb-10">
+        <div className="rounded-3xl border border-instruments-vellum/10 bg-instruments-ink-deep px-8 py-6 mb-8">
           <div className="flex flex-col md:flex-row md:items-center gap-5">
             <div className="flex-1">
               <p className="font-display font-semibold text-instruments-vellum text-sm mb-0.5">
@@ -127,7 +127,49 @@ export default function Footer() {
               </p>
             </div>
             <div className="md:w-80">
-              <NewsletterSubscribeForm variant="footer" />
+              <BeehiivSubscribeForm variant="footer" buttonLabel="Subscribe" />
+            </div>
+          </div>
+        </div>
+
+        {/* Beehiiv recommended content module */}
+        <div className="rounded-3xl border border-instruments-vellum/10 bg-instruments-ink-deep px-8 py-6 mb-10">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-instruments-gold mb-1">
+            Recommended reading
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 mt-3">
+            <div className="flex-1">
+              <p className="font-sans text-xs font-semibold text-instruments-vellum mb-1">
+                VA Employer Field Guide
+              </p>
+              <p className="font-sans text-[11px] text-instruments-vellum/40 mb-2">
+                Staffing checklist and real VA placement pricing.
+              </p>
+              <a href="https://tantaholdings.com" className="font-sans text-[11px] text-instruments-gold hover:text-instruments-gold-bright transition-colors">
+                Tanta Holdings
+              </a>
+            </div>
+            <div className="flex-1">
+              <p className="font-sans text-xs font-semibold text-instruments-vellum mb-1">
+                Tool Snippet of the Week
+              </p>
+              <p className="font-sans text-[11px] text-instruments-vellum/40 mb-2">
+                Free workspace template or productivity snippet.
+              </p>
+              <a href="https://tantaholdings.com/shop" className="font-sans text-[11px] text-instruments-gold hover:text-instruments-gold-bright transition-colors">
+                Browse the tool library
+              </a>
+            </div>
+            <div className="flex-1">
+              <p className="font-sans text-xs font-semibold text-instruments-vellum mb-1">
+                TGA Certification Track
+              </p>
+              <p className="font-sans text-[11px] text-instruments-vellum/40 mb-2">
+                VA certification built for the US market.
+              </p>
+              <a href="https://academy.tantaglobal.com" className="font-sans text-[11px] text-instruments-gold hover:text-instruments-gold-bright transition-colors">
+                Start at TGA Academy
+              </a>
             </div>
           </div>
         </div>
