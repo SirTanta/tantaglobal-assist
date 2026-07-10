@@ -356,4 +356,67 @@
   @media (prefers-reduced-motion: reduce) {
     .instr-needle { animation: none; }
   }
+
+  /* === Instruments of Passage — Hero photo swipe panel === */
+  /* Full-bleed diagonal photo panel — desktop only. Skew-and-counter-skew
+     technique gives a clean diagonal edge at any hero height without
+     clip-path polygon math that breaks across breakpoints. */
+  .instr-hero-photo-wrap {
+    position: absolute;
+    inset: 0;
+    left: 56%;
+    overflow: hidden;
+    transform: skewX(-9deg);
+    transform-origin: top right;
+    border-left: 2px solid rgba(231,176,41,0.55);
+    box-shadow: -50px 0 90px rgba(0,0,0,0.4);
+  }
+  .instr-hero-photo-inner {
+    position: absolute;
+    inset: -5% -12%;
+    transform: skewX(9deg);
+    transform-origin: top right;
+  }
+  .instr-hero-photo-inner img {
+    animation: instrKenBurns 24s ease-in-out infinite alternate;
+  }
+  @keyframes instrKenBurns {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(-1.5%, -1.5%); }
+  }
+
+  /* Pure-CSS swipe carousel between stacked hero photos — no JS/hydration
+     dependency, so it can't be silently broken by a script error or a
+     slow-to-hydrate client component. One shared keyframe drives every
+     slide; each slide is phase-shifted onto its own 1-of-5 slot via a
+     negative animation-delay. */
+  .instr-hero-photo-slide {
+    position: absolute;
+    inset: 0;
+    animation: instrHeroSwipe 30s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  .instr-hero-photo-slide:nth-child(1) { animation-delay: 0s; }
+  .instr-hero-photo-slide:nth-child(2) { animation-delay: -6s; }
+  .instr-hero-photo-slide:nth-child(3) { animation-delay: -12s; }
+  .instr-hero-photo-slide:nth-child(4) { animation-delay: -18s; }
+  .instr-hero-photo-slide:nth-child(5) { animation-delay: -24s; }
+  @keyframes instrHeroSwipe {
+    0%     { transform: translateX(0%); }
+    16.67% { transform: translateX(0%); }
+    20%    { transform: translateX(-100%); }
+    20.01% { transform: translateX(100%); }
+    96.67% { transform: translateX(100%); }
+    100%   { transform: translateX(0%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    /* Keep the continuous Ken Burns zoom off for reduced-motion users, but
+       the hero swipe itself stays on the same instrHeroSwipe animation as
+       everyone else — it's a deliberate, low-frequency (every 6s) content
+       transition rather than the kind of persistent motion this preference
+       targets, and a hard-cut/no-motion fallback here reads as a bug (a
+       flash with no transition) rather than an accommodation. Do NOT add
+       an animation-name override or disable rule for .instr-hero-photo-slide
+       here — that exact change caused two rounds of regressions. */
+    .instr-hero-photo-inner img { animation: none; }
+  }
 }
