@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
+import HeroImageRotator from '@/components/HeroImageRotator';
 
 export const metadata = pageMetadata({
   title: 'TantaGlobal Assist — Hire Trained Virtual Assistants from the Philippines',
@@ -33,11 +34,21 @@ export default function HomePage() {
 
       <section className="section-pad relative overflow-hidden">
         <div className="absolute inset-0 instr-sun-orbit-teal pointer-events-none" aria-hidden />
-        <div className="section-container relative grid gap-8 lg:grid-cols-[1.25fr_0.95fr] lg:items-center">
-          <div className="space-y-6">
+
+        {/* Full-bleed diagonal photo panel — desktop only. Skew-and-counter-skew
+            technique gives a clean diagonal edge at any hero height. */}
+        <div className="hidden lg:block instr-hero-photo-wrap" aria-hidden="true">
+          <div className="instr-hero-photo-inner">
+            <HeroImageRotator />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/45 via-transparent to-transparent" />
+          </div>
+        </div>
+
+        <div className="section-container relative">
+          <div className="max-w-2xl space-y-6">
             <span className="instr-stamp">Placement · Assist</span>
             <h1 className="instr-display">We connect trained VAs with businesses that need them.</h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-600">
+            <p className="text-lg leading-8 text-slate-600">
               Candidates apply here, complete TGA Academy certification, and move into an employer-ready
               placement workflow. Employers share the role they need filled and we route them toward the
               right shortlist.
@@ -62,7 +73,13 @@ export default function HomePage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
 
+      {/* Dual-path info band — moved out of the hero grid to make room for the
+          photo panel; still immediately visible on load. */}
+      <section className="section-pad pt-0">
+        <div className="section-container">
           <div className="surface-soft p-6 sm:p-8">
             <div className="flex items-center justify-between gap-4">
               <div>
@@ -73,7 +90,7 @@ export default function HomePage() {
                 TGA
               </span>
             </div>
-            <div className="mt-6 grid gap-4">
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
               <div className="rounded-2xl bg-white p-5 shadow-sm">
                 <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">For employers</p>
                 <p className="mt-3 text-slate-600">
