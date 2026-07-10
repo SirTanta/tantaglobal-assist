@@ -10,7 +10,13 @@ const ALLOWED_ORIGINS = [
 
 export async function POST(request: NextRequest) {
   const origin = request.headers.get("origin") ?? "";
-  if (!ALLOWED_ORIGINS.includes(origin) && !origin.startsWith("http://localhost")) {
+
+  // Allow empty origin in production (React Native / Expo apps don't send origin header)
+  const originAllowed = !origin
+    ? true
+    : ALLOWED_ORIGINS.includes(origin) || origin.startsWith("http://localhost");
+
+  if (!originAllowed) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 

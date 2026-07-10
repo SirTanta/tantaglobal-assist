@@ -26,6 +26,8 @@ export default function ApplyForm() {
     status: "idle",
     errorMessage: "",
   });
+  const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const capturedEmail = useRef("");
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -75,6 +77,7 @@ export default function ApplyForm() {
         );
       }
 
+      capturedEmail.current = payload.email;
       setState({ status: "success", errorMessage: "" });
       formRef.current?.reset();
       // GA4 conversion event
@@ -125,6 +128,50 @@ export default function ApplyForm() {
         <p className="text-sm" style={{ color: "#2D3748" }}>
           We&apos;ll be in touch within 3 business days.
         </p>
+        {/* Beehiiv va-applicant newsletter */}
+        <div className="mt-6 p-4 rounded-lg text-left" style={{ backgroundColor: "#f0fdfa", border: "1px solid rgba(13,92,99,0.2)" }}>
+          <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#0D5C63" }}>
+            Free resource: VA hiring guide
+          </p>
+          <p className="text-xs mb-3" style={{ color: "#2D3748" }}>
+            Get our free VA employer guide while you wait for your shortlist.
+          </p>
+          {newsletterStatus === "success" ? (
+            <p className="text-xs" style={{ color: "#16a34a" }}>You&apos;re subscribed — check your inbox.</p>
+          ) : (
+            <div className="flex gap-2">
+              <input
+                type="email"
+                className="flex-1 rounded px-3 py-2 text-xs border"
+                style={{ borderColor: "#cbd5e1", backgroundColor: "#fff", color: "#2D3748" }}
+                value={capturedEmail.current}
+                readOnly
+              />
+              <button
+                type="button"
+                disabled={newsletterStatus === "loading"}
+                onClick={async () => {
+                  if (!capturedEmail.current) return;
+                  setNewsletterStatus("loading");
+                  try {
+                    const res = await fetch("/api/beehiiv/subscribe", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ email: capturedEmail.current, source_site: "tantaglobal.com", subscriber_role: "va-applicant" }),
+                    });
+                    setNewsletterStatus(res.ok ? "success" : "error");
+                  } catch {
+                    setNewsletterStatus("error");
+                  }
+                }}
+                className="text-xs font-semibold px-4 py-2 rounded"
+                style={{ backgroundColor: "#0D5C63", color: "#fff" }}
+              >
+                {newsletterStatus === "loading" ? "..." : "Send guide"}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     );
   }
