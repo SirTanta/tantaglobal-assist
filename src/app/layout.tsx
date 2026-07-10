@@ -4,6 +4,7 @@ import Script from 'next/script';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TalaChatWidget from '@/components/TalaChatWidget';
+import GA4CTATracker from '@/components/GA4CTATracker';
 import { organizationJsonLd, websiteJsonLd, breadcrumbSchema, site, absoluteUrl } from '@/lib/seo';
 import './globals.css';
 
@@ -62,22 +63,21 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="ga4-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-              `}
-            </Script>
-          </>
-        )}
+        <>
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-44MNCME40P"
+            strategy="afterInteractive"
+          />
+          <Script id="ga4-init" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-44MNCME40P');
+            `}
+          </Script>
+        </>
+        <GA4CTATracker />
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
