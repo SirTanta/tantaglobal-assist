@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 
 export const metadata = pageMetadata({
-  title: 'TantaGlobal Assist — Professional VA Placement',
+  title: 'TantaGlobal Assist — Hire Trained Virtual Assistants from the Philippines',
   description:
     'Connect your business with trained virtual assistants or apply for placement through a certification-led pipeline.',
   path: '/',
