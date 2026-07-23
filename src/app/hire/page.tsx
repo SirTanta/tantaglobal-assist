@@ -40,12 +40,11 @@ export default function HirePage() {
             <p className="eyebrow">For employers</p>
             <h1>Request a VA shortlist built from trained, certified candidates.</h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-600">
-              Use the form to share the role, time commitment, and expectations. We review the brief, then route you
-              toward candidates who are closer to the work you need done and into the HubSpot portal 243753317
-              workflow on automation-hub.
+              Share the role, time commitment, and expectations. We review your brief and follow up with the next
+              step toward a focused shortlist of candidates suited to the work.
             </p>
             <div className="surface p-6">
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">What helps us match well</p>
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">A focused brief takes about 2 minutes</p>
               <ul className="mt-4 space-y-3 text-slate-600">
                 <li>• The tasks the VA will actually own</li>
                 <li>• Weekly hours and preferred overlap</li>
@@ -58,7 +57,7 @@ export default function HirePage() {
           <div className="surface p-6 sm:p-8">
             <h2 className="text-3xl">Role brief</h2>
             <p className="mt-3 leading-7 text-slate-600">
-              Fill out the form below and we will follow up with the next step in the placement process.
+              You do not need a polished job description. Tell us what needs to get done and we will follow up within one business day.
             </p>
             <div className="mt-6">
               <HireForm />

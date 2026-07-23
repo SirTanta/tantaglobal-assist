@@ -43,7 +43,7 @@ export default function ApplyPage() {
             <h1>Apply for placement and start the route into client work.</h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-600">
               Tell us about your background, availability, and the kind of work you want to do. If the fit is there,
-              you move to the academy step and then into placement.
+              you move to the Academy step and then into placement. It is a straightforward first step, not a promise of placement.
             </p>
             <div className="surface p-6">
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">What to include</p>
@@ -57,22 +57,23 @@ export default function ApplyPage() {
           </div>
 
           <div className="surface p-6 sm:p-8">
-            <h2 className="text-3xl">Application form</h2>
+            <h2 className="text-3xl">Start your application</h2>
             <p className="mt-3 leading-7 text-slate-600">
-              The preferred application path is the Tally form. If you need an on-page fallback, the intake form
-              below will still send your details into the placement workflow.
+              Complete the application on Tally to begin. It opens in a new tab, so this page stays available for reference.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <a href={tallyFormUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                Open Tally application
+              <a href={tallyFormUrl} target="_blank" rel="noopener noreferrer" className="instr-btn-primary" data-ga4-action="click_cta__global_assist__apply" data-ga4-label="Open application" data-ga4-zone="Z1" data-ga4-page="FORM">
+                Open application <span aria-hidden="true">↗</span>
               </a>
-              <Link href="/how-it-works" className="btn-secondary">
+              <Link href="/how-it-works" className="instr-btn-ghost" data-ga4-action="click_cta__global_assist__apply" data-ga4-label="See application process" data-ga4-zone="Z1" data-ga4-page="FORM">
                 See the process
               </Link>
             </div>
-            <div className="mt-6">
-              <ApplyForm />
-            </div>
+            <details className="mt-7 border-t border-instruments-shadow/20 pt-5">
+              <summary className="cursor-pointer text-sm font-semibold text-instruments-teak">Can&apos;t use Tally? Use the on-page application instead.</summary>
+              <p className="mt-3 text-sm leading-6 text-instruments-shadow">This secure fallback sends the same application details to our placement workflow.</p>
+              <div className="mt-5"><ApplyForm /></div>
+            </details>
           </div>
         </div>
       </section>
@@ -86,10 +87,10 @@ export default function ApplyPage() {
               The academy step helps separate interested applicants from candidates ready for client work.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
+              <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="instr-btn-primary" data-ga4-action="click_cta__global_assist__apply" data-ga4-label="Visit TGA Academy" data-ga4-zone="Z4" data-ga4-page="FORM">
                 Visit TGA Academy
               </a>
-              <Link href="/how-it-works" className="btn-secondary">See the full process</Link>
+              <Link href="/how-it-works" className="instr-btn-ghost" data-ga4-action="click_cta__global_assist__apply" data-ga4-label="See full application process" data-ga4-zone="Z4" data-ga4-page="FORM">See the full process</Link>
             </div>
           </div>
           <div className="surface p-7">
@@ -99,8 +100,8 @@ export default function ApplyPage() {
               Candidate questions go to {site.emailCandidates}. General questions go to {site.emailGeneral}.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/contact" className="btn-primary">Contact us</Link>
-              <Link href="/pricing" className="btn-secondary">Review pricing model</Link>
+              <Link href="/contact" className="instr-btn-primary" data-ga4-action="click_cta__global_assist__apply" data-ga4-label="Contact us" data-ga4-zone="Z5" data-ga4-page="FORM">Contact us</Link>
+              <Link href="/pricing" className="instr-btn-ghost" data-ga4-action="click_cta__global_assist__apply" data-ga4-label="Review pricing model" data-ga4-zone="Z5" data-ga4-page="FORM">Review pricing model</Link>
             </div>
           </div>
         </div>
