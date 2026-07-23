@@ -11,14 +11,14 @@ interface FormState {
 const inputClass =
   "rounded-lg px-4 py-3 text-sm border w-full transition-colors focus:outline-none focus:ring-2";
 const inputStyle = {
-  borderColor: "#cbd5e1",
-  backgroundColor: "#F5FAFA",
-  color: "#2D3748",
+  borderColor: "#D8D0C4",
+  backgroundColor: "#FFFDF8",
+  color: "#3D3932",
 };
-const inputFocusRing = "focus:ring-[#0D5C63] focus:border-[#0D5C63]";
+const inputFocusRing = "focus:ring-[#E85D3F] focus:border-[#E85D3F]";
 
 const labelClass = "text-sm font-semibold block mb-1.5";
-const labelStyle = { color: "#2D3748" };
+const labelStyle = { color: "#25221D" };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -101,13 +101,15 @@ export default function HireForm() {
   if (state.status === "success") {
     return (
       <div
+        role="status"
+        aria-live="polite"
         className="rounded-xl px-8 py-10 text-center"
-        style={{ backgroundColor: "#E0F5F5", border: "1px solid rgba(13,92,99,0.25)" }}
+        style={{ backgroundColor: "#FDE5DC", border: "1px solid rgba(232,93,63,0.3)" }}
       >
         <div className="flex justify-center mb-4">
           <div
             className="w-12 h-12 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: "#0D5C63" }}
+            style={{ backgroundColor: "#E85D3F" }}
           >
             <svg
               className="w-6 h-6 text-white"
@@ -124,19 +126,19 @@ export default function HireForm() {
             </svg>
           </div>
         </div>
-        <h3 className="text-xl font-bold mb-2" style={{ color: "#0D5C63" }}>
+        <h3 className="text-xl font-bold mb-2" style={{ color: "#25221D" }}>
           We received your request.
         </h3>
-        <p className="text-sm" style={{ color: "#2D3748" }}>
+        <p className="text-sm" style={{ color: "#3D3932" }}>
           Our team will review your requirements and follow up within 1 business day. Check your
           inbox at the email you provided.
         </p>
         {/* Beehiiv va-employer newsletter */}
-        <div className="mt-6 p-4 rounded-lg text-left" style={{ backgroundColor: "#f0fdfa", border: "1px solid rgba(13,92,99,0.2)" }}>
-          <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#0D5C63" }}>
+        <div className="mt-6 p-4 rounded-lg text-left" style={{ backgroundColor: "#FFFDF8", border: "1px solid rgba(232,93,63,0.22)" }}>
+          <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#E85D3F" }}>
             VA employer insights — free
           </p>
-          <p className="text-xs mb-3" style={{ color: "#2D3748" }}>
+          <p className="text-xs mb-3" style={{ color: "#3D3932" }}>
             Staffing checklist and real placement pricing, sent weekly.
           </p>
           {newsletterStatus === "success" ? (
@@ -168,7 +170,7 @@ export default function HireForm() {
                   }
                 }}
                 className="text-xs font-semibold px-4 py-2 rounded"
-                style={{ backgroundColor: "#0D5C63", color: "#fff" }}
+                style={{ backgroundColor: "#25221D", color: "#FFFDF8" }}
               >
                 {newsletterStatus === "loading" ? "..." : "Subscribe free"}
               </button>
@@ -361,6 +363,7 @@ export default function HireForm() {
       {/* Error message */}
       {state.status === "error" && (
         <div
+          role="alert"
           className="md:col-span-2 rounded-lg px-5 py-4 text-sm"
           style={{
             backgroundColor: "#fff5f5",
@@ -378,7 +381,7 @@ export default function HireForm() {
           type="submit"
           disabled={isSubmitting}
           className="w-full sm:w-auto px-8 py-3.5 rounded-lg text-sm font-semibold text-white transition-opacity disabled:opacity-60"
-          style={{ backgroundColor: "#0D5C63" }}
+          style={{ backgroundColor: "#25221D" }}
         >
           {isSubmitting ? "Submitting..." : "Submit your requirements"}
         </button>

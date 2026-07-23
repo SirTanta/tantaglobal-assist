@@ -6,41 +6,41 @@
   --font-display: "Bricolage Grotesque", "Inter Tight", system-ui, sans-serif;
   --font-mono:    "JetBrains Mono", ui-monospace, monospace;
 
-  --color-brand-navy: #0a1628;
-  --color-brand-teal: #0d5c63;
-  --color-brand-teal-dark: #094d54;
-  --color-brand-teal-light: #e0f5f5;
-  --color-brand-gold: #d4af37;
-  --color-brand-sky: #d9ebff;
-  --color-brand-offwhite: #f5fafa;
-  --color-brand-slate: #2d3748;
-  --color-brand-muted: #64748b;
-  --color-brand-border: #cbd5e1;
+  --color-brand-navy: #25221D;
+  --color-brand-teal: #E85D3F;
+  --color-brand-teal-dark: #C9472E;
+  --color-brand-teal-light: #FDE5DC;
+  --color-brand-gold: #D8EF5B;
+  --color-brand-sky: #E9F0FF;
+  --color-brand-offwhite: #F5F0E8;
+  --color-brand-slate: #3D3932;
+  --color-brand-muted: #6B665D;
+  --color-brand-border: #D8D0C4;
 
   /* Instruments of Passage — family system */
-  --color-instruments-gold:         #E7B029;
-  --color-instruments-gold-bright:  #F5C842;
-  --color-instruments-bronze:       #A88450;
-  --color-instruments-shadow:       #5A4632;
-  --color-instruments-teak:         #2B1F12;
-  --color-instruments-daylight:     #EFEDE4;
-  --color-instruments-vellum:       #F8F7F2;
-  --color-instruments-sea:          #0D5C63;
-  --color-instruments-sea-deep:     #093F44;
-  --color-instruments-ink:          #0B1F2E;
-  --color-instruments-ink-deep:     #071420;
+  --color-instruments-gold:         #D8EF5B;
+  --color-instruments-gold-bright:  #E7F586;
+  --color-instruments-bronze:       #E85D3F;
+  --color-instruments-shadow:       #6B665D;
+  --color-instruments-teak:         #25221D;
+  --color-instruments-daylight:     #F5F0E8;
+  --color-instruments-vellum:       #FFFDF8;
+  --color-instruments-sea:          #3569E8;
+  --color-instruments-sea-deep:     #224AA3;
+  --color-instruments-ink:          #25221D;
+  --color-instruments-ink-deep:     #322F29;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #f5fafa;
+    background-color: #F5F0E8;
   }
 
   body {
     font-family: var(--font-sans);
-    color: #2d3748;
-    background: linear-gradient(180deg, #f5fafa 0%, #eef4f3 100%);
+    color: #3D3932;
+    background: linear-gradient(180deg, #F5F0E8 0%, #FFFDF8 100%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -50,7 +50,7 @@
     line-height: 1.04;
     letter-spacing: -0.04em;
     font-weight: 800;
-    color: #0a1628;
+    color: #25221D;
   }
 
   h2 {
@@ -58,18 +58,18 @@
     line-height: 1.1;
     letter-spacing: -0.03em;
     font-weight: 750;
-    color: #0a1628;
+    color: #25221D;
   }
 
   h3 {
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     line-height: 1.25;
     font-weight: 700;
-    color: #0a1628;
+    color: #25221D;
   }
 
   :focus-visible {
-    outline: 3px solid #0d5c63;
+    outline: 3px solid #E85D3F;
     outline-offset: 3px;
     border-radius: 8px;
   }
@@ -91,9 +91,9 @@
     height: auto;
     padding: 10px 16px;
     z-index: 9999;
-    background: #0a1628;
-    color: #d4af37;
-    border: 2px solid #d4af37;
+    background: #25221D;
+    color: #D8EF5B;
+    border: 2px solid #D8EF5B;
     border-radius: 9999px;
     font-weight: 700;
     text-decoration: none;
@@ -112,7 +112,7 @@
   .glass-nav {
     backdrop-filter: blur(16px) saturate(180%);
     background: rgba(255, 255, 255, 0.92);
-    border-bottom: 1px solid rgba(13, 92, 99, 0.12);
+    border-bottom: 1px solid rgba(232, 93, 63, 0.16);
     box-shadow: 0 1px 14px rgb(15 23 42 / 0.05);
   }
 
@@ -125,7 +125,7 @@
   }
 
   .nav-link:hover {
-    color: #0d5c63;
+    color: #E85D3F;
   }
 
   .btn-primary,
@@ -144,24 +144,24 @@
   }
 
   .btn-primary {
-    background-color: #0d5c63;
+    background-color: #E85D3F;
     color: #fff;
-    box-shadow: 0 10px 25px rgb(13 92 99 / 0.18);
+    box-shadow: 0 10px 25px rgb(232 93 63 / 0.22);
   }
 
   .btn-primary:hover {
-    background-color: #094d54;
+    background-color: #C9472E;
     transform: translateY(-1px);
   }
 
   .btn-secondary {
-    border-color: #0d5c63;
-    color: #0d5c63;
+    border-color: #25221D;
+    color: #25221D;
     background: rgba(255, 255, 255, 0.5);
   }
 
   .btn-secondary:hover {
-    background-color: #0d5c63;
+    background-color: #25221D;
     color: #ffffff;
     transform: translateY(-1px);
   }
@@ -174,8 +174,8 @@
   }
 
   .surface-soft {
-    background: linear-gradient(180deg, rgba(224, 245, 245, 0.9), rgba(255, 255, 255, 0.92));
-    border: 1px solid rgba(13, 92, 99, 0.12);
+    background: linear-gradient(180deg, rgba(253, 229, 220, 0.92), rgba(255, 253, 248, 0.96));
+    border: 1px solid rgba(232, 93, 63, 0.16);
     border-radius: 1.5rem;
     box-shadow: 0 18px 45px rgb(15 23 42 / 0.05);
   }
@@ -184,7 +184,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: #0d5c63;
+    color: #E85D3F;
     font-size: 0.78rem;
     font-weight: 800;
     letter-spacing: 0.14em;
@@ -196,7 +196,7 @@
     width: 2.5rem;
     height: 3px;
     border-radius: 9999px;
-    background: linear-gradient(90deg, #0d5c63, #E7B029);
+    background: linear-gradient(90deg, #E85D3F, #D8EF5B);
   }
 
   .subtle-rule {
@@ -211,7 +211,7 @@
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #0a1628;
+    color: #25221D;
   }
 
   .footer-list {
@@ -228,7 +228,7 @@
   }
 
   .footer-list a:hover {
-    color: #0d5c63;
+    color: #E85D3F;
     text-decoration: underline;
     text-underline-offset: 0.15em;
   }
@@ -253,14 +253,14 @@
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: #A88450;
+    color: #E85D3F;
   }
   .instr-filing {
     font-family: "JetBrains Mono", ui-monospace, monospace;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    color: #A88450;
+    color: #E85D3F;
   }
   .instr-stamp {
     display: inline-block;
@@ -268,27 +268,27 @@
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.22em;
-    color: #0d5c63;
-    border: 1px solid rgba(13, 92, 99, 0.6);
+    color: #E85D3F;
+    border: 1px solid rgba(232, 93, 63, 0.6);
     padding: 4px 8px;
   }
   .instr-rule-gold {
     height: 1px;
-    background: linear-gradient(90deg, transparent, #E7B029 18%, #E7B029 82%, transparent);
+    background: linear-gradient(90deg, transparent, #D8EF5B 18%, #D8EF5B 82%, transparent);
   }
   .instr-numeral {
     font-family: "Bricolage Grotesque", "Inter Tight", system-ui, sans-serif;
     font-weight: 500;
-    color: #2B1F12;
+    color: #25221D;
     font-variant-numeric: tabular-nums;
     line-height: 1;
   }
   .instr-sun-orbit-teal {
-    background: radial-gradient(circle at center, rgba(13, 92, 99, 0.10) 0%, rgba(13, 92, 99, 0.03) 38%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(53, 105, 232, 0.10) 0%, rgba(53, 105, 232, 0.03) 38%, transparent 70%);
   }
   .instr-rule-bronze {
     height: 1px;
-    background: linear-gradient(90deg, transparent, #A88450 18%, #A88450 82%, transparent);
+    background: linear-gradient(90deg, transparent, #E85D3F 18%, #E85D3F 82%, transparent);
   }
 
   /* === Instruments of Passage — Button System === */
@@ -305,16 +305,16 @@
     font-weight: 600;
     letter-spacing: -0.01em;
     text-decoration: none;
-    color: #F8F7F2;
-    background-color: #2B1F12;
-    border: 1.5px solid #2B1F12;
+    color: #FFFDF8;
+    background-color: #25221D;
+    border: 1.5px solid #25221D;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     white-space: nowrap;
-    box-shadow: 0 4px 14px rgba(43,31,18,0.18);
+    box-shadow: 0 4px 14px rgba(37,34,29,0.18);
   }
   .instr-btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(43,31,18,0.22), 0 0 0 2px rgba(231,176,41,0.35);
+    box-shadow: 0 6px 20px rgba(37,34,29,0.22), 0 0 0 2px rgba(216,239,91,0.5);
   }
   .instr-btn-primary:active {
     transform: translateY(0);
@@ -333,15 +333,15 @@
     font-weight: 600;
     letter-spacing: -0.01em;
     text-decoration: none;
-    color: #2B1F12;
+    color: #25221D;
     background-color: transparent;
     border: 1.5px solid rgba(90,70,50,0.4);
     transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
     white-space: nowrap;
   }
   .instr-btn-ghost:hover {
-    border-color: #2B1F12;
-    background-color: rgba(43,31,18,0.04);
+    border-color: #25221D;
+    background-color: rgba(37,34,29,0.04);
     transform: translateY(-1px);
   }
   .instr-btn-ghost:active {
