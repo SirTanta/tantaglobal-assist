@@ -314,7 +314,7 @@
   }
   .instr-btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(37,34,29,0.22), 0 0 0 2px rgba(216,239,91,0.5);
+    box-shadow: 0 6px 20px rgba(37,34,29,0.22), 0 0 0 2px rgba(231,176,41,0.5);
   }
   .instr-btn-primary:active {
     transform: translateY(0);
