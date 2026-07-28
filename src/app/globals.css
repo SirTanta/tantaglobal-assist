@@ -92,8 +92,8 @@
     padding: 10px 16px;
     z-index: 9999;
     background: #25221D;
-    color: #D8EF5B;
-    border: 2px solid #D8EF5B;
+    color: #E7B029;
+    border: 2px solid #E7B029;
     border-radius: 9999px;
     font-weight: 700;
     text-decoration: none;
@@ -196,7 +196,7 @@
     width: 2.5rem;
     height: 3px;
     border-radius: 9999px;
-    background: linear-gradient(90deg, #E85D3F, #D8EF5B);
+    background: linear-gradient(90deg, #E85D3F, #E7B029);
   }
 
   .subtle-rule {
@@ -274,7 +274,7 @@
   }
   .instr-rule-gold {
     height: 1px;
-    background: linear-gradient(90deg, transparent, #D8EF5B 18%, #D8EF5B 82%, transparent);
+    background: linear-gradient(90deg, transparent, #E85D3F 18%, #E85D3F 82%, transparent);
   }
   .instr-numeral {
     font-family: "Bricolage Grotesque", "Inter Tight", system-ui, sans-serif;
