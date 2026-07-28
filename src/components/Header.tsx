@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { READING_LOCATION } from "@/lib/reading-location";
 
@@ -26,6 +27,7 @@ const navLinks = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 8);
@@ -67,15 +69,23 @@ export default function Header() {
 
           {/* Primary nav — max 5 items */}
           <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="font-sans text-sm text-instruments-shadow hover:text-instruments-teak transition-colors px-3 py-2 rounded-lg hover:bg-instruments-teak/5"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`font-sans text-sm transition-colors px-3 py-2 rounded-lg ${
+                    isActive
+                      ? "bg-instruments-teak text-instruments-vellum"
+                      : "text-instruments-shadow hover:text-instruments-teak hover:bg-instruments-teak/5"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* CTA — two primary actions */}
@@ -84,6 +94,8 @@ export default function Header() {
               href="/apply"
               data-ga4-action="cta_apply_nav"
               data-ga4-label="header"
+              data-ga4-zone="Z0"
+              data-ga4-page="NAVIGATION"
               className="instr-btn-ghost !py-1.5 !px-4 !text-xs"
             >
               Apply for placement
@@ -92,6 +104,8 @@ export default function Header() {
               href="/hire"
               data-ga4-action="cta_hire_nav"
               data-ga4-label="header"
+              data-ga4-zone="Z0"
+              data-ga4-page="NAVIGATION"
               className="instr-btn-primary !py-1.5 !px-4 !text-xs"
             >
               Request VA shortlist
@@ -99,7 +113,7 @@ export default function Header() {
           </div>
 
           {/* Mobile menu toggle */}
-          <MobileMenu />
+          <MobileMenu pathname={pathname} />
         </div>
       </div>
 
@@ -109,7 +123,7 @@ export default function Header() {
   );
 }
 
-function MobileMenu() {
+function MobileMenu({ pathname }: { pathname: string }) {
   const [open, setOpen] = useState(false);
   const menuId = "mobile-menu";
 
@@ -117,7 +131,7 @@ function MobileMenu() {
     <div className="lg:hidden">
       <button
         className="p-2 rounded-lg text-instruments-shadow hover:bg-instruments-teak/5 transition-colors"
-        aria-label="Toggle menu"
+        aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((v) => !v)}
@@ -137,21 +151,45 @@ function MobileMenu() {
           className="absolute left-0 right-0 top-full bg-instruments-daylight border-b border-instruments-shadow/10 shadow-lg z-40"
         >
           <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1" aria-label="Mobile navigation">
-            {navLinks.map((link) => (
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`font-sans text-sm rounded-lg px-3 py-2 transition-colors ${
+                    isActive
+                      ? "bg-instruments-teak text-instruments-vellum"
+                      : "text-instruments-shadow hover:text-instruments-teak hover:bg-instruments-teak/5"
+                  }`}
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+            <div className="border-t border-instruments-shadow/10 mt-2 pt-3 flex flex-col gap-2">
               <Link
-                key={link.href}
-                href={link.href}
-                className="font-sans text-sm text-instruments-shadow hover:text-instruments-teak hover:bg-instruments-teak/5 rounded-lg px-3 py-2 transition-colors"
+                href="/apply"
+                data-ga4-action="cta_apply_nav"
+                data-ga4-label="mobile-menu"
+                data-ga4-zone="Z0"
+                data-ga4-page="NAVIGATION"
+                className="instr-btn-ghost !py-2 !px-4 !text-xs text-center"
                 onClick={() => setOpen(false)}
               >
-                {link.label}
-              </Link>
-            ))}
-            <div className="border-t border-instruments-shadow/10 mt-2 pt-3 flex flex-col gap-2">
-              <Link href="/apply" className="instr-btn-ghost !py-2 !px-4 !text-xs text-center" onClick={() => setOpen(false)}>
                 Apply for placement
               </Link>
-              <Link href="/hire" className="instr-btn-primary !py-2 !px-4 !text-xs text-center" onClick={() => setOpen(false)}>
+              <Link
+                href="/hire"
+                data-ga4-action="cta_hire_nav"
+                data-ga4-label="mobile-menu"
+                data-ga4-zone="Z0"
+                data-ga4-page="NAVIGATION"
+                className="instr-btn-primary !py-2 !px-4 !text-xs text-center"
+                onClick={() => setOpen(false)}
+              >
                 Request VA shortlist
               </Link>
             </div>

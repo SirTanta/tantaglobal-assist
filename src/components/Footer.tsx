@@ -29,7 +29,7 @@ const pages: { label: string; href: string }[] = [
 
 const legal: { label: string; href: string }[] = [
   { label: "Privacy Policy", href: "/privacy" },
-  { label: "Sitemap",        href: "/sitemap.xml" },
+  { label: "Site map",       href: "/sitemap" },
 ];
 
 export default function Footer() {
@@ -116,7 +116,7 @@ export default function Footer() {
         </div>
 
         {/* Newsletter bar */}
-        <div className="rounded-3xl border border-instruments-vellum/10 bg-instruments-ink-deep px-8 py-6 mb-8">
+        <div id="field-notes" className="rounded-3xl border border-instruments-vellum/10 bg-instruments-ink-deep px-8 py-6 mb-8">
           <div className="flex flex-col md:flex-row md:items-center gap-5">
             <div className="flex-1">
               <p className="font-display font-semibold text-instruments-vellum text-sm mb-0.5">
