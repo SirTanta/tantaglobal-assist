@@ -1,4 +1,4 @@
-import { createHmac, randomUUID } from "node:crypto";
+import { createHash, createHmac } from "node:crypto";
 
 /**
  * Atlas CRM ingestion sender (server-only).
@@ -70,26 +70,72 @@ export function signPayload(rawBody: string, secret: string): string {
   return `sha256=${createHmac("sha256", secret).update(rawBody, "utf8").digest("hex")}`;
 }
 
-/** Drops undefined/empty attribution fields so absent UTMs are not sent as empty strings. */
+/**
+ * The only attribution keys ever forwarded. Attribution originates from an
+ * untrusted client body, so this is an allow-list rather than a value filter:
+ * unknown keys would otherwise ride through and draw a non-retryable 422.
+ */
+const ATTRIBUTION_KEYS = [
+  "source",
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+  "gclid",
+  "fbclid",
+  "msclkid",
+] as const;
+
+/** Allow-lists known keys and drops empty ones so absent UTMs are not sent as "". */
 function compactAttribution(attribution: AtlasAttribution): AtlasAttribution {
-  const entries = Object.entries(attribution).filter(
-    ([, value]) => typeof value === "string" && value.length > 0
-  );
-  return Object.fromEntries(entries) as unknown as AtlasAttribution;
+  const source = attribution as unknown as Record<string, unknown>;
+  const out: Record<string, string> = {};
+  for (const key of ATTRIBUTION_KEYS) {
+    const value = source[key];
+    if (typeof value === "string" && value.length > 0) out[key] = value;
+  }
+  return out as unknown as AtlasAttribution;
 }
 
+/**
+ * Derives a stable event_id from an event's logical identity.
+ *
+ * A random id per call is only idempotent for retries inside a single
+ * sendAtlasEvent loop; a timeout, cold retry, double submit, or manual replay
+ * would mint a new id and the receiver would create a duplicate record. Same
+ * logical event must therefore always hash to the same id.
+ *
+ * The receiver validates event_id as a UUID, so a raw hex digest is rejected
+ * with a non-retryable 422 — the digest is shaped into an RFC 4122 v5 layout.
+ */
+export function deterministicEventId(parts: string[]): string {
+  const digest = createHash("sha256").update(parts.join("|"), "utf8").digest("hex");
+  const nibbles = digest.slice(0, 32).split("");
+  nibbles[12] = "5";
+  nibbles[16] = ((parseInt(nibbles[16], 16) & 0x3) | 0x8).toString(16);
+  const h = nibbles.join("");
+  return `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20, 32)}`;
+}
+
+/**
+ * eventId and occurredAt are required, deliberately. A `?? randomUUID()` or
+ * `?? new Date()` default would produce a different value on every call for
+ * the same logical event, which is exactly the duplicate-record bug this
+ * contract's dedupe is meant to prevent. Callers must supply stable values.
+ */
 export function buildEvent(input: {
   eventType: AtlasEventType;
   leadExternalId: string;
   data: AtlasIntakeData | AtlasOfferData | AtlasRevenueData;
+  eventId: string;
+  occurredAt: string;
   attribution?: AtlasAttribution;
-  eventId?: string;
-  occurredAt?: string;
 }): AtlasEvent {
   const event: AtlasEvent = {
-    event_id: input.eventId ?? randomUUID(),
+    event_id: input.eventId,
     event_type: input.eventType,
-    occurred_at: input.occurredAt ?? new Date().toISOString(),
+    occurred_at: input.occurredAt,
     source_system: "global_assist",
     lead_external_id: input.leadExternalId,
     data: input.data,
@@ -175,11 +221,16 @@ export async function sendAtlasEvent(event: AtlasEvent): Promise<AtlasSendResult
   return { delivered: false, reason: "exhausted_retries", status: lastStatus };
 }
 
-/** Event 1 — must arrive before any offer or revenue event for this employer. */
+/**
+ * Event 1 — must arrive before any offer or revenue event for this employer.
+ * One intake per employer, so the employer id alone is the stable identity.
+ * Pass the lead row's created_at as occurredAt so a replay reuses it.
+ */
 export function sendEmployerIntake(input: {
   employerId: string;
   attribution: AtlasAttribution;
   data: AtlasIntakeData;
+  occurredAt: string;
   eventId?: string;
 }): Promise<AtlasSendResult> {
   return sendAtlasEvent(
@@ -188,7 +239,10 @@ export function sendEmployerIntake(input: {
       leadExternalId: input.employerId,
       attribution: input.attribution,
       data: input.data,
-      eventId: input.eventId,
+      occurredAt: input.occurredAt,
+      eventId:
+        input.eventId ??
+        deterministicEventId(["global_assist", "employer.intake_received", input.employerId]),
     })
   );
 }
@@ -197,6 +251,7 @@ export function sendEmployerIntake(input: {
 export function sendPlacementOfferCreated(input: {
   employerId: string;
   data: AtlasOfferData;
+  occurredAt: string;
   eventId?: string;
 }): Promise<AtlasSendResult> {
   return sendAtlasEvent(
@@ -204,15 +259,32 @@ export function sendPlacementOfferCreated(input: {
       eventType: "placement.offer_created",
       leadExternalId: input.employerId,
       data: input.data,
-      eventId: input.eventId,
+      occurredAt: input.occurredAt,
+      eventId:
+        input.eventId ??
+        deterministicEventId([
+          "global_assist",
+          "placement.offer_created",
+          input.employerId,
+          input.data.offer_external_id,
+        ]),
     })
   );
 }
 
-/** Event 3 — include offer_external_id whenever the revenue traces to an offer. */
+/**
+ * Event 3 — include offer_external_id whenever the revenue traces to an offer.
+ *
+ * An employer can legitimately have several revenue events, so the identity
+ * includes the offer, type, recognition date, and amount. Keying on employer
+ * alone would make a second payment hash to the first one's id and be silently
+ * discarded as a duplicate — lost revenue. Pass eventId explicitly if the
+ * source system has its own stable transaction id.
+ */
 export function sendPlacementRevenueRecorded(input: {
   employerId: string;
   data: AtlasRevenueData;
+  occurredAt: string;
   eventId?: string;
 }): Promise<AtlasSendResult> {
   return sendAtlasEvent(
@@ -220,7 +292,18 @@ export function sendPlacementRevenueRecorded(input: {
       eventType: "placement.revenue_recorded",
       leadExternalId: input.employerId,
       data: input.data,
-      eventId: input.eventId,
+      occurredAt: input.occurredAt,
+      eventId:
+        input.eventId ??
+        deterministicEventId([
+          "global_assist",
+          "placement.revenue_recorded",
+          input.employerId,
+          input.data.offer_external_id ?? "",
+          input.data.revenue_type,
+          input.data.recognized_at ?? "",
+          String(input.data.amount_cents),
+        ]),
     })
   );
 }

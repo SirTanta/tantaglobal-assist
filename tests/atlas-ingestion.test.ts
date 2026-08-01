@@ -5,7 +5,9 @@ import { createHmac } from "node:crypto";
 import {
   buildEvent,
   signPayload,
+  deterministicEventId,
   sendEmployerIntake,
+  sendPlacementOfferCreated,
   sendPlacementRevenueRecorded,
 } from "../src/lib/atlas-ingestion";
 
@@ -53,6 +55,7 @@ afterEach(() => {
 
 const INTAKE = {
   employerId: "emp_10023",
+  occurredAt: "2026-08-01T12:00:00.000Z",
   attribution: {
     source: "google",
     utm_source: "google",
@@ -123,19 +126,86 @@ test("lead_external_id is the employer id, never the email", () => {
     leadExternalId: INTAKE.employerId,
     attribution: INTAKE.attribution,
     data: INTAKE.data,
+    eventId: "11111111-2222-3333-4444-555555555555",
+    occurredAt: INTAKE.occurredAt,
   });
   assert.equal(event.lead_external_id, "emp_10023");
   assert.notEqual(event.lead_external_id, INTAKE.data.email);
 });
 
-test("occurred_at defaults to an ISO-8601 UTC timestamp", () => {
-  const event = buildEvent({
-    eventType: "employer.intake_received",
-    leadExternalId: "emp_1",
-    attribution: { source: "direct" },
-    data: INTAKE.data,
+test("deterministicEventId is stable, UUID-shaped, and input-sensitive", () => {
+  const id = deterministicEventId(["global_assist", "employer.intake_received", "emp_10023"]);
+
+  // The receiver validates event_id as a UUID; a raw hex digest is 422-rejected.
+  assert.match(id, /^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
+  assert.equal(id, deterministicEventId(["global_assist", "employer.intake_received", "emp_10023"]));
+  assert.notEqual(id, deterministicEventId(["global_assist", "employer.intake_received", "emp_9"]));
+});
+
+// The axis the original suite missed: idempotency ACROSS calls, not just across
+// retries inside one send loop.
+test("two separate intake calls for the same employer reuse the same event_id", async () => {
+  stubFetch([{ status: 200 }]);
+  await sendEmployerIntake(INTAKE);
+  const first = JSON.parse(captured[0].body);
+
+  captured = [];
+  stubFetch([{ status: 200 }]);
+  await sendEmployerIntake(INTAKE);
+  const second = JSON.parse(captured[0].body);
+
+  assert.equal(first.event_id, second.event_id);
+  assert.equal(first.occurred_at, second.occurred_at);
+});
+
+test("different employers get different event_ids", async () => {
+  stubFetch([{ status: 200 }]);
+  await sendEmployerIntake(INTAKE);
+  await sendEmployerIntake({ ...INTAKE, employerId: "emp_99999" });
+
+  const ids = captured.map((c) => JSON.parse(c.body).event_id);
+  assert.notEqual(ids[0], ids[1]);
+});
+
+test("different event types for one employer get different event_ids", async () => {
+  stubFetch([{ status: 200 }]);
+  await sendEmployerIntake(INTAKE);
+  await sendPlacementOfferCreated({
+    employerId: INTAKE.employerId,
+    occurredAt: INTAKE.occurredAt,
+    data: {
+      offer_external_id: "offer_77",
+      amount_cents: 250000,
+      currency: "USD",
+      status: "sent",
+    },
   });
-  assert.match(event.occurred_at, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+
+  const ids = captured.map((c) => JSON.parse(c.body).event_id);
+  assert.notEqual(ids[0], ids[1]);
+});
+
+test("distinct revenue events for one employer do not collapse to one event_id", async () => {
+  stubFetch([{ status: 200 }]);
+  const base = {
+    employerId: "emp_10023",
+    occurredAt: INTAKE.occurredAt,
+    data: {
+      amount_cents: 250000,
+      currency: "USD",
+      revenue_type: "placement_fee",
+      offer_external_id: "offer_77",
+      recognized_at: "2026-08-01T00:00:00.000Z",
+    },
+  };
+  await sendPlacementRevenueRecorded(base);
+  await sendPlacementRevenueRecorded({
+    ...base,
+    data: { ...base.data, recognized_at: "2026-09-01T00:00:00.000Z" },
+  });
+
+  const ids = captured.map((c) => JSON.parse(c.body).event_id);
+  assert.notEqual(ids[0], ids[1], "a second payment must not be swallowed as a duplicate");
 });
 
 test("sendEmployerIntake posts a correctly signed request to the configured endpoint", async () => {
@@ -220,10 +290,29 @@ test("empty attribution values are dropped rather than sent as empty strings", a
   assert.deepEqual(sent.attribution, { source: "direct" });
 });
 
+test("arbitrary client-supplied attribution keys are stripped", async () => {
+  stubFetch([{ status: 200 }]);
+  await sendEmployerIntake({
+    ...INTAKE,
+    attribution: {
+      source: "google",
+      utm_source: "google",
+      // A caller can POST anything; none of it may reach the CRM.
+      evil_key: "injected",
+      __proto__: "polluted",
+      lifecycle_stage: "customer",
+    } as never,
+  });
+
+  const sent = JSON.parse(captured[0].body);
+  assert.deepEqual(sent.attribution, { source: "google", utm_source: "google" });
+});
+
 test("revenue event carries offer_external_id and currency when present", async () => {
   stubFetch([{ status: 200 }]);
   await sendPlacementRevenueRecorded({
     employerId: "emp_10023",
+    occurredAt: INTAKE.occurredAt,
     data: {
       amount_cents: 250000,
       currency: "USD",

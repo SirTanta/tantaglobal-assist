@@ -90,6 +90,9 @@ export async function POST(req: NextRequest) {
     try {
       const result = await sendEmployerIntake({
         employerId: String(employerId),
+        // The row's own created_at, so a replay of this intake reports the
+        // original time rather than the time of the replay.
+        occurredAt: insertedRow?.created_at ?? new Date().toISOString(),
         attribution: {
           ...attribution,
           source: attribution?.source?.trim() || 'direct',
