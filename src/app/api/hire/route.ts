@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { sendEmployerIntake, toIso8601Utc, type AtlasAttribution } from '@/lib/atlas-ingestion';
 
 // Simple in-memory rate limiter — keyed by IP, max 3 submissions per 15 minutes
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -27,12 +28,18 @@ export async function POST(req: NextRequest) {
   }
 
   // Parse body
-  let body: Record<string, string>;
+  let rawBody: Record<string, unknown>;
   try {
-    body = await req.json();
+    rawBody = await req.json();
   } catch {
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
   }
+
+  // Attribution rides alongside the lead fields but is not a column on
+  // employer_leads, so it is split out before the insert.
+  const { attribution: rawAttribution, ...leadFields } = rawBody;
+  const body = leadFields as Record<string, string>;
+  const attribution = (rawAttribution ?? null) as AtlasAttribution | null;
 
   // Validate required fields
   const { employer_name, company_name, email } = body;
@@ -57,7 +64,9 @@ export async function POST(req: NextRequest) {
       'Content-Type': 'application/json',
       'apikey': supabaseKey,
       'Authorization': `Bearer ${supabaseKey}`,
-      'Prefer': 'return=minimal',
+      // Representation (rather than minimal) so the persisted row's primary key
+      // can be used as the stable employer id sent to Atlas.
+      'Prefer': 'return=representation',
     },
     body: JSON.stringify(body),
   }).catch(err => {
@@ -67,6 +76,42 @@ export async function POST(req: NextRequest) {
 
   if (!leadInsert || !leadInsert.ok) {
     return NextResponse.json({ error: 'Failed to submit. Please try again.' }, { status: 502 });
+  }
+
+  const insertedRows = await leadInsert.json().catch(() => null);
+  const insertedRow = Array.isArray(insertedRows) ? insertedRows[0] : insertedRows;
+  const employerId = insertedRow?.employer_id ?? insertedRow?.id ?? null;
+
+  // Atlas CRM ingestion — additive alongside the HubSpot delivery below, which
+  // stays in place until the human-approved cutover. Fails open like HubSpot.
+  if (!employerId) {
+    console.error('employer_leads insert returned no id; skipping Atlas intake event');
+  } else {
+    try {
+      const result = await sendEmployerIntake({
+        employerId: String(employerId),
+        // The row's own created_at, so a replay of this intake reports the
+        // original time rather than the time of the replay. Normalized because
+        // PostgREST emits microseconds and a +00:00 offset.
+        occurredAt: toIso8601Utc(insertedRow?.created_at),
+        attribution: {
+          ...attribution,
+          source: attribution?.source?.trim() || 'direct',
+        },
+        data: {
+          first_name: employer_name.trim().split(/\s+/)[0] ?? '',
+          last_name: employer_name.trim().split(/\s+/).slice(1).join(' '),
+          email: email.trim(),
+          phone: (body.phone ?? '').trim(),
+          lifecycle_stage: 'new',
+        },
+      });
+      if (!result.delivered) {
+        console.error('Atlas intake event not delivered:', result.reason);
+      }
+    } catch (err) {
+      console.error('Atlas intake event threw:', err);
+    }
   }
 
   // Best-effort delivery to HubSpot webhook. Fail open so the user still gets a successful submission.

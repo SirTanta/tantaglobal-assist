@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { ga4Event } from "@/lib/analytics";
+import { captureAttribution } from "@/lib/attribution";
 
 interface FormState {
   status: "idle" | "submitting" | "success" | "error";
@@ -69,7 +70,7 @@ export default function HireForm() {
       const res = await fetch("/api/hire", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, attribution: captureAttribution() }),
       });
 
       const json = await res.json().catch(() => ({}));
