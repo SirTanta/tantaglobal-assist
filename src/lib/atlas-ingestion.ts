@@ -99,6 +99,23 @@ function compactAttribution(attribution: AtlasAttribution): AtlasAttribution {
 }
 
 /**
+ * Normalizes a timestamp to the Z/millisecond ISO-8601 form.
+ *
+ * PostgREST serializes a raw timestamptz as `2026-08-01T12:00:00.123456+00:00`
+ * — microsecond precision and a numeric offset. That is valid ISO-8601, but a
+ * strict receiver-side validator can reject it, and a 422 is not retried, so
+ * the event would be lost silently. Falls back to now when the value is absent
+ * or unparseable rather than throwing on `new Date(undefined)`.
+ */
+export function toIso8601Utc(value: unknown): string {
+  if (typeof value === "string" || typeof value === "number" || value instanceof Date) {
+    const parsed = new Date(value);
+    if (!Number.isNaN(parsed.getTime())) return parsed.toISOString();
+  }
+  return new Date().toISOString();
+}
+
+/**
  * Derives a stable event_id from an event's logical identity.
  *
  * A random id per call is only idempotent for retries inside a single

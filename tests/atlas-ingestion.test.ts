@@ -6,6 +6,7 @@ import {
   buildEvent,
   signPayload,
   deterministicEventId,
+  toIso8601Utc,
   sendEmployerIntake,
   sendPlacementOfferCreated,
   sendPlacementRevenueRecorded,
@@ -131,6 +132,20 @@ test("lead_external_id is the employer id, never the email", () => {
   });
   assert.equal(event.lead_external_id, "emp_10023");
   assert.notEqual(event.lead_external_id, INTAKE.data.email);
+});
+
+test("toIso8601Utc normalizes PostgREST timestamps to the Z/millisecond form", () => {
+  // What PostgREST actually emits for a timestamptz.
+  assert.equal(toIso8601Utc("2026-08-01T12:00:00.123456+00:00"), "2026-08-01T12:00:00.123Z");
+  assert.equal(toIso8601Utc("2026-08-01T12:00:00+00:00"), "2026-08-01T12:00:00.000Z");
+  assert.equal(toIso8601Utc("2026-08-01T07:00:00-05:00"), "2026-08-01T12:00:00.000Z");
+  assert.equal(toIso8601Utc("2026-08-01T12:00:00.000Z"), "2026-08-01T12:00:00.000Z");
+
+  // Absent or unparseable must fall back to now, never throw.
+  const iso = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
+  assert.match(toIso8601Utc(undefined), iso);
+  assert.match(toIso8601Utc(null), iso);
+  assert.match(toIso8601Utc("not-a-date"), iso);
 });
 
 test("deterministicEventId is stable, UUID-shaped, and input-sensitive", () => {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendEmployerIntake, type AtlasAttribution } from '@/lib/atlas-ingestion';
+import { sendEmployerIntake, toIso8601Utc, type AtlasAttribution } from '@/lib/atlas-ingestion';
 
 // Simple in-memory rate limiter — keyed by IP, max 3 submissions per 15 minutes
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -91,8 +91,9 @@ export async function POST(req: NextRequest) {
       const result = await sendEmployerIntake({
         employerId: String(employerId),
         // The row's own created_at, so a replay of this intake reports the
-        // original time rather than the time of the replay.
-        occurredAt: insertedRow?.created_at ?? new Date().toISOString(),
+        // original time rather than the time of the replay. Normalized because
+        // PostgREST emits microseconds and a +00:00 offset.
+        occurredAt: toIso8601Utc(insertedRow?.created_at),
         attribution: {
           ...attribution,
           source: attribution?.source?.trim() || 'direct',
