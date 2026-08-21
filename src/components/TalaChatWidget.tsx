@@ -1,9 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useChat, type UIMessage } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { detectIntent } from "@/data/tala-knowledge";
+import {
+  PUBLIC_ASSISTANT_FAILURE_COPY,
+  canRetryPublicAssistant,
+  shouldClosePublicAssistant,
+} from "@/lib/public-assistant-ui";
 
 const STORAGE_KEY = "tala-chat-session";
 const CAPTURE_STORAGE_KEY = "tala-capture-state";
@@ -65,9 +70,10 @@ export default function TalaChatWidget() {
   const [captureEmail, setCaptureEmail] = useState("");
   const [captureIntent, setCaptureIntent] = useState("");
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const launcherRef = useRef<HTMLButtonElement>(null);
 
   const transport = useMemo(() => new DefaultChatTransport({ api: "/api/tala" }), []);
-  const { messages, setMessages, sendMessage, status, error } = useChat({
+  const { messages, setMessages, sendMessage, status, error, regenerate, clearError } = useChat({
     transport,
     messages: [WELCOME_MESSAGE],
   });
@@ -118,6 +124,29 @@ export default function TalaChatWidget() {
     if (!el) return;
     el.scrollTop = el.scrollHeight;
   }, [messages, open, capture]);
+
+  const closeChat = useCallback(() => {
+    clearError();
+    setOpen(false);
+    window.requestAnimationFrame(() => launcherRef.current?.focus());
+  }, [clearError]);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!shouldClosePublicAssistant(open, event.key)) return;
+      event.preventDefault();
+      closeChat();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [closeChat, open]);
+
+  const retryReply = () => {
+    if (!canRetryPublicAssistant(status)) return;
+    clearError();
+    void regenerate();
+  };
 
   const { exchangeCount, audience, highIntent } = useMemo(() => {
     const userMessages = messages.filter((m) => m.role === "user");
@@ -175,18 +204,24 @@ export default function TalaChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-[60] font-sans">
+    <div className="pointer-events-none fixed bottom-4 right-4 z-[60] font-sans">
       {open ? (
-        <div className="mb-3 w-[min(94vw,25rem)] overflow-hidden rounded-2xl border border-[#0d5c63]/20 bg-white text-[#0d2326] shadow-2xl shadow-black/15">
+        <section
+          id="tala-chat-panel"
+          role="dialog"
+          aria-modal="false"
+          aria-labelledby="tala-chat-title"
+          className="pointer-events-auto mb-3 w-[min(94vw,25rem)] overflow-hidden rounded-2xl border border-[#0d5c63]/20 bg-white text-[#0d2326] shadow-2xl shadow-black/15"
+        >
           <div className="flex items-start justify-between gap-4 border-b border-[#0d5c63]/15 bg-[#0d5c63] px-4 py-4 text-white">
             <div>
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-white/75">Tala</p>
-              <h2 className="text-base font-semibold tracking-tight">Placement guide</h2>
+              <h2 id="tala-chat-title" className="text-base font-semibold tracking-tight">Placement guide</h2>
               <p className="text-xs text-white/70">Hiring · Applying · Honest reads</p>
             </div>
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={closeChat}
               className="rounded-full border border-white/20 px-2.5 py-1 text-sm text-white/70 transition-colors hover:border-white/60 hover:text-white"
               aria-label="Close chat"
             >
@@ -213,9 +248,29 @@ export default function TalaChatWidget() {
             ))}
 
             {error ? (
-              <p className="rounded-xl border border-red-700/30 bg-red-700/5 px-4 py-3 text-xs text-red-900">
-                Something glitched. Try again, or use the contact form at /contact.
-              </p>
+              <div role="alert" aria-live="assertive" className="rounded-xl border border-red-700/30 bg-red-700/5 px-4 py-3 text-xs text-red-900">
+                <p>{PUBLIC_ASSISTANT_FAILURE_COPY}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={retryReply}
+                    disabled={!canRetryPublicAssistant(status)}
+                    className="rounded-full border border-red-900/30 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Retry reply
+                  </button>
+                  <button
+                    type="button"
+                    onClick={closeChat}
+                    className="rounded-full border border-red-900/30 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]"
+                  >
+                    Close guide
+                  </button>
+                  <a href={CONTACT_URL} className="rounded-full border border-red-900/30 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]">
+                    Contact team
+                  </a>
+                </div>
+              </div>
             ) : null}
 
             {capture.status === "needed" || capture.status === "submitting" || capture.status === "error" ? (
@@ -313,6 +368,7 @@ export default function TalaChatWidget() {
               event.preventDefault();
               const prompt = input.trim();
               if (!prompt || status !== "ready") return;
+              clearError();
               setInput("");
               await sendMessage({ text: prompt });
             }}
@@ -335,14 +391,20 @@ export default function TalaChatWidget() {
               </button>
             </div>
           </form>
-        </div>
+        </section>
       ) : null}
 
       <button
         type="button"
-        onClick={() => setOpen((value) => !value)}
-        className="ml-auto flex items-center gap-3 rounded-full bg-[#0d5c63] px-4 py-3 text-white shadow-lg shadow-black/30 ring-1 ring-[#0d5c63]/30 transition-transform hover:scale-[1.02]"
+        ref={launcherRef}
+        onClick={() => {
+          clearError();
+          setOpen((value) => !value);
+        }}
+        className="pointer-events-auto ml-auto flex items-center gap-3 rounded-full bg-[#0d5c63] px-4 py-3 text-white shadow-lg shadow-black/30 ring-1 ring-[#0d5c63]/30 transition-transform hover:scale-[1.02]"
         aria-label={open ? "Close Tala chat" : "Open Tala chat"}
+        aria-expanded={open}
+        aria-controls="tala-chat-panel"
       >
         <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#0d5c63] font-bold">
           T

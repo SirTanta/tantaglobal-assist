@@ -6,6 +6,7 @@ import {
   streamText,
 } from "ai";
 import { buildSystemPrompt, detectIntent } from "@/data/tala-knowledge";
+import { hasPublicAssistantGateway } from "@/lib/public-assistant-ui";
 
 export const runtime = "nodejs";
 
@@ -16,16 +17,6 @@ export const runtime = "nodejs";
 const TALA_MODEL = process.env.TALA_MODEL || "openrouter/deepseek/deepseek-chat-v3:free";
 
 const SYSTEM_PROMPT = buildSystemPrompt();
-
-function hasGatewayAccess(): boolean {
-  // Only treat the route as gateway-enabled when an actual credential exists.
-  // VERCEL=1 alone is insufficient — the AI Gateway also requires a payment
-  // method on file. Without credentials we fall back to the deterministic
-  // persona reply below.
-  return Boolean(
-    process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN
-  );
-}
 
 function getUserPrompt(messages: unknown[]): string {
   const userMessage = [...messages].reverse().find((message) => {
@@ -220,7 +211,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => null);
   const messages = Array.isArray(body?.messages) ? body.messages : [];
 
-  if (!hasGatewayAccess()) {
+  if (!hasPublicAssistantGateway({ AI_GATEWAY_API_KEY: process.env.AI_GATEWAY_API_KEY })) {
     const reply = generateFallbackReply(getUserPrompt(messages));
     const stream = createUIMessageStream({
       originalMessages: messages,
