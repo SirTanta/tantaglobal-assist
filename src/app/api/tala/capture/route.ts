@@ -33,10 +33,14 @@ export async function POST(request: NextRequest) {
   const audience = body.audience === "employer" || body.audience === "candidate" ? body.audience : null;
   const transcript = Array.isArray(body.transcript) ? body.transcript.slice(-20) : [];
 
+  // -- Persist to bot_leads (atlas-platform Supabase) ----------------------
   let leadId: string | null = null;
+  let persistError: string | null = null;
   const thosUrl = process.env.THOS_SUPABASE_URL;
   const thosKey = process.env.THOS_SUPABASE_SERVICE_KEY;
-  if (thosUrl && thosKey) {
+  if (!thosUrl || !thosKey) {
+    persistError = "THOS_SUPABASE_URL / THOS_SUPABASE_SERVICE_KEY are not set";
+  } else {
     try {
       const { createClient } = await import("@supabase/supabase-js");
       const supabase = createClient(thosUrl, thosKey);
@@ -52,12 +56,31 @@ export async function POST(request: NextRequest) {
         })
         .select("id")
         .single();
-      if (error) console.error("[Tala/Capture] Supabase error:", error.message);
-      else leadId = data?.id ?? null;
+      if (error) persistError = error.message;
+      else if (!data?.id) persistError = "insert returned no id";
+      else leadId = data.id;
     } catch (err) {
-      console.error("[Tala/Capture] Supabase exception:", err);
+      persistError = err instanceof Error ? err.message : String(err);
     }
   }
+
+  if (persistError) {
+    console.error(
+      `[Tala/Capture] LEAD_PERSIST_FAILURE site=${sourceSite} email=${email} reason=${persistError}`,
+    );
+    const opsWebhook = process.env.DISCORD_WEBHOOK_OPS;
+    if (opsWebhook) {
+      await fetch(opsWebhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: `**Tala lead NOT saved** - ${email}\nSite: ${sourceSite}\nReason: ${persistError}\nIntent: ${intent.slice(0, 300)}`,
+        }),
+      }).catch((err) => console.error("[Tala/Capture] Discord alert failed:", err));
+    }
+  }
+
+  let notified = false;
 
   if (process.env.RESEND_API_KEY) {
     try {
@@ -93,7 +116,7 @@ export async function POST(request: NextRequest) {
     </table>
   </td></tr>
   <tr><td style="padding:12px 28px;background:#f4f6f6;font-size:11px;color:#0d5c63">
-    ${leadId ? `Lead id: ${esc(leadId)}` : "Lead not persisted to Supabase (env missing)"}
+    ${leadId ? `Lead id: ${esc(leadId)}` : `NOT SAVED TO DATABASE - ${esc(persistError || "unknown error")}. This email is the only record of this lead.`}
   </td></tr>
 </table>
 </body></html>`;
@@ -118,7 +141,7 @@ export async function POST(request: NextRequest) {
         resend.emails.send({
           from: fromAddress,
           to: notifyTo,
-          subject: `[Tala] New lead · ${audience || "general"} · ${email}`,
+          subject: `${persistError ? "[UNSAVED] " : ""}[Tala] New lead · ${audience || "general"} · ${email}`,
           html: notifyHtml,
           replyTo: email,
         }),
@@ -129,10 +152,17 @@ export async function POST(request: NextRequest) {
           html: confirmHtml,
         }),
       ]);
+      notified = true;
     } catch (err) {
       console.error("[Tala/Capture] Resend exception:", err);
     }
   }
 
-  return NextResponse.json({ ok: true, leadId });
+  if (persistError && !notified) {
+    console.error(
+      `[Tala/Capture] LEAD_LOST - no database row and no notification email. payload=${JSON.stringify({ email, intent, sourceBot, sourceSite, qualified_for: audience, transcript })}`,
+    );
+  }
+
+  return NextResponse.json({ ok: true, leadId, persisted: leadId !== null });
 }
