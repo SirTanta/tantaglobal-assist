@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendEmployerIntake, toIso8601Utc, type AtlasAttribution } from '@/lib/atlas-ingestion';
+import {
+  sendAtlasIntake,
+  buildEmployerIntakeIdempotencyKey,
+  ATLAS_INTAKE_TENANT,
+  ATLAS_INTAKE_SOURCE_ID,
+} from '@/lib/atlas-intake';
 
 // Simple in-memory rate limiter — keyed by IP, max 3 submissions per 15 minutes
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -35,11 +40,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
   }
 
-  // Attribution rides alongside the lead fields but is not a column on
-  // employer_leads, so it is split out before the insert.
-  const { attribution: rawAttribution, ...leadFields } = rawBody;
-  const body = leadFields as Record<string, string>;
-  const attribution = (rawAttribution ?? null) as AtlasAttribution | null;
+  const body = rawBody as Record<string, string>;
 
   // Validate required fields
   const { employer_name, company_name, email } = body;
@@ -58,6 +59,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Persist the lead first so an upstream delivery outage does not drop the submission.
+  // Supabase `employer_leads` is a fire-and-forget mirror; Atlas is the CRM of record.
   const leadInsert = await fetch(`${supabaseUrl}/rest/v1/employer_leads`, {
     method: 'POST',
     headers: {
@@ -82,64 +84,52 @@ export async function POST(req: NextRequest) {
   const insertedRow = Array.isArray(insertedRows) ? insertedRows[0] : insertedRows;
   const employerId = insertedRow?.employer_id ?? insertedRow?.id ?? null;
 
-  // Atlas CRM ingestion — additive alongside the HubSpot delivery below, which
-  // stays in place until the human-approved cutover. Fails open like HubSpot.
+  // Atlas intake via the Fleet Ticketing Bridge (the canonical destination
+  // per docs/business/bizdev.md f6840f8 § "Intake destination (canonical)").
+  // Runs only after employer_leads succeeded, so an upstream Atlas outage
+  // never drops the submission. Failure is surfaced but does not fail the
+  // user-visible response — the lead is already persisted.
   if (!employerId) {
-    console.error('employer_leads insert returned no id; skipping Atlas intake event');
+    console.error('employer_leads insert returned no id; skipping Atlas intake');
   } else {
+    const idempotencyKey = buildEmployerIntakeIdempotencyKey(String(employerId));
+    const intakePayload = {
+      company_scope: 'assist' as const,
+      department: 'Sales / Revenue',
+      exact_target: 'VA Placement employer intake',
+      concise_subject: `New employer lead from tantaglobal.com/hire — ${body.company_name}`,
+      operator_description:
+        'Employer submitted the VA Placement intake form at tantaglobal.com/hire.',
+      intended_outcome:
+        'Holo triages the new employer lead and routes to match + outreach.',
+      requester: 'holo',
+      source_authority: 'SirTanta/thos-wiki@f6840f8 (docs/business/bizdev.md)',
+      request_type: 'intake',
+      allowed_action_boundary:
+        'Create one unclaimed intake row only. No claim, transition, or release.',
+      prohibited_action_boundary:
+        'No lifecycle mutation, no public action, no provider change.',
+      execution_acceptance:
+        'intake row visible to Holo via the dept-lead read; no second row on retry.',
+      approval_requirement:
+        'Self-approved within dept-lead filing scope per AGENTS.md.',
+      idempotency_key: idempotencyKey,
+      source_record_id: String(employerId),
+    };
+
     try {
-      const result = await sendEmployerIntake({
-        employerId: String(employerId),
-        // The row's own created_at, so a replay of this intake reports the
-        // original time rather than the time of the replay. Normalized because
-        // PostgREST emits microseconds and a +00:00 offset.
-        occurredAt: toIso8601Utc(insertedRow?.created_at),
-        attribution: {
-          ...attribution,
-          source: attribution?.source?.trim() || 'direct',
-        },
-        data: {
-          first_name: employer_name.trim().split(/\s+/)[0] ?? '',
-          last_name: employer_name.trim().split(/\s+/).slice(1).join(' '),
-          email: email.trim(),
-          phone: (body.phone ?? '').trim(),
-          lifecycle_stage: 'new',
-        },
-      });
+      const result = await sendAtlasIntake(intakePayload);
       if (!result.delivered) {
-        console.error('Atlas intake event not delivered:', result.reason);
+        console.error(
+          `Atlas FTB intake not delivered for ${idempotencyKey}:`,
+          result.reason,
+          'status' in result ? result.status : ''
+        );
+      } else if (result.duplicate) {
+        console.log(`Atlas FTB intake deduped for ${idempotencyKey}`);
       }
     } catch (err) {
-      console.error('Atlas intake event threw:', err);
-    }
-  }
-
-  // Best-effort delivery to HubSpot webhook. Fail open so the user still gets a successful submission.
-  const webhookUrl = process.env.HUBSPOT_EMPLOYER_WEBHOOK_URL;
-  const webhookSecret = process.env.HUBSPOT_WEBHOOK_SECRET;
-  if (!webhookUrl) {
-    console.warn('HUBSPOT_EMPLOYER_WEBHOOK_URL not set; skipping HubSpot delivery');
-  } else {
-    const webhookAbort = new AbortController();
-    const webhookTimeout = setTimeout(() => webhookAbort.abort(), 5000);
-    try {
-      const upstream = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(webhookSecret ? { 'X-Webhook-Secret': webhookSecret } : {}),
-        },
-        body: JSON.stringify(body),
-        signal: webhookAbort.signal,
-      });
-
-      if (!upstream.ok) {
-        console.error('Webhook returned non-OK:', upstream.status, upstream.statusText);
-      }
-    } catch (err) {
-      console.error('Webhook POST failed:', err);
-    } finally {
-      clearTimeout(webhookTimeout);
+      console.error(`Atlas FTB intake threw for ${idempotencyKey}:`, err);
     }
   }
 
