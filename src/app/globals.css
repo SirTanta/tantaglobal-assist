@@ -6,17 +6,6 @@
   --font-display: "Bricolage Grotesque", "Inter Tight", system-ui, sans-serif;
   --font-mono:    "JetBrains Mono", ui-monospace, monospace;
 
-  --color-brand-navy: #25221D;
-  --color-brand-teal: #E85D3F;
-  --color-brand-teal-dark: #C9472E;
-  --color-brand-teal-light: #FDE5DC;
-  --color-brand-gold: #D8EF5B;
-  --color-brand-sky: #E9F0FF;
-  --color-brand-offwhite: #F5F0E8;
-  --color-brand-slate: #3D3932;
-  --color-brand-muted: #6B665D;
-  --color-brand-border: #D8D0C4;
-
   /* Instruments of Passage — family system */
   --color-instruments-gold:         #E7B029;
   --color-instruments-gold-bright:  #F5C842;
