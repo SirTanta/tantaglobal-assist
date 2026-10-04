@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   description:
     'Reach the employer, candidate, or general contact routes at TantaGlobal Assist.',
   path: '/contact',
-  image: '/og-contact.svg',
+  image: '/og-home.png',
 });
 
 const breadcrumbs = breadcrumbJsonLd([

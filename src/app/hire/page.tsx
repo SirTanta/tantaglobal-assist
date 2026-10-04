@@ -7,7 +7,7 @@ export const metadata = pageMetadata({
   description:
     'Tell us about the role you need covered and get matched with a certified virtual assistant shortlist.',
   path: '/hire',
-  image: '/og-hire.svg',
+  image: '/og-home.png',
 });
 
 const breadcrumbs = breadcrumbJsonLd([

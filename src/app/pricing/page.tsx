@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   description:
     'Understand how TantaGlobal Assist scopes pricing for employer placement and candidate support.',
   path: '/pricing',
-  image: '/og-pricing.svg',
+  image: '/og-home.png',
 });
 
 const breadcrumbs = breadcrumbJsonLd([

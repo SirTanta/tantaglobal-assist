@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description: site.description,
     images: [
       {
-        url: absoluteUrl("/og-home.svg"),
+        url: absoluteUrl("/og-home.png"),
         width: 1200,
         height: 630,
         alt: "TantaGlobal Assist",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TantaGlobal Assist — Professional VA Placement",
     description: site.description,
-    images: [absoluteUrl("/og-home.svg")],
+    images: [absoluteUrl("/og-home.png")],
   },
   robots: { index: true, follow: true },
 };

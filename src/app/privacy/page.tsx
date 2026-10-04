@@ -5,7 +5,7 @@ export const metadata = pageMetadata({
   description:
     'Read the privacy policy for TantaGlobal Assist and how submitted form data is handled.',
   path: '/privacy',
-  image: '/og-privacy.svg',
+  image: '/og-home.png',
 });
 
 const breadcrumbs = breadcrumbJsonLd([
