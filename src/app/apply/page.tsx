@@ -9,7 +9,7 @@ export const metadata = pageMetadata({
   description:
     'Apply to TantaGlobal Assist and move into a certification-led virtual assistant placement pipeline.',
   path: '/apply',
-  image: '/og-apply.svg',
+  image: '/og-home.png',
 });
 
 const breadcrumbs = breadcrumbJsonLd([

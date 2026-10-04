@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   title: "Site map",
   description: "Find the employer, candidate, support, and legal paths at TantaGlobal Assist.",
   path: "/sitemap",
-  image: "/og-home.svg",
+  image: "/og-home.png",
 });
 
 const breadcrumbs = breadcrumbJsonLd([

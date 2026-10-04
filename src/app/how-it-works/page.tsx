@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   description:
     'See how applications move from intake to academy certification to employer placement at TantaGlobal Assist.',
   path: '/how-it-works',
-  image: '/og-how-it-works.svg',
+  image: '/og-home.png',
 });
 
 const breadcrumbs = breadcrumbJsonLd([

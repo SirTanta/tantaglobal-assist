@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   description:
     'Learn how TantaGlobal Assist connects training, screening, and placement for businesses that need dependable virtual assistants.',
   path: '/about',
-  image: '/og-about.svg',
+  image: '/og-home.png',
 });
 
 const breadcrumbs = breadcrumbJsonLd([
