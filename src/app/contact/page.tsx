@@ -35,7 +35,7 @@ export default function ContactPage() {
           {[
             {
               title: 'Employers',
-              body: 'Questions about role briefs, shortlist timing, or the placement workflow.',
+              body: 'Questions about role briefs, the employer waitlist, or the placement workflow.',
               email: site.emailEmployer,
             },
             {

@@ -4,7 +4,7 @@ import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 export const metadata = pageMetadata({
   title: 'How It Works',
   description:
-    'See how TantaGlobal Assist moves candidates from application to TGA Academy certification, and employers from role brief to a shortlist and placement handoff.',
+    'See how TantaGlobal Assist moves candidates from application to TGA Academy certification, and how employers join the waitlist until matching opens.',
   path: '/how-it-works',
   image: '/og-home.png',
 });
@@ -29,9 +29,9 @@ const steps = [
   },
   {
     step: '03',
-    title: 'Review the shortlist and place',
+    title: 'Matching opens when certified VAs are available',
     body:
-      'We help keep the shortlist readable, the communication clean, and the handoff organized for both sides.',
+      'Employers on the waitlist hear from us when matching is available. We keep communication clean and the handoff organized for both sides.',
   },
 ];
 
@@ -46,7 +46,7 @@ export default function HowItWorksPage() {
           <h1>Three steps. One clear path from intake to placement.</h1>
           <p className="max-w-3xl text-lg leading-8 text-slate-600">
             The workflow is designed to avoid noise. We start with a clean application or role brief,
-            move candidates through certification, then hand employers a shortlist that already cleared the basics.
+            move candidates through certification, then contact waitlisted employers when certified VAs are available.
           </p>
         </div>
       </section>
@@ -85,10 +85,10 @@ export default function HowItWorksPage() {
             <p className="eyebrow">For employers</p>
             <h2 className="mt-3">Submit a role brief that people can actually respond to.</h2>
             <p className="mt-4 leading-8 text-slate-600">
-              Hours, tools, core responsibilities, and timeline matter. The clearer the brief, the better the shortlist.
+              Hours, tools, core responsibilities, and timeline matter. The clearer the brief, the better we can understand the work when matching opens.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/hire" data-ga4-action="click_cta__global_assist__how-it-works" data-ga4-label="Request VA shortlist" data-ga4-destination="/hire" data-ga4-zone="Z5" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-primary">Request VA shortlist</Link>
+              <Link href="/hire" data-ga4-action="click_cta__global_assist__how-it-works" data-ga4-label="Join the employer waitlist" data-ga4-destination="/hire" data-ga4-zone="Z5" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-primary">Join the employer waitlist</Link>
               <Link href="/pricing" data-ga4-action="click_cta__global_assist__how-it-works" data-ga4-label="Review pricing model" data-ga4-destination="/pricing" data-ga4-zone="Z5" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-ghost">Review pricing model</Link>
             </div>
           </div>

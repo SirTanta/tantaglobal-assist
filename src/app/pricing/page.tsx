@@ -64,7 +64,7 @@ export default function PricingPage() {
               <li>• Role complexity and expected hours</li>
               <li>• Whether the work is one-off or ongoing</li>
               <li>• Tooling and communication requirements</li>
-              <li>• Speed of turnaround for shortlist review</li>
+              <li>• Fit with the certified VAs available when matching opens</li>
             </ul>
           </div>
           <div className="surface p-7">
@@ -75,7 +75,7 @@ export default function PricingPage() {
               scoped conversation instead of guessing.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/hire" className="btn-primary">Request VA shortlist</Link>
+              <Link href="/hire" className="btn-primary">Join the employer waitlist</Link>
               <a href={`mailto:${site.emailEmployer}`} className="btn-secondary">Email employer team</a>
             </div>
           </div>
