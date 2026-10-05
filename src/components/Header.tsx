@@ -108,7 +108,7 @@ export default function Header() {
               data-ga4-page="NAVIGATION"
               className="instr-btn-primary !py-1.5 !px-4 !text-xs"
             >
-              Request VA shortlist
+              Join the employer waitlist
             </Link>
           </div>
 
@@ -190,7 +190,7 @@ function MobileMenu({ pathname }: { pathname: string }) {
                 className="instr-btn-primary !py-2 !px-4 !text-xs text-center"
                 onClick={() => setOpen(false)}
               >
-                Request VA shortlist
+                Join the employer waitlist
               </Link>
             </div>
           </nav>

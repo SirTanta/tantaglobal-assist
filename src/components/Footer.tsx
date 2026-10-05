@@ -143,7 +143,7 @@ export default function Footer() {
                 VA Employer Field Guide
               </p>
               <p className="font-sans text-[11px] text-instruments-vellum/40 mb-2">
-                Staffing checklist and real VA placement pricing.
+                Staffing checklist and notes on how VA placement is scoped.
               </p>
               <a href="https://tantaholdings.com" className="font-sans text-[11px] text-instruments-gold hover:text-instruments-gold-bright transition-colors">
                 Tanta Holdings

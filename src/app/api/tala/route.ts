@@ -88,7 +88,7 @@ function generateFallbackReply(prompt: string): string {
     return "Tala here. I won't guarantee a great VA or a specific outcome — placements depend on the brief, the candidate, and the work itself. The honest path is to submit a brief at /hire so we can scope a real conversation, not promise something I can't back up.";
   }
   if (/(specific candidate|send me (maria|juan|ana|jose)|the va who worked|that specific va|by name|name a va)/i.test(t)) {
-    return "Tala here. I won't name a specific candidate or confirm prior placements — that's the kind of detail the team handles after a scoped brief at /hire. The shortlist is built against your specific brief, not browsed from a directory.";
+    return "Tala here. I won't name a specific candidate or confirm prior placements. We are still building our pool of certified virtual assistants, so there are no candidates to share today. Employers can join the waitlist at /hire.";
   }
   if (/(poach|hire (your|the) va directly|skip you|cut you out|pay (them|the va) directly)/i.test(t)) {
     return "Tala here. The engagement terms are scoped after the role brief — that's where direct-hire questions get answered honestly. The /pricing page covers the engagement model; use /contact or /hire to start that conversation rather than working around it.";
@@ -145,7 +145,7 @@ function generateFallbackReply(prompt: string): string {
   // ─── Audience-specific routing ─────────────────────────────────────
   if (intent.audience === "employer") {
     if (/(shortlist|how fast|how (long|quick)|turnaround|when can|response time)/i.test(t)) {
-      return "Tala here. Shortlist turnaround depends on the brief — clearer briefs (specific hours, tools, responsibilities, timeline) get faster responses. I won't promise a fixed window because that wouldn't be honest. Submit at /hire and the team will respond with a scoped timeline.";
+      return "Tala here. We are still building our pool of certified virtual assistants, so there is no shortlist today and I can't give a timeline. Submit a role brief at /hire to join the employer waitlist and the team will contact you when matching is available.";
     }
     if (/(skip|without.*academy|just hire|directly hire|bypass|no academy)/i.test(t)) {
       return "Tala here. Candidates we route have completed academy certification — that's the readiness baseline we built the pipeline around. If your timeline is tighter than the pipeline allows, we'll be honest about whether we can help, but we don't skip the academy step. Submit at /hire and we can talk scope.";
@@ -165,7 +165,7 @@ function generateFallbackReply(prompt: string): string {
     if (/(non.?us|uk|canada|australia|outside (the )?us|international employer)/i.test(t)) {
       return "Tala here. Most briefs we work with are US-based, but we don't refuse on geography alone. Submit at /hire with the time zone, tooling, and timeline you need — we'll be honest about whether the candidate pipeline fits before committing time.";
     }
-    return "Tala here. Employer next step is /hire — submit the role brief (hours, tools, core responsibilities, timeline) and we respond with a shortlist scoped to your actual work. The pipeline runs: brief → academy-certified candidates → shortlist. Pricing is at /pricing.";
+    return "Tala here. Employer next step is /hire. Submit the role brief (hours, tools, core responsibilities, timeline) to join our employer waitlist. We are still building our pool of certified virtual assistants and will contact you when matching is available. Pricing is not published; /pricing explains how it is scoped.";
   }
 
   if (intent.audience === "candidate") {
@@ -191,12 +191,12 @@ function generateFallbackReply(prompt: string): string {
 
   // ─── Pipeline / how-it-works (no audience yet) ─────────────────────
   if (/(how.*work|process|pipeline|steps|how does.*assist|how do you|how does.*tga|how is.*structured)/i.test(t)) {
-    return "Tala here. Three steps, mirrored on both sides: (01) apply or submit the role brief, (02) qualified candidates complete TGA Academy certification, (03) we route the shortlist and place. Employer side starts at /hire, candidate side starts at /apply. Full breakdown is at /how-it-works.";
+    return "Tala here. Three steps, mirrored on both sides: (01) apply or submit the role brief, (02) qualified candidates complete TGA Academy certification, (03) matching opens once certified VAs are available. Employers join the waitlist at /hire, candidates start at /apply. Full breakdown is at /how-it-works.";
   }
 
   // ─── Generic 'who runs' / matching question (no audience) ──────────
   if (/(matching|matcher|who.*match|reviewer|review.*brief|how.*review)/i.test(t)) {
-    return "Tala here. The placement team reviews briefs against the candidate pipeline — not an algorithm, not a directory search. The shortlist is built to fit the specific brief, which is why a clearer brief gets a faster, sharper response. Submit at /hire to start that.";
+    return "Tala here. Matching is not open yet because we are still building our pool of certified virtual assistants. Employer briefs submitted at /hire join our waitlist, and the team will contact you when matching is available. No timeline is promised.";
   }
 
   // ─── Data / privacy meta ───────────────────────────────────────────
@@ -213,7 +213,7 @@ function generateFallbackReply(prompt: string): string {
     return "Tala here. For a scoped conversation: employers submit at /hire, candidates apply at /apply. Pricing model is at /pricing, general contact at /contact. Which side are you on?";
   }
 
-  return "Tala here, the placement guide for TantaGlobal Assist. TGA Assist places trained virtual assistants — candidates apply, complete TGA Academy certification, then enter the placement queue. Employers submit a role brief and we route a shortlist. Which side are you on — hiring a VA, or applying as one?";
+  return "Tala here, the placement guide for TantaGlobal Assist. Candidates apply, complete TGA Academy certification, then enter the placement queue. Employers can submit a role brief to join our waitlist; we will contact them when certified VAs are available. Which side are you on: hiring a VA, or applying as one?";
 }
 
 export async function POST(request: NextRequest) {

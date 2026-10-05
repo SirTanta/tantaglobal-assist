@@ -4,7 +4,7 @@
  * Single source of truth for what Tala is allowed to say. The site is a
  * placement service for trained virtual assistants — candidates apply,
  * complete TGA Academy certification, then enter an employer-ready pipeline.
- * Employers submit a role brief and we route them toward a shortlist.
+ * Employers submit a role brief and join a waitlist until certified VAs are available.
  *
  * Tala NEVER promises a specific candidate, a specific salary, a specific
  * timeline, or a guaranteed placement. When the question is too specific to
@@ -53,9 +53,9 @@ export const PIPELINE = [
   },
   {
     step: "03",
-    title: "Review the shortlist and place",
+    title: "Matching opens when certified VAs are available",
     body:
-      "We keep the shortlist readable, the communication clean, and the handoff organized for both sides.",
+      "Employers on the waitlist hear from us when matching is available. We keep communication clean and the handoff organized for both sides.",
   },
 ] as const;
 
@@ -64,7 +64,7 @@ export const PRICING_NOTES = [
   "Employer placement is scoped AFTER the role brief — there is no flat-rate published fee.",
   "Candidate application itself is the entry point to the pipeline; it does not start with a hard sell.",
   "Academy certification (training cost) lives at TGA Academy, separate from placement.",
-  "What affects scope: role complexity, expected hours, one-off vs ongoing, tooling/communication requirements, shortlist turnaround speed.",
+  "What affects scope: role complexity, expected hours, one-off vs ongoing, tooling/communication requirements, fit with the certified VAs available.",
   "Fastest route to an accurate price: submit a role brief at /hire first; we respond with a scoped conversation.",
 ] as const;
 
@@ -73,12 +73,12 @@ export const FAQ_KB = [
   {
     topic: "What is TantaGlobal Assist?",
     answer:
-      "TGA Assist is the placement side of the Tanta workflow. Candidates apply here, complete TGA Academy certification, and move into an employer-ready pipeline. Employers submit a role brief and we route them toward a shortlist. We're the placement layer, not a generic VA directory.",
+      "TGA Assist is the placement side of the Tanta workflow. Candidates apply here, complete TGA Academy certification, and enter the placement queue. Employers submit a role brief and join our waitlist; we contact them when certified VAs are available. We're the placement layer, not a generic VA directory.",
   },
   {
     topic: "What do I get as an employer?",
     answer:
-      "You submit a role brief at /hire (hours, tools, core responsibilities, timeline). We review it, align it with the candidate pipeline, and respond with a shortlist scoped to the work you actually need done. Less time filtering noise, more time deciding between good options.",
+      "You submit a role brief at /hire (hours, tools, core responsibilities, timeline). We are still building our pool of certified virtual assistants, so your brief joins our employer waitlist and we contact you when matching is available. We cannot promise a timeline.",
   },
   {
     topic: "What does the candidate path look like?",
@@ -106,14 +106,14 @@ export const FAQ_KB = [
       "Primary audience is Filipino professionals working from the Philippines, with operations in Cebu, PH and Rio Rancho, NM. Candidates work in their local time zones; employers should expect to align on overlap hours.",
   },
   {
-    topic: "How fast can I get a shortlist?",
+    topic: "When will I be matched with a VA?",
     answer:
-      "Depends on the brief. Clearer briefs (specific hours, tools, responsibilities, timeline) get faster responses. We don't promise a fixed turnaround — the brief tells us what kind of work this is and how to scope the review.",
+      "We are still building our pool of certified virtual assistants, so there is no shortlist today. Submit a brief at /hire to join the employer waitlist; we contact you when matching is available. We don't promise a timeline.",
   },
   {
     topic: "Can I hire directly without the academy step?",
     answer:
-      "Candidates we route have completed academy certification. That's the whole point of the pipeline — readiness over volume. If you need someone faster than the academy step allows, we'll be honest about whether we can help on that timeline.",
+      "The pipeline is built around academy certification: readiness over volume. We are still building our pool of certified virtual assistants, so we cannot match you today. If you need someone sooner, we'll be honest about whether we can help.",
   },
   {
     topic: "What happens if the placement doesn't work out?",
