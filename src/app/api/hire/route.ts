@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { sendAtlasLead, pickAttribution } from '@/lib/atlas-crm';
+import { logDbError } from '@/lib/supabase-admin';
 import {
   sendAtlasIntake,
   buildEmployerIntakeIdempotencyKey,
@@ -25,6 +27,20 @@ function isRateLimited(key: string): boolean {
   return false;
 }
 
+// Columns that exist on employer_leads (THOS Supabase).
+const LEAD_COLUMNS = [
+  'employer_name',
+  'company_name',
+  'email',
+  'phone',
+  'website',
+  'va_role',
+  'hours_per_week',
+  'budget',
+  'start_date',
+  'message',
+] as const;
+
 export async function POST(req: NextRequest) {
   // Rate limit
   const key = getRateLimitKey(req);
@@ -41,6 +57,14 @@ export async function POST(req: NextRequest) {
   }
 
   const body = rawBody as Record<string, string>;
+  // The client also sends an `attribution` object. employer_leads has no such column, and
+  // PostgREST rejects an insert that names an unknown column, so only real columns are stored.
+  const attribution = pickAttribution(rawBody.attribution);
+  const row: Record<string, string> = {};
+  for (const col of LEAD_COLUMNS) {
+    const v = body[col];
+    if (typeof v === 'string' && v.trim()) row[col] = v.trim();
+  }
 
   // Validate required fields
   const { employer_name, company_name, email } = body;
@@ -70,17 +94,55 @@ export async function POST(req: NextRequest) {
       // can be used as the stable employer id sent to Atlas.
       'Prefer': 'return=representation',
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify(row),
   }).catch(err => {
-    console.error('Supabase employer_leads insert failed:', err);
+    console.error('Supabase employer_leads insert threw:', err instanceof Error ? err.message : typeof err);
     return null;
   });
 
-  if (!leadInsert || !leadInsert.ok) {
+  let stored = false;
+  let insertedRows: unknown = null;
+  if (leadInsert && leadInsert.ok) {
+    stored = true;
+    insertedRows = await leadInsert.json().catch(() => null);
+  } else if (leadInsert) {
+    const text = await leadInsert.text().catch(() => '');
+    let parsed: { code?: string; message?: string } = {};
+    try {
+      parsed = JSON.parse(text);
+    } catch {
+      // not JSON
+    }
+    logDbError('hire', 'employer_leads', 'insert', {
+      code: parsed.code ?? String(leadInsert.status),
+      message: parsed.message ?? '',
+    });
+  }
+
+  // CRM mirror (never throws): a second system of record, so a Supabase failure no longer drops
+  // the lead.
+  const crm = await sendAtlasLead({
+    kind: 'employer_hire_brief',
+    email: row.email ?? '',
+    name: row.employer_name,
+    company: row.company_name,
+    phone: row.phone,
+    details: [
+      row.va_role ? `Role: ${row.va_role}` : '',
+      row.hours_per_week ? `Hours per week: ${row.hours_per_week}` : '',
+      row.budget ? `Monthly budget: ${row.budget}` : '',
+      row.start_date ? `Target start: ${row.start_date}` : '',
+      row.website ? `Website: ${row.website}` : '',
+      row.message ? `Brief: ${row.message.slice(0, 600)}` : '',
+    ].filter(Boolean),
+    attribution,
+  });
+
+  if (!stored && !crm.delivered) {
+    console.error(`[hire] LEAD_LOST no database row and no CRM delivery (crm=${crm.reason})`);
     return NextResponse.json({ error: 'Failed to submit. Please try again.' }, { status: 502 });
   }
 
-  const insertedRows = await leadInsert.json().catch(() => null);
   const insertedRow = Array.isArray(insertedRows) ? insertedRows[0] : insertedRows;
   const employerId = insertedRow?.employer_id ?? insertedRow?.id ?? null;
 

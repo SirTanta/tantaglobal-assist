@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { ga4Event } from "@/lib/analytics";
+import { ga4Event, trackLead } from "@/lib/analytics";
 import { captureAttribution } from "@/lib/attribution";
 
 interface FormState {
@@ -84,6 +84,7 @@ export default function HireForm() {
       capturedEmail.current = payload.email;
       setState({ status: "success", errorMessage: "" });
       formRef.current?.reset();
+      trackLead("employer_role_brief", { form_name: "placement_inquiry" });
       // Canonical GA4 form submit event — ga4-event-spec.md §3
       ga4Event("submit_form__global_assist__hire", {
         form_name: "placement_inquiry",
