@@ -1,6 +1,8 @@
 "use client";
 
 import { useId, useState, FormEvent } from "react";
+import { trackLead } from "@/lib/analytics";
+import { captureAttribution } from "@/lib/attribution";
 
 interface Props {
   variant?: "inline" | "card" | "footer";
@@ -34,10 +36,12 @@ export default function BeehiivSubscribeForm({
           email,
           source_site: "tantaglobal.com",
           subscriber_role: "visitor",
+          attribution: captureAttribution(),
         }),
       });
 
       if (res.ok) {
+        trackLead("newsletter_subscribe", { form_name: "footer_newsletter" });
         setStatus("success");
         setMessage("You're in — check your inbox.");
       } else {

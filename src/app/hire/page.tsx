@@ -5,7 +5,7 @@ import HireForm from '@/components/HireForm';
 export const metadata = pageMetadata({
   title: 'Hire a Virtual Assistant',
   description:
-    'Tell us about the role you need covered and get matched with a certified virtual assistant shortlist.',
+    'Tell TantaGlobal Assist about the role, hours, and tools you need covered, and get a focused shortlist of trained, certified virtual assistant candidates.',
   path: '/hire',
   image: '/og-home.png',
 });

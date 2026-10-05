@@ -3,7 +3,7 @@ import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 export const metadata = pageMetadata({
   title: 'Privacy Policy',
   description:
-    'Read the privacy policy for TantaGlobal Assist and how submitted form data is handled.',
+    'Privacy policy for TantaGlobal Assist: what the site collects through its contact, hire, and application forms, and how that information is used and corrected.',
   path: '/privacy',
   image: '/og-home.png',
 });

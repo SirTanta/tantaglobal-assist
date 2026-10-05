@@ -4,7 +4,7 @@ import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 export const metadata = pageMetadata({
   title: 'How It Works',
   description:
-    'See how applications move from intake to academy certification to employer placement at TantaGlobal Assist.',
+    'See how TantaGlobal Assist moves candidates from application to TGA Academy certification, and employers from role brief to a shortlist and placement handoff.',
   path: '/how-it-works',
   image: '/og-home.png',
 });
