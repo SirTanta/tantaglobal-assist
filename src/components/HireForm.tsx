@@ -28,8 +28,6 @@ export default function HireForm() {
     status: "idle",
     errorMessage: "",
   });
-  const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const capturedEmail = useRef("");
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -81,7 +79,6 @@ export default function HireForm() {
         );
       }
 
-      capturedEmail.current = payload.email;
       setState({ status: "success", errorMessage: "" });
       formRef.current?.reset();
       trackLead("employer_role_brief", { form_name: "placement_inquiry" });
@@ -129,56 +126,13 @@ export default function HireForm() {
           </div>
         </div>
         <h3 className="text-xl font-bold mb-2" style={{ color: "#25221D" }}>
-          We received your request.
+          We received your brief.
         </h3>
         <p className="text-sm" style={{ color: "#3D3932" }}>
-          Our team will review your requirements and follow up within 1 business day. Check your
-          inbox at the email you provided.
+          You are on our employer waitlist. We are still building our pool of certified virtual assistants,
+          so we will contact you when matching is available. We cannot promise a timeline, and no
+          confirmation email is sent.
         </p>
-        {/* Beehiiv va-employer newsletter */}
-        <div className="mt-6 p-4 rounded-lg text-left" style={{ backgroundColor: "#FFFDF8", border: "1px solid rgba(232,93,63,0.22)" }}>
-          <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#E85D3F" }}>
-            VA employer insights — free
-          </p>
-          <p className="text-xs mb-3" style={{ color: "#3D3932" }}>
-            Staffing checklist and real placement pricing, sent weekly.
-          </p>
-          {newsletterStatus === "success" ? (
-            <p className="text-xs" style={{ color: "#16a34a" }}>You&apos;re subscribed — check your inbox.</p>
-          ) : (
-            <div className="flex gap-2">
-              <input
-                type="email"
-                className="flex-1 rounded px-3 py-2 text-xs border"
-                style={{ borderColor: "#cbd5e1", backgroundColor: "#fff", color: "#2D3748" }}
-                value={capturedEmail.current}
-                readOnly
-              />
-              <button
-                type="button"
-                disabled={newsletterStatus === "loading"}
-                onClick={async () => {
-                  if (!capturedEmail.current) return;
-                  setNewsletterStatus("loading");
-                  try {
-                    const res = await fetch("/api/beehiiv/subscribe", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({ email: capturedEmail.current, source_site: "tantaglobal.com", subscriber_role: "va-employer" }),
-                    });
-                    setNewsletterStatus(res.ok ? "success" : "error");
-                  } catch {
-                    setNewsletterStatus("error");
-                  }
-                }}
-                className="text-xs font-semibold px-4 py-2 rounded"
-                style={{ backgroundColor: "#25221D", color: "#FFFDF8" }}
-              >
-                {newsletterStatus === "loading" ? "..." : "Subscribe free"}
-              </button>
-            </div>
-          )}
-        </div>
       </div>
     );
   }
@@ -385,11 +339,11 @@ export default function HireForm() {
           className="w-full sm:w-auto px-8 py-3.5 rounded-lg text-sm font-semibold text-white transition-opacity disabled:opacity-60"
           style={{ backgroundColor: "#25221D" }}
         >
-          {isSubmitting ? "Submitting..." : "Submit your requirements"}
+          {isSubmitting ? "Submitting..." : "Join the employer waitlist"}
         </button>
         <p className="text-xs mt-3" style={{ color: "#64748b" }}>
-          Required fields marked <span style={{ color: "#e53e3e" }}>*</span>. We respond within 1
-          business day.
+          Required fields marked <span style={{ color: "#e53e3e" }}>*</span>. We will contact you when
+          matching is available.
         </p>
       </div>
     </form>
