@@ -148,7 +148,7 @@ export default function ApplyForm() {
             Get practical readiness tips and placement updates while you wait.
           </p>
           {newsletterStatus === "success" ? (
-            <p className="text-xs" style={{ color: "#16a34a" }}>You&apos;re subscribed — check your inbox.</p>
+            <p className="text-xs" style={{ color: "#16a34a" }}>You&apos;re subscribed. Check your inbox.</p>
           ) : (
             <div className="flex gap-2">
               <input
@@ -327,7 +327,7 @@ export default function ApplyForm() {
           id="message"
           name="message"
           rows={4}
-          placeholder="Share anything else relevant — your goals, work history highlights, or questions for us..."
+          placeholder="Share anything else relevant: your goals, work history highlights, or questions for us..."
           disabled={isSubmitting}
           className={`${inputClass} ${inputFocusRing} resize-none`}
           style={inputStyle}

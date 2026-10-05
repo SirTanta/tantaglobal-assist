@@ -4,7 +4,7 @@ export const site = {
   name: 'TantaGlobal Assist',
   shortName: 'TGA',
   description:
-    'Professional virtual assistant placement for employers and certification-led training for candidates, from TantaGlobal Assist, a Tanta Holdings company.',
+    'An employer waitlist for certified virtual assistants and certification-led training for candidates, from TantaGlobal Assist, a Tanta Holdings company.',
   url: 'https://tantaglobal.com',
   academyUrl: 'https://academy.tantaglobal.com',
   holdingsUrl: 'https://tantaholdings.com',

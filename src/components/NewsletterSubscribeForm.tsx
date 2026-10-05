@@ -50,7 +50,7 @@ export default function NewsletterSubscribeForm({ variant = "footer" }: Props) {
   if (status === "success") {
     return (
       <p className="font-sans text-sm text-instruments-vellum/70">
-        You&apos;re on the list — thanks.
+        You&apos;re on the list. Thanks.
       </p>
     );
   }

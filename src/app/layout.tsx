@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "TantaGlobal Assist — Professional VA Placement",
+    default: "TantaGlobal Assist: Certified VA Pathway and Employer Waitlist",
     template: "%s | TantaGlobal Assist",
   },
   description: site.description,
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: site.url,
     siteName: site.name,
-    title: "TantaGlobal Assist — Professional VA Placement",
+    title: "TantaGlobal Assist: Certified VA Pathway and Employer Waitlist",
     description: site.description,
     images: [
       {
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TantaGlobal Assist — Professional VA Placement",
+    title: "TantaGlobal Assist: Certified VA Pathway and Employer Waitlist",
     description: site.description,
     images: [absoluteUrl("/og-home.png")],
   },

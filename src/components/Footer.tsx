@@ -19,7 +19,7 @@ const companies: { label: string; href: string; external: boolean }[] = [
 ];
 
 const pages: { label: string; href: string }[] = [
-  { label: "Hire a VA",     href: "/hire" },
+  { label: "Employer waitlist",     href: "/hire" },
   { label: "Apply for placement", href: "/apply" },
   { label: "Pricing",       href: "/pricing" },
   { label: "How it works",  href: "/how-it-works" },
@@ -56,7 +56,7 @@ export default function Footer() {
               />
             </div>
             <p className="font-sans text-sm leading-relaxed text-instruments-vellum/50 max-w-xs mb-4">
-              Professional VA placement for employers, paired with certification-led training for candidates.
+              An employer waitlist for certified virtual assistants, paired with certification-led training for candidates.
               Part of Tanta Holdings.
             </p>
             <div className="flex gap-3 mt-5">

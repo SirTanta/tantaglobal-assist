@@ -227,7 +227,7 @@ export default function TalaChatWidget() {
                   Quick capture
                 </p>
                 <p className="text-sm text-[#0d2326] mb-3 leading-snug">
-                  Drop your email and one line about what you need. The TGA Assist team will respond directly — no marketing list, no third parties.
+                  Drop your email and one line about what you need. The TGA Assist team will respond directly. No marketing list, no third parties.
                 </p>
                 <div className="space-y-2">
                   <input
@@ -272,7 +272,7 @@ export default function TalaChatWidget() {
                   Captured · routing
                 </p>
                 <p className="text-sm text-[#0d2326] leading-snug">
-                  Got it. Check {capture.email} for confirmation — the team will reply directly.
+                  Got it. Check {capture.email} for confirmation. The team will reply directly.
                   {audience === "employer" ? (
                     <> Looks like the employer side; the role brief is the right next step.</>
                   ) : audience === "candidate" ? (

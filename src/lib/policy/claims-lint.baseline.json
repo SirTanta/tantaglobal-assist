@@ -1,0 +1,14 @@
+[
+  {
+    "file": "src/components/Footer.tsx",
+    "rule": "visa-promotion",
+    "count": 1,
+    "reason": "Company registry, footer or CTA that links the held Visa Pathways site. Removing it changes site structure and needs a Jon decision; the ratchet blocks new links."
+  },
+  {
+    "file": "src/data/tala-knowledge.ts",
+    "rule": "visa-promotion",
+    "count": 3,
+    "reason": "Chatbot knowledge base refers visa questions to the held Visa Pathways site. Jon decides whether the bot keeps referring; the ratchet blocks new links."
+  }
+]
