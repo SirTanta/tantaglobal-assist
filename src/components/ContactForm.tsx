@@ -116,7 +116,7 @@ export default function ContactForm() {
           </div>
         </div>
         <h3 className="text-xl font-bold mb-2" style={{ color: "#0D5C63" }}>
-          Thanks — your message is on its way.
+          Thanks. Your message is on its way.
         </h3>
         <p className="text-sm" style={{ color: "#2D3748" }}>
           We&apos;ll get back to you shortly at the email you provided.

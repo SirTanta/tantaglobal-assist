@@ -50,7 +50,7 @@ export default function Header() {
           <Link
             href="/"
             className="flex items-center gap-2.5 flex-shrink-0 group"
-            aria-label="TantaGlobal Assist — home"
+            aria-label="TantaGlobal Assist home"
           >
             <Image
               src="/logo-transparent.png"

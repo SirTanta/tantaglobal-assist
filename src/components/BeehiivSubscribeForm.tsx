@@ -43,7 +43,7 @@ export default function BeehiivSubscribeForm({
       if (res.ok) {
         trackLead("newsletter_subscribe", { form_name: "footer_newsletter" });
         setStatus("success");
-        setMessage("You're in — check your inbox.");
+        setMessage("You're in. Check your inbox.");
       } else {
         setStatus("error");
         setMessage("Something went wrong. Please try again.");
@@ -57,7 +57,7 @@ export default function BeehiivSubscribeForm({
   if (status === "success") {
     return (
       <p className="font-sans text-sm text-instruments-vellum/70">
-        You&apos;re on the list — thanks.
+        You&apos;re on the list. Thanks.
       </p>
     );
   }

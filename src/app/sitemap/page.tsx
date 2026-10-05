@@ -35,7 +35,7 @@ const groups: Array<{ title: string; description: string; links: SitemapLink[] }
     title: "For employers",
     description: "Plan a virtual-assistant hire and join the employer waitlist.",
     links: [
-      { href: "/hire", label: "Hire a VA", description: "Tell us the role and support you need." },
+      { href: "/hire", label: "Employer waitlist", description: "Tell us the role and support you need." },
       { href: "/pricing", label: "Pricing", description: "See how pricing is scoped." },
       { href: "/contact", label: "Talk to the team", description: "Ask an employer question." },
     ],
