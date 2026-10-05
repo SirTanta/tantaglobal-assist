@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { trackLead } from "@/lib/analytics";
+import { captureAttribution } from "@/lib/attribution";
 
 interface FormState {
   status: "idle" | "submitting" | "success" | "error";
@@ -57,7 +59,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, attribution: captureAttribution() }),
       });
 
       const json = await res.json().catch(() => ({}));
@@ -70,6 +72,7 @@ export default function ContactForm() {
 
       setState({ status: "success", errorMessage: "" });
       formRef.current?.reset();
+      trackLead("contact_message", { form_name: "contact" });
       // GA4 conversion event
       if (typeof window !== "undefined" && (window as any).gtag) {
         (window as any).gtag("event", "contact_submitted", {

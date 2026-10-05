@@ -3,7 +3,7 @@ import Link from "next/link";
 import RemoteReadyPromo from "@/components/RemoteReadyPromo";
 import { breadcrumbJsonLd, pageMetadata, site } from "@/lib/seo";
 
-export const metadata = pageMetadata({ title: "TantaGlobal Assist | Global talent, hired with intent", description: "A certification-led placement path for US businesses and Filipino virtual assistants.", path: "/", image: "/og-home.png" });
+export const metadata = pageMetadata({ title: "TantaGlobal Assist | Global talent, hired with intent", description: "TantaGlobal Assist places certification-trained virtual assistants with US businesses. Employers request a shortlist; candidates apply and train at TGA Academy.", path: "/", image: "/og-home.png" });
 const breadcrumbs = breadcrumbJsonLd([{ name: "Home", path: "/" }]);
 
 const steps = [

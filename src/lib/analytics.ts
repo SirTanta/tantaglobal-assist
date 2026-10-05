@@ -16,3 +16,11 @@ function gtag(...args: unknown[]) {
 export function ga4Event(name: string, params?: Record<string, unknown>) {
   gtag("event", name, params);
 }
+
+/**
+ * GA4 recommended lead event. Fired next to the existing custom events (which are kept), because
+ * `generate_lead` is the name GA4 reporting and key-event marking understand.
+ */
+export function trackLead(leadType: string, params?: Record<string, unknown>) {
+  ga4Event("generate_lead", { lead_type: leadType, ...params });
+}

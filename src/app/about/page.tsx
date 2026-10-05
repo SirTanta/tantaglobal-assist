@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 
 export const metadata = pageMetadata({
-  title: 'About TantaGlobal Assist',
+  title: 'About',
   description:
-    'Learn how TantaGlobal Assist connects training, screening, and placement for businesses that need dependable virtual assistants.',
+    'TantaGlobal Assist connects training, screening, and placement so US businesses can hire dependable, certified virtual assistants without a long sorting cycle.',
   path: '/about',
   image: '/og-home.png',
 });

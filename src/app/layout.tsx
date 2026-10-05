@@ -4,7 +4,7 @@ import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GA4CTATracker from "@/components/GA4CTATracker";
-import { organizationJsonLd, websiteJsonLd, breadcrumbSchema, site, absoluteUrl } from "@/lib/seo";
+import { organizationJsonLd, websiteJsonLd, site, absoluteUrl } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -55,10 +55,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
       </head>
       <body className="min-h-screen flex flex-col antialiased">

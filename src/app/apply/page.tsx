@@ -7,7 +7,7 @@ const tallyFormUrl = 'https://tally.so/r/VLVZbE';
 export const metadata = pageMetadata({
   title: 'Apply for Placement',
   description:
-    'Apply to TantaGlobal Assist and move into a certification-led virtual assistant placement pipeline.',
+    'Apply to TantaGlobal Assist, complete the TGA Academy certification step, and enter a certification-led virtual assistant placement pipeline for US clients.',
   path: '/apply',
   image: '/og-home.png',
 });

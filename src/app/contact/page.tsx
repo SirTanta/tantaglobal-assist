@@ -2,9 +2,9 @@ import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata = pageMetadata({
-  title: 'Contact TantaGlobal Assist',
+  title: 'Contact',
   description:
-    'Reach the employer, candidate, or general contact routes at TantaGlobal Assist.',
+    'Reach the TantaGlobal Assist employer, candidate, or general contact routes by email, or send a message through the form and we will route it to the right team.',
   path: '/contact',
   image: '/og-home.png',
 });

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { ga4Event } from "@/lib/analytics";
+import { ga4Event, trackLead } from "@/lib/analytics";
+import { captureAttribution } from "@/lib/attribution";
 
 interface FormState {
   status: "idle" | "submitting" | "success" | "error";
@@ -67,7 +68,7 @@ export default function ApplyForm() {
       const res = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, attribution: captureAttribution() }),
       });
 
       const json = await res.json().catch(() => ({}));
@@ -89,6 +90,7 @@ export default function ApplyForm() {
           event_label: "va_apply_form",
         });
       }
+      trackLead("va_candidate_application", { form_name: "placement_application" });
       ga4Event("submit_form__global_assist__apply", {
         form_name: "placement_application",
         form_fields_completed: Object.values(payload).filter(Boolean).length,

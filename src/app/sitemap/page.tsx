@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, pageMetadata, site } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Site map",
-  description: "Find the employer, candidate, support, and legal paths at TantaGlobal Assist.",
+  description: "Site map for TantaGlobal Assist: find the employer, candidate, support, and legal pages, plus the XML sitemap, in one crawlable index of the whole website.",
   path: "/sitemap",
   image: "/og-home.png",
 });

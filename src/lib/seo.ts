@@ -4,7 +4,7 @@ export const site = {
   name: 'TantaGlobal Assist',
   shortName: 'TGA',
   description:
-    'Professional virtual assistant placement for employers and certification-led training for candidates.',
+    'Professional virtual assistant placement for employers and certification-led training for candidates, from TantaGlobal Assist, a Tanta Holdings company.',
   url: 'https://tantaglobal.com',
   academyUrl: 'https://academy.tantaglobal.com',
   holdingsUrl: 'https://tantaholdings.com',
@@ -82,6 +82,7 @@ export const organizationJsonLd = {
   '@type': 'Organization',
   name: site.name,
   url: site.url,
+  logo: `${site.url}/logo-transparent.png`,
   description: site.description,
   parentOrganization: {
     '@type': 'Organization',
@@ -111,20 +112,4 @@ export const websiteJsonLd = {
   name: site.name,
   url: site.url,
   description: site.description,
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: `${site.url}/search?q={search_term_string}`,
-    },
-    'query-input': 'required name=search_term_string',
-  },
-};
-
-export const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
-  ],
 };

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { sendAtlasLead } from "@/lib/atlas-crm";
 
 export const runtime = "nodejs";
 
@@ -17,6 +18,7 @@ type CapturePayload = {
   source_site?: string;
   audience?: "employer" | "candidate" | null;
   transcript?: Array<{ role: string; text: string }>;
+  attribution?: Record<string, unknown>;
 };
 
 export async function POST(request: NextRequest) {
@@ -79,6 +81,18 @@ export async function POST(request: NextRequest) {
       }).catch((err) => console.error("[Tala/Capture] Discord alert failed:", err));
     }
   }
+
+  // CRM mirror (never throws): the chat lead also lands in Atlas, so it survives a bot_leads outage.
+  await sendAtlasLead({
+    kind: `chat_lead_${sourceBot}`,
+    email,
+    ref: leadId ?? undefined,
+    details: [
+      audience ? `Audience: ${audience}` : "",
+      `Intent: ${intent.slice(0, 400)}`,
+    ].filter(Boolean),
+    attribution: body.attribution,
+  });
 
   let notified = false;
 
