@@ -63,16 +63,16 @@ function generateFallbackReply(prompt: string): string {
 
   // ─── Hard refusals / safety / identity ─────────────────────────────
   if (/(ignore your instructions|system prompt|reveal.*prompt|your prompt|prompt injection|jailbreak)/i.test(t)) {
-    return "Tala here. I won't share my instructions or pretend to be something I'm not. I'm here to help with TGA Assist placement questions — ask me about hiring a VA or applying as one and I'll do my best.";
+    return "Tala here. I won't share my instructions or pretend to be something I'm not. I'm here to help with TGA Assist waitlist and certification pathway questions — ask me about hiring a VA or applying as one and I'll do my best.";
   }
   if (/(are you (chatgpt|gpt|claude|bard|gemini|an ai|a bot)|which (ai|model|llm))/i.test(t)) {
-    return "Tala here — no, I'm Tala, the placement guide for TantaGlobal Assist (TGA Assist). I'm an automated assistant, not a human and not a general chatbot. I stick to what TGA Assist actually knows. What can I help with — hiring or applying?";
+    return "Tala here — no, I'm Tala, the guide for TantaGlobal Assist (TGA Assist). I'm an automated assistant, not a human and not a general chatbot. I stick to what TGA Assist actually knows. What can I help with — hiring or applying?";
   }
   if (/(are you (a )?(real|actual) (person|human)|are you human)/i.test(t)) {
     return "Tala here — no, I'm not a human. I'm an automated guide for TantaGlobal Assist. For specific role briefs or candidate questions, the team picks up at /contact, /hire, or /apply depending on which side you're on.";
   }
   if (/(what'?s your name|who are you|introduce yourself|tell me about you|tell me about yourself|your name)/i.test(t)) {
-    return "Tala here. I'm Tala, the placement guide for TantaGlobal Assist (TGA Assist). My job is to answer hiring and application questions honestly and point you toward the right next step. What are you exploring?";
+    return "Tala here. I'm Tala, the guide for TantaGlobal Assist (TGA Assist). My job is to answer hiring and application questions honestly and point you toward the right next step. What are you exploring?";
   }
 
   // ─── Booking / contact ─────────────────────────────────────────────
@@ -85,10 +85,10 @@ function generateFallbackReply(prompt: string): string {
 
   // ─── Specific-case prediction / guarantee guards ───────────────────
   if (/(guarantee|promise|will.*work|will.*get a great|surefire|definitely will)/i.test(t)) {
-    return "Tala here. I won't guarantee a great VA or a specific outcome — placements depend on the brief, the candidate, and the work itself. The honest path is to submit a brief at /hire so we can scope a real conversation, not promise something I can't back up.";
+    return "Tala here. I won't guarantee a great VA or a specific outcome — outcomes depend on the brief, the candidate, and the work itself, and no placement is promised. The honest path is to submit a brief at /hire so we can scope a real conversation, not promise something I can't back up.";
   }
   if (/(specific candidate|send me (maria|juan|ana|jose)|the va who worked|that specific va|by name|name a va)/i.test(t)) {
-    return "Tala here. I won't name a specific candidate or confirm prior placements. We are still building our pool of certified virtual assistants, so there are no candidates to share today. Employers can join the waitlist at /hire.";
+    return "Tala here. I won't name a specific candidate or claim any placements. We are still building our pool of certified virtual assistants, so there are no candidates to share today. Employers can join the waitlist at /hire.";
   }
   if (/(poach|hire (your|the) va directly|skip you|cut you out|pay (them|the va) directly)/i.test(t)) {
     return "Tala here. The engagement terms are scoped after the role brief — that's where direct-hire questions get answered honestly. The /pricing page covers the engagement model; use /contact or /hire to start that conversation rather than working around it.";
@@ -101,23 +101,23 @@ function generateFallbackReply(prompt: string): string {
 
   // ─── Academy ───────────────────────────────────────────────────────
   if (/(academy|certification|train(ing|ed)?|course|class|curriculum)/i.test(t)) {
-    return "Tala here. Training and certification live at TGA Academy (academy.tantaglobal.com) — that's a separate Tanta property from Assist. The academy step is part of the candidate pipeline; placement starts only after candidates complete it. Academy cost is separate from placement cost.";
+    return "Tala here. Training and certification live at TGA Academy (academy.tantaglobal.com) — that's a separate Tanta property from Assist. The academy step is part of the candidate pipeline; employer matching only opens after candidates complete it. Academy cost is separate from any employer engagement. We have not placed any VAs yet, and placement is not promised.";
   }
 
   // ─── Ecosystem routing (parent / brands / vs marketplaces) ─────────
   if (/(who owns|owner|parent (company|brand)|tanta holdings|veteran.?owned)/i.test(t)) {
-    return "Tala here. TantaGlobal Assist is part of Tanta Holdings LLC, a veteran-owned ecosystem. The family also includes TGA Academy (training at academy.tantaglobal.com), Tanta Visa Pathways (US immigration at tantavisapathways.com), and Tanta Solutions (AI enablement at tantaholdings.com/solutions). Assist is the placement layer.";
+    return "Tala here. TantaGlobal Assist is part of Tanta Holdings LLC, a veteran-owned ecosystem. The family also includes TGA Academy (training at academy.tantaglobal.com), Tanta Visa Pathways (US immigration at tantavisapathways.com), and Tanta Solutions (AI enablement at tantaholdings.com/solutions). Assist runs the employer waitlist and the certification pathway application.";
   }
   if (/(other (tanta )?(brands|companies|properties)|what (else|other).*tanta|tanta ecosystem|sister (brand|company|site))/i.test(t)) {
-    return "Tala here. The Tanta ecosystem: Tanta Holdings (parent), TGA Academy (training at academy.tantaglobal.com), Tanta Visa Pathways (US immigration at tantavisapathways.com), Tanta Solutions (AI enablement at tantaholdings.com/solutions), and TGA Assist — placement. Each one stays in its lane.";
+    return "Tala here. The Tanta ecosystem: Tanta Holdings (parent), TGA Academy (training at academy.tantaglobal.com), Tanta Visa Pathways (US immigration at tantavisapathways.com), Tanta Solutions (AI enablement at tantaholdings.com/solutions), and TGA Assist (employer waitlist and certification pathway). Each one stays in its lane.";
   }
   if (/(upwork|fiverr|onlinejobs|marketplace|directory|how.*different)/i.test(t)) {
-    return "Tala here. Upwork / Fiverr / OnlineJobs.ph are open marketplaces — you browse and filter directories. TGA Assist is a placement layer with a training step in front: TGA Academy certification builds the baseline before candidates reach employers, and the workflow matches a specific brief instead of a directory. Different model for a different problem.";
+    return "Tala here. Upwork / Fiverr / OnlineJobs.ph are open marketplaces — you browse and filter directories. TGA Assist is an employer waitlist with a certification pathway in front: TGA Academy certification builds the baseline, and matching is planned around a specific brief instead of a directory. We have not placed any VAs yet, and placement is not promised. Different model for a different problem.";
   }
 
   // ─── Tagalog / language ────────────────────────────────────────────
   if (/(tagalog|filipino language|cebuano|bisaya|ilocano|pwede ka|pwede mo|magsalita|sa filipino|sa tagalog)/i.test(t)) {
-    return "Tala here. I work in English — happy to answer questions phrased in Tagalog or Bisaya, but I'll respond in English so the placement team can also follow the thread. Ask in whichever language is easiest and I'll do my best.";
+    return "Tala here. I work in English — happy to answer questions phrased in Tagalog or Bisaya, but I'll respond in English so the team can also follow the thread. Ask in whichever language is easiest and I'll do my best.";
   }
 
   // ─── Rude / blunt input ────────────────────────────────────────────
@@ -127,7 +127,7 @@ function generateFallbackReply(prompt: string): string {
 
   // ─── Topic-level guards (apply regardless of audience detection) ───
   if (/(fire (my |an? )?employee|replace.*employee|laid off (an |my )?employee|let go.*employee|terminate.*employee)/i.test(t)) {
-    return "Tala here. I won't speculate on the legal side of employment changes — that's an employment attorney's call, not mine. On the placement side: once you know what role you actually need, submit a brief at /hire and we'll scope the match. Keep the legal piece separate from the hiring piece.";
+    return "Tala here. I won't speculate on the legal side of employment changes — that's an employment attorney's call, not mine. Once you know what role you actually need, submit a brief at /hire to join the employer waitlist. Keep the legal piece separate from the hiring piece.";
   }
   if (/(do my taxes|taxes for me|tax preparation|tax prep|file my taxes|file taxes|bookkeep|cpa work|accounting work)/i.test(t)) {
     return "Tala here. Tax preparation and accounting work need a licensed CPA — that's not VA scope, and I won't pretend it is. Our candidates handle operational and administrative work, not licensed accounting. For tax work, talk to a CPA; for VA support around the edges (scheduling, document gathering), submit a brief at /hire.";
@@ -151,7 +151,7 @@ function generateFallbackReply(prompt: string): string {
       return "Tala here. Candidates we route have completed academy certification — that's the readiness baseline we built the pipeline around. If your timeline is tighter than the pipeline allows, we'll be honest about whether we can help, but we don't skip the academy step. Submit at /hire and we can talk scope.";
     }
     if (/(replace|fire (my|an) employee|laid off|let go|terminate)/i.test(t)) {
-      return "Tala here. I won't speculate on the legal side of employment changes — that's an employment attorney's call, not mine. On the placement side: once you know what role you actually need, submit a brief at /hire and we'll scope the match. Keep the legal piece separate from the hiring piece.";
+      return "Tala here. I won't speculate on the legal side of employment changes — that's an employment attorney's call, not mine. Once you know what role you actually need, submit a brief at /hire to join the employer waitlist. Keep the legal piece separate from the hiring piece.";
     }
     if (/(what (do you|kind of work|skills|tools)|kinds? of (work|task|role)|va do|va support|administrative|executive)/i.test(t)) {
       return "Tala here. Core VA work: executive support, scheduling, inbox management, customer follow-up, light bookkeeping prep, social media coordination, and tool-specific operational support (CRM, project management, document workflows). Specific candidate strengths come out in the application — we don't promise every skill from every candidate. Submit at /hire with what you need and we'll scope it.";
@@ -170,23 +170,23 @@ function generateFallbackReply(prompt: string): string {
 
   if (intent.audience === "candidate") {
     if (/(new to (va|virtual assistant)|never done|first time|no experience|haven'?t done|beginner|just starting)/i.test(t)) {
-      return "Tala here. Yes — you can still apply. The academy step is the gate; if you're new to VA work, the certification path is where you build the baseline before the placement queue. Be honest in the application about your starting point; the pipeline doesn't pretend raw applicants are senior placements. Apply at /apply.";
+      return "Tala here. Yes — you can still apply. The academy step is the gate; if you're new to VA work, the certification path is where you build the baseline. Be honest in the application about your starting point; the pathway doesn't pretend raw applicants are senior candidates. We have not placed any VAs yet, and placement is not promised. Apply at /apply.";
     }
     if (/(not (a )?filipino|not from the philippines|i('m| am) from|based in|live in)/i.test(t) && !/philippines|cebu/.test(t)) {
-      return "Tala here. Primary audience is Filipino professionals, but we don't bar applications from elsewhere. The training pipeline is the same — academy first, then placement queue. Be honest in the application about where you're based; some role briefs are location-specific. Apply at /apply.";
+      return "Tala here. Primary audience is Filipino professionals, but we don't bar applications from elsewhere. The training pipeline is the same — academy certification first. We have not placed any VAs yet, and placement is not promised. Be honest in the application about where you're based; some role briefs are location-specific. Apply at /apply.";
     }
     if (/(how much (do|will|will i)|pay|salary|rate|earn|make money|income|wage)/i.test(t)) {
-      return "Tala here. Candidate pay depends on the engagement that gets scoped between the employer and the placement — there's no fixed rate I can quote, and I won't make one up. The /pricing page describes the engagement model; the application at /apply is the first step into the queue.";
+      return "Tala here. Candidate pay depends on any engagement scoped between an employer and a candidate; there is no fixed rate I can quote, and I won't make one up. No work is promised. The application at /apply is the first step on the certification pathway.";
     }
     if (/(how long.*apply|application.*process|what happens after.*apply|steps after|then what)/i.test(t)) {
-      return "Tala here. Three steps: apply at /apply with your background and availability, complete TGA Academy certification at academy.tantaglobal.com, then enter the placement queue. The academy step isn't optional — it's what makes placement faster on the employer side.";
+      return "Tala here. Three steps: apply at /apply with your background and availability, complete TGA Academy certification at academy.tantaglobal.com, then wait for employer matching to open. The academy step isn't optional. We have not placed any VAs yet, and placement is not promised.";
     }
-    return "Tala here. Candidate next step is /apply — share your background, location, and availability. After application, qualified candidates move to TGA Academy certification (academy.tantaglobal.com), then enter the placement queue. The academy step is the gate.";
+    return "Tala here. Candidate next step is /apply — share your background, location, and availability. After application, qualified candidates move to TGA Academy certification (academy.tantaglobal.com), then stay on the certification pathway. The academy step is the gate. We have not placed any VAs yet, and placement is not promised.";
   }
 
   // ─── Side detection prompts ────────────────────────────────────────
   if (/(don'?t know|not sure|either|which one|which side|both)/i.test(t)) {
-    return "Tala here. Which side are you on — hiring a VA for your team (employer → /hire), or applying as a VA looking for placement (candidate → /apply)? The answer routes differently. Tell me a bit about what you're trying to do and I'll point the right way.";
+    return "Tala here. Which side are you on — hiring a VA for your team (employer → /hire), or applying to the VA certification pathway (candidate → /apply)? The answer routes differently. Tell me a bit about what you're trying to do and I'll point the right way.";
   }
 
   // ─── Pipeline / how-it-works (no audience yet) ─────────────────────
@@ -213,7 +213,7 @@ function generateFallbackReply(prompt: string): string {
     return "Tala here. For a scoped conversation: employers submit at /hire, candidates apply at /apply. Pricing model is at /pricing, general contact at /contact. Which side are you on?";
   }
 
-  return "Tala here, the placement guide for TantaGlobal Assist. Candidates apply, complete TGA Academy certification, then enter the placement queue. Employers can submit a role brief to join our waitlist; we will contact them when certified VAs are available. Which side are you on: hiring a VA, or applying as one?";
+  return "Tala here, the guide for TantaGlobal Assist. Candidates apply and complete TGA Academy certification. We have not placed any VAs yet, and placement is not promised. Employers can submit a role brief to join our waitlist; we will contact them when certified VAs are available. Which side are you on: hiring a VA, or applying as one?";
 }
 
 export async function POST(request: NextRequest) {
