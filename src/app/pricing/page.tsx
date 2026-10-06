@@ -4,7 +4,7 @@ import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 export const metadata = pageMetadata({
   title: 'Pricing',
   description:
-    'How TantaGlobal Assist scopes pricing for employer placement and candidate support. Submit a role brief to start a scoped conversation about cost and fit.',
+    'TantaGlobal Assist does not publish prices. We are still building our certified VA pool, so submit a role brief to join the employer waitlist.',
   path: '/pricing',
   image: '/og-home.png',
 });
