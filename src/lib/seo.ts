@@ -10,9 +10,9 @@ export const site = {
   holdingsUrl: 'https://tantaholdings.com',
   facebookUrl: 'https://www.facebook.com/profile.php?id=867291873125261',
   youtubeUrl: 'https://www.youtube.com/@TantaRemote',
-  emailEmployer: 'hire@tantaglobal.com',
-  emailCandidates: 'apply@tantaglobal.com',
-  emailGeneral: 'hello@tantaglobal.com',
+  email: 'info@tanta-holdings.com',
+  // Mailbox behind the newsletter mailto fallback. Functioning mailbox, not the public contact address.
+  newsletterMailbox: 'hello@tantaglobal.com',
 } as const;
 
 export function absoluteUrl(path = '/') {
@@ -94,13 +94,13 @@ export const organizationJsonLd = {
     {
       '@type': 'ContactPoint',
       contactType: 'sales',
-      email: site.emailEmployer,
+      email: site.email,
       availableLanguage: ['en'],
     },
     {
       '@type': 'ContactPoint',
       contactType: 'customer support',
-      email: site.emailGeneral,
+      email: site.email,
       availableLanguage: ['en'],
     },
   ],

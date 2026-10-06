@@ -24,9 +24,9 @@ export default function AboutPage() {
           <p className="eyebrow">About</p>
           <h1>Built around a simple idea: trained people should reach employers faster.</h1>
           <p className="max-w-3xl text-lg leading-8 text-slate-600">
-            TantaGlobal Assist is the placement side of a larger Tanta workflow. Candidates enter here,
-            go through the academy step, and move into employer matching with a clearer standard than a typical
-            open marketplace can provide.
+            TantaGlobal Assist is the employer waitlist and certification pathway side of a larger Tanta workflow. Candidates apply here,
+            complete the academy certification step, and employers join a waitlist for when certified VAs are available.
+            We have not placed any VAs yet, and placement or work is not guaranteed for anyone.
           </p>
         </div>
       </section>
@@ -35,10 +35,10 @@ export default function AboutPage() {
         <div className="section-container grid gap-6 lg:grid-cols-2">
           <div className="surface p-7">
             <p className="eyebrow">What we do</p>
-            <h2 className="mt-3">Placement with a point of view.</h2>
+            <h2 className="mt-3">A certification pathway with a point of view.</h2>
             <p className="mt-4 leading-8 text-slate-600">
               We do not try to be everything to everyone. We focus on the path that matters most: a candidate who is
-              better prepared because they were trained, screened, and evaluated before they hit an employer inbox.
+              better prepared because they were trained and evaluated through certification.
             </p>
             <p className="mt-4 leading-8 text-slate-600">
               If an employer has to spend less time filtering noise and more time deciding between good options,
@@ -56,11 +56,11 @@ export default function AboutPage() {
                 },
                 {
                   title: 'Candidates',
-                  body: 'VA professionals who want a more serious route into client work and placement support.',
+                  body: 'VA professionals who want a structured certification pathway toward client work. No placement or work is promised.',
                 },
                 {
                   title: 'Training partners',
-                  body: 'The academy side keeps standards consistent before placement starts.',
+                  body: 'The academy side keeps certification standards consistent.',
                 },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl bg-white p-5 shadow-sm">
@@ -77,20 +77,20 @@ export default function AboutPage() {
         <div className="section-container grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="surface p-7">
             <p className="eyebrow">The network</p>
-            <h2 className="mt-3">Training and placement stay close.</h2>
+            <h2 className="mt-3">Training and the employer waitlist stay close.</h2>
             <p className="mt-4 leading-8 text-slate-600">
               The academy lives at{' '}
               <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#0d5c63] underline-offset-4 hover:underline">
                 academy.tantaglobal.com
               </a>
-              . Tanta Holdings provides the parent structure. TantaGlobal Assist focuses on matching and placement.
+              . Tanta Holdings provides the parent structure. TantaGlobal Assist runs the employer waitlist and candidate applications.
             </p>
           </div>
           <div className="surface p-7">
             <p className="eyebrow">What we value</p>
             <h2 className="mt-3">Clear standards, no inflated language.</h2>
             <ul className="mt-4 space-y-3 text-slate-600">
-              <li>• Real screening before placement</li>
+              <li>• Certification before any employer matching</li>
               <li>• Clear handoffs between training and client work</li>
               <li>• Practical communication and measurable expectations</li>
               <li>• A clean path for employers and candidates alike</li>
@@ -108,7 +108,7 @@ export default function AboutPage() {
             </div>
             <div className="flex flex-wrap gap-3">
               <Link href="/hire" data-ga4-action="click_cta__global_assist__about" data-ga4-label="Join the employer waitlist" data-ga4-destination="/hire" data-ga4-zone="Z5" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-primary">Join the employer waitlist</Link>
-              <Link href="/apply" data-ga4-action="click_cta__global_assist__about" data-ga4-label="Apply for placement" data-ga4-destination="/apply" data-ga4-zone="Z5" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-ghost">Apply for placement</Link>
+              <Link href="/apply" data-ga4-action="click_cta__global_assist__about" data-ga4-label="Apply for placement" data-ga4-destination="/apply" data-ga4-zone="Z5" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-ghost">Apply to the VA Pathway</Link>
             </div>
           </div>
         </div>

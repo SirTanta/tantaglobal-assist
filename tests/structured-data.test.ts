@@ -64,3 +64,18 @@ test("structured data: no invented ratings or phone numbers anywhere in src", ()
     if (/['"]@context['"]/.test(s)) assert.ok(!/aggregateRating|reviewCount|ratingValue|telephone/.test(s), `${f}: invented rating or phone in JSON-LD`);
   }
 });
+
+test("page bodies: no 'Apply for placement' copy and one public contact address", () => {
+  const files = [
+    "src/app/page.tsx", "src/app/about/page.tsx", "src/app/apply/page.tsx", "src/app/how-it-works/page.tsx",
+    "src/app/sitemap/page.tsx", "src/app/contact/page.tsx", "src/components/Header.tsx", "src/components/Footer.tsx",
+  ];
+  for (const rel of files) {
+    const src = read(rel).replace(/data-ga4-label="Apply for placement"/g, "");
+    assert.ok(!/apply for placement/i.test(src), `${rel}: still says Apply for placement`);
+    assert.ok(!/(hire|apply|hello|employers|candidates)@tantaglobal\.com/i.test(src), `${rel}: legacy public mailbox in copy`);
+  }
+  assert.equal(site.email, "info@tanta-holdings.com");
+  assert.ok(JSON.stringify(organizationJsonLd).includes("info@tanta-holdings.com"));
+  assert.ok(!/tantaglobal\.com/.test(JSON.stringify(organizationJsonLd).replace(/https?:\/\/[^"]*tantaglobal\.com[^"]*/g, "")));
+});

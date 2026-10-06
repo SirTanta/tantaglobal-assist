@@ -20,7 +20,7 @@ const companies: { label: string; href: string; external: boolean }[] = [
 
 const pages: { label: string; href: string }[] = [
   { label: "Employer waitlist",     href: "/hire" },
-  { label: "Apply for placement", href: "/apply" },
+  { label: "Apply to the VA Pathway", href: "/apply" },
   { label: "Pricing",       href: "/pricing" },
   { label: "How it works",  href: "/how-it-works" },
   { label: "About",         href: "/about" },
@@ -79,26 +79,10 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:hire@tantaglobal.com"
+                  href="mailto:info@tanta-holdings.com"
                   className="font-sans text-sm text-instruments-vellum/50 hover:text-instruments-vellum transition-colors"
                 >
-                  hire@tantaglobal.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:apply@tantaglobal.com"
-                  className="font-sans text-sm text-instruments-vellum/50 hover:text-instruments-vellum transition-colors"
-                >
-                  apply@tantaglobal.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:hello@tantaglobal.com"
-                  className="font-sans text-sm text-instruments-vellum/50 hover:text-instruments-vellum transition-colors"
-                >
-                  hello@tantaglobal.com
+                  info@tanta-holdings.com
                 </a>
               </li>
               {legal.map((item) => (
@@ -143,7 +127,7 @@ export default function Footer() {
                 VA Employer Field Guide
               </p>
               <p className="font-sans text-[11px] text-instruments-vellum/40 mb-2">
-                Staffing checklist and notes on how VA placement is scoped.
+                Staffing checklist and notes on how VA support is scoped.
               </p>
               <a href="https://tantaholdings.com" className="font-sans text-[11px] text-instruments-gold hover:text-instruments-gold-bright transition-colors">
                 Tanta Holdings

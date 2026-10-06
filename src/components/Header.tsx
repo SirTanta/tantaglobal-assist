@@ -98,7 +98,7 @@ export default function Header() {
               data-ga4-page="NAVIGATION"
               className="instr-btn-ghost !py-1.5 !px-4 !text-xs"
             >
-              Apply for placement
+              Apply to the VA Pathway
             </Link>
             <Link
               href="/hire"
@@ -179,7 +179,7 @@ function MobileMenu({ pathname }: { pathname: string }) {
                 className="instr-btn-ghost !py-2 !px-4 !text-xs text-center"
                 onClick={() => setOpen(false)}
               >
-                Apply for placement
+                Apply to the VA Pathway
               </Link>
               <Link
                 href="/hire"

@@ -40,10 +40,10 @@ export default function ApplyPage() {
         <div className="section-container grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div className="space-y-6">
             <p className="eyebrow">For candidates</p>
-            <h1>Apply for placement and start the route into client work.</h1>
+            <h1>Apply to the VA certification pathway.</h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-600">
               Tell us about your background, availability, and the kind of work you want to do. If the fit is there,
-              you move to the Academy step and then into placement. It is a straightforward first step, not a promise of placement.
+              you move to the TGA Academy certification step. We have not placed any VAs yet, and an application is not a promise of placement or work.
             </p>
             <div className="surface p-6">
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">What to include</p>
@@ -71,7 +71,7 @@ export default function ApplyPage() {
             </div>
             <details className="mt-7 border-t border-instruments-shadow/20 pt-5">
               <summary className="cursor-pointer text-sm font-semibold text-instruments-teak">Can&apos;t use Tally? Use the on-page application instead.</summary>
-              <p className="mt-3 text-sm leading-6 text-instruments-shadow">This secure fallback sends the same application details to our placement workflow.</p>
+              <p className="mt-3 text-sm leading-6 text-instruments-shadow">This secure fallback sends the same application details to our application workflow.</p>
               <div className="mt-5"><ApplyForm /></div>
             </details>
           </div>
@@ -97,7 +97,7 @@ export default function ApplyPage() {
             <p className="eyebrow">Need help first?</p>
             <h2 className="mt-3">Ask before you apply if the path is unclear.</h2>
             <p className="mt-4 leading-8 text-slate-600">
-              Candidate questions go to {site.emailCandidates}. General questions go to {site.emailGeneral}.
+              Questions go to {site.email}.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/contact" className="instr-btn-primary" data-ga4-action="click_cta__global_assist__apply" data-ga4-label="Contact us" data-ga4-zone="Z5" data-ga4-page="FORM">Contact us</Link>
