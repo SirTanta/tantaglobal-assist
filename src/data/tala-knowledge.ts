@@ -2,12 +2,12 @@
  * Tala knowledge base — TantaGlobal Assist bot.
  *
  * Single source of truth for what Tala is allowed to say. The site is a
- * placement service for trained virtual assistants — candidates apply,
+ * employer waitlist and certification pathway for virtual assistants — candidates apply,
  * complete TGA Academy certification, then enter an employer-ready pipeline.
  * Employers submit a role brief and join a waitlist until certified VAs are available.
  *
  * Tala NEVER promises a specific candidate, a specific salary, a specific
- * timeline, or a guaranteed placement. When the question is too specific to
+ * timeline, or a guaranteed placement (none is offered). When the question is too specific to
  * answer honestly, route to /apply, /hire, or /contact.
  *
  * Update this file when the site changes, NOT the prompt.
@@ -18,7 +18,7 @@ export const SITE_FACTS = {
   brand: "Assist (TGA)",
   parent: "Tanta Holdings LLC",
   philosophy:
-    "Placement with a point of view. We train, screen, and route candidates before they reach employer inboxes. Less noise on the employer side; a real path on the candidate side.",
+    "A certification pathway with a point of view. Candidates complete TGA Academy certification, and employers join a waitlist for when certified VAs are available. We have not placed any VAs yet, and placement is not promised.",
   veteranOwned: true,
   primaryAudienceEmployer:
     "US founders, operators, and team leads who need reliable remote VA support without a long sorting cycle.",
@@ -49,7 +49,7 @@ export const PIPELINE = [
     step: "02",
     title: "Complete TGA Academy certification",
     body:
-      "Qualified candidates move to the academy step so placement starts from a stronger baseline than raw intake. Academy lives at academy.tantaglobal.com.",
+      "Qualified candidates move to the academy step so the pathway starts from a stronger baseline than raw intake. Academy lives at academy.tantaglobal.com.",
   },
   {
     step: "03",
@@ -61,9 +61,9 @@ export const PIPELINE = [
 
 // Pricing model — never quote numbers. Mirrors /pricing
 export const PRICING_NOTES = [
-  "Employer placement is scoped AFTER the role brief — there is no flat-rate published fee.",
+  "Employer engagements are scoped AFTER the role brief — there is no flat-rate published fee.",
   "Candidate application itself is the entry point to the pipeline; it does not start with a hard sell.",
-  "Academy certification (training cost) lives at TGA Academy, separate from placement.",
+  "Academy certification (training cost) lives at TGA Academy, separate from any employer engagement.",
   "What affects scope: role complexity, expected hours, one-off vs ongoing, tooling/communication requirements, fit with the certified VAs available.",
   "Fastest route to an accurate price: submit a role brief at /hire first; we respond with a scoped conversation.",
 ] as const;
@@ -73,7 +73,7 @@ export const FAQ_KB = [
   {
     topic: "What is TantaGlobal Assist?",
     answer:
-      "TGA Assist is the placement side of the Tanta workflow. Candidates apply here, complete TGA Academy certification, and enter the placement queue. Employers submit a role brief and join our waitlist; we contact them when certified VAs are available. We're the placement layer, not a generic VA directory.",
+      "TGA Assist is the employer waitlist and certification pathway side of the Tanta workflow. Candidates apply here and complete TGA Academy certification. We have not placed any VAs yet, and placement is not promised. Employers submit a role brief and join our waitlist; we contact them when certified VAs are available. We are not a generic VA directory.",
   },
   {
     topic: "What do I get as an employer?",
@@ -83,17 +83,17 @@ export const FAQ_KB = [
   {
     topic: "What does the candidate path look like?",
     answer:
-      "Three steps: apply at /apply with your background and availability, complete TGA Academy certification at academy.tantaglobal.com, then enter the placement queue. The academy step is not optional — it is what makes placement faster.",
+      "Three steps: apply at /apply with your background and availability, complete TGA Academy certification at academy.tantaglobal.com, then wait for employer matching to open. The academy step is not optional. We have not placed any VAs yet, and placement is not promised.",
   },
   {
     topic: "How much does it cost?",
     answer:
-      "Employer placement is scoped after the role brief. There is no flat-rate fee published. The fastest path to an accurate number is to submit a brief at /hire and we'll respond with a scoped conversation. For full pricing model: /pricing.",
+      "Employer engagements are scoped after the role brief. There is no flat-rate fee published. The fastest path to an accurate number is to submit a brief at /hire and we'll respond with a scoped conversation. For full pricing model: /pricing.",
   },
   {
     topic: "Where does the training live?",
     answer:
-      "Training happens at TGA Academy: academy.tantaglobal.com. The placement workflow on this site only opens after the academy step is complete. Academy is a separate property in the Tanta ecosystem.",
+      "Training happens at TGA Academy: academy.tantaglobal.com. Employer matching on this site only opens after the academy step is complete and certified VAs are available. Academy is a separate property in the Tanta ecosystem.",
   },
   {
     topic: "What kinds of VA work do candidates support?",
@@ -116,14 +116,14 @@ export const FAQ_KB = [
       "The pipeline is built around academy certification: readiness over volume. We are still building our pool of certified virtual assistants, so we cannot match you today. If you need someone sooner, we'll be honest about whether we can help.",
   },
   {
-    topic: "What happens if the placement doesn't work out?",
+    topic: "What happens if an engagement doesn't work out?",
     answer:
       "We support the handoff and stay close enough to help if things go sideways. The specific terms depend on the engagement scoped after your brief. The /pricing page describes how engagements are structured.",
   },
   {
     topic: "Are you a staffing agency?",
     answer:
-      "We're a placement service with a training pipeline attached. The academy half is what differentiates us from a generic VA directory or open marketplace. We're not a body-shop staffing firm — we focus on placement, training, and clear handoffs.",
+      "We are building an employer waitlist and a certification pathway. The academy half is what differentiates us from a generic VA directory or open marketplace. We have not placed any VAs yet, and placement is not promised.",
   },
   {
     topic: "How do I contact the right person?",
@@ -133,12 +133,12 @@ export const FAQ_KB = [
   {
     topic: "Who runs TGA Assist?",
     answer:
-      "TantaGlobal Assist is part of Tanta Holdings LLC — a veteran-owned ecosystem that includes Tanta Holdings (parent), TGA Academy (training), Tanta Visa Pathways (US immigration), and Tanta Solutions (AI enablement). Assist focuses on matching and placement.",
+      "TantaGlobal Assist is part of Tanta Holdings LLC — a veteran-owned ecosystem that includes Tanta Holdings (parent), TGA Academy (training), Tanta Visa Pathways (US immigration), and Tanta Solutions (AI enablement). Assist runs the employer waitlist and candidate applications.",
   },
   {
     topic: "Do I need to be in the Philippines to apply?",
     answer:
-      "Primary audience is Filipino professionals, but we don't bar applications from elsewhere. The training pipeline is the same — academy first, then placement queue. Be honest in the application about where you're based; some role briefs are location-specific.",
+      "Primary audience is Filipino professionals, but we don't bar applications from elsewhere. The training pipeline is the same — academy certification first. We have not placed any VAs yet, and placement is not promised. Be honest in the application about where you're based; some role briefs are location-specific.",
   },
   {
     topic: "What if I'm an employer outside the US?",
@@ -148,12 +148,12 @@ export const FAQ_KB = [
   {
     topic: "Can a candidate apply if they haven't done VA work before?",
     answer:
-      "Yes — but the academy step is the gate. If you're new to VA work, the certification path is where you build the baseline. The application is honest about your starting point; the pipeline doesn't pretend raw applicants are senior placements.",
+      "Yes — but the academy step is the gate. If you're new to VA work, the certification path is where you build the baseline. The application is honest about your starting point; the pathway doesn't pretend raw applicants are senior candidates. We have not placed any VAs yet, and placement is not promised.",
   },
   {
     topic: "How is this different from Upwork / Fiverr / OnlineJobs.ph?",
     answer:
-      "Those are open marketplaces. We're a placement layer with a training step in front. The academy keeps a consistent baseline before candidates reach employers, and the workflow is about matching a specific brief — not browsing a directory. Different model for a different problem.",
+      "Those are open marketplaces. We are an employer waitlist with a certification pathway in front. The academy keeps a consistent baseline, and matching is planned around a specific brief, not a directory. We have not placed any VAs yet, and placement is not promised. Different model for a different problem.",
   },
   {
     topic: "Do you do specialized roles (developer, designer, accountant)?",
@@ -163,12 +163,12 @@ export const FAQ_KB = [
   {
     topic: "What about visa or immigration help?",
     answer:
-      "That's Tanta Visa Pathways, a separate Tanta property at tantavisapathways.com. They guide US visa categories (J-1 firsthand, others informational). TGA Assist is placement, not immigration — we don't try to do both.",
+      "That's Tanta Visa Pathways, a separate Tanta property at tantavisapathways.com. They guide US visa categories (J-1 firsthand, others informational). TGA Assist is a VA waitlist and certification pathway, not immigration — we don't try to do both.",
   },
   {
     topic: "What about AI tooling or business operations consulting?",
     answer:
-      "That's Tanta Solutions, a separate Tanta property at tantaholdings.com/solutions. They handle AI enablement consulting. TGA Assist is placement.",
+      "That's Tanta Solutions, a separate Tanta property at tantaholdings.com/solutions. They handle AI enablement consulting. TGA Assist is a VA waitlist and certification pathway.",
   },
 ] as const;
 
@@ -177,7 +177,7 @@ export const OUT_OF_SCOPE = [
   {
     pattern: /\b(visa|immigration|h-?1b|j-?1|eb-?3|green card|consular|embassy|uscis)\b/i,
     response:
-      "Visa and immigration work is Tanta Visa Pathways, a separate Tanta property at tantavisapathways.com. TGA Assist is placement only — we don't guide on visa categories. Head over there for the immigration side; if you also need VA placement, come back to /hire when you're ready.",
+      "Visa and immigration work is Tanta Visa Pathways, a separate Tanta property at tantavisapathways.com. TGA Assist does not guide on visa categories. Head over there for the immigration side; if you also need VA support, you can join the employer waitlist at /hire.",
   },
   {
     pattern: /\b(ai consulting|ai enablement|ai strategy|automation|business operations|consulting engagement|ai solution|automate.*(ai|business|operations|workflow)|(use|using|with|via) ai|ai.*(automat|implement|integrat))\b/i,
@@ -187,7 +187,7 @@ export const OUT_OF_SCOPE = [
   {
     pattern: /\b(legal advice|labor law|employment law|wage claim|i-9|w-9|w-2|1099 (advice|question)|misclassif|wrongful termination)\b/i,
     response:
-      "I can't give legal or labor-law advice — TGA Assist is a placement service, not a law firm. For employment-law questions, talk to a licensed employment attorney. For tax classification (W-2 vs 1099, etc.), talk to a CPA or tax attorney. I won't speculate on those.",
+      "I can't give legal or labor-law advice — TGA Assist is not a law firm. For employment-law questions, talk to a licensed employment attorney. For tax classification (W-2 vs 1099, etc.), talk to a CPA or tax attorney. I won't speculate on those.",
   },
   {
     pattern: /\b(developer|engineer|programmer|designer|cpa|accountant|lawyer|architect|nurse|doctor|physician|licensed)\s+(va|virtual assistant|hire|role|placement)|(hire|need|recruit|find|place|placement|looking for|i want|i'?m looking|role for|brief for|get me).{0,30}(?:a |an |the )?(licensed |senior |certified )?(developer|engineer|programmer|designer|cpa|accountant|lawyer|attorney|architect|nurse|doctor|physician)\b/i,
@@ -197,7 +197,7 @@ export const OUT_OF_SCOPE = [
   {
     pattern: /\b(specific salary|guaranteed (rate|hire|placement|salary)|promise.*(rate|salary|placement))\b/i,
     response:
-      "I won't quote a specific salary or guarantee a placement — rates and engagement terms are scoped after the role brief, and outcomes depend on the specific candidate and the work. The pricing model is at /pricing; submit a brief at /hire for a scoped conversation.",
+      "I won't quote a specific salary or guarantee any placement — rates and engagement terms are scoped after the role brief, and outcomes depend on the specific candidate and the work. The pricing model is at /pricing; submit a brief at /hire for a scoped conversation.",
   },
 ] as const;
 
@@ -246,7 +246,7 @@ export function buildSystemPrompt(): string {
   const faqLines = FAQ_KB.map((f) => `Q: ${f.topic}\nA: ${f.answer}`).join("\n\n");
 
   return [
-    "You are Tala, the placement guide for TantaGlobal Assist (TGA Assist). Your job is to answer honest, grounded questions from two audiences — employers looking to hire a VA, and candidates looking to apply for placement — and route each side to the right next step.",
+    "You are Tala, the guide for TantaGlobal Assist (TGA Assist). TGA Assist runs an employer waitlist and a VA certification pathway; no VAs have been placed yet and no placement or hiring is promised. Your job is to answer honest, grounded questions from two audiences — employers who want to join the waitlist, and candidates applying to the certification pathway — and route each side to the right next step.",
     "",
     "# Who TGA Assist is",
     `- ${SITE_FACTS.legalName}, part of ${SITE_FACTS.parent}. Veteran-owned.`,
@@ -282,7 +282,7 @@ export function buildSystemPrompt(): string {
     "",
     "# Routing",
     `- Employer next step → ${SITE_FACTS.hirePath} (submit role brief)`,
-    `- Candidate next step → ${SITE_FACTS.applyPath} (apply for placement)`,
+    `- Candidate next step → ${SITE_FACTS.applyPath} (apply to the VA Pathway)`,
     `- General contact → ${SITE_FACTS.contactPath}`,
     `- Pricing model → ${SITE_FACTS.pricingPath}`,
     `- How it works → ${SITE_FACTS.howItWorksPath}`,
