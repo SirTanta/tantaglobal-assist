@@ -34,7 +34,7 @@ export default function PricingPage() {
         <div className="section-container grid gap-6 lg:grid-cols-3">
           {[
             {
-              title: 'Employer placement',
+              title: 'Employer waitlist',
               body: 'Scoped after we review the role brief, timeline, and support needs.',
             },
             {
@@ -76,7 +76,7 @@ export default function PricingPage() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/hire" className="btn-primary">Join the employer waitlist</Link>
-              <a href={`mailto:${site.emailEmployer}`} className="btn-secondary">Email employer team</a>
+              <a href={`mailto:${site.email}`} className="btn-secondary">Email us</a>
             </div>
           </div>
         </div>

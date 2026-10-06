@@ -37,7 +37,7 @@ export default function NewsletterSubscribeForm({ variant = "footer" }: Props) {
         if (!res.ok) throw new Error("Subscription failed");
       } else {
         // Fallback: mailto newsletter subscription
-        window.location.href = `mailto:${site.emailGeneral}?subject=Newsletter subscription&body=${encodeURIComponent(email)}`;
+        window.location.href = `mailto:${site.newsletterMailbox}?subject=Newsletter subscription&body=${encodeURIComponent(email)}`;
       }
       setStatus("success");
       setEmail("");

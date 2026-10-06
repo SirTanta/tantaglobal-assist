@@ -17,7 +17,7 @@ const WELCOME_MESSAGE: UIMessage = {
   parts: [
     {
       type: "text",
-      text: "Tala here, the placement guide for TantaGlobal Assist. Hiring a VA, or applying as one? Tell me a bit about what you're after and I'll point you the right way.",
+      text: "Tala here, the guide for TantaGlobal Assist. Hiring a VA, or applying as one? Tell me a bit about what you're after and I'll point you the right way.",
     },
   ],
 };
@@ -170,7 +170,7 @@ export default function TalaChatWidget() {
       setCapture({ status: "captured", email, audience });
     } catch (err) {
       console.error("[Tala] capture failed", err);
-      setCapture({ status: "error", message: "Couldn't save that. Try again, or email hello@tantaglobal.com." });
+      setCapture({ status: "error", message: "Couldn't save that. Try again, or email info@tanta-holdings.com." });
     }
   };
 
@@ -181,7 +181,7 @@ export default function TalaChatWidget() {
           <div className="flex items-start justify-between gap-4 border-b border-[#0d5c63]/15 bg-[#0d5c63] px-4 py-4 text-white">
             <div>
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-white/75">Tala</p>
-              <h2 className="text-base font-semibold tracking-tight">Placement guide</h2>
+              <h2 className="text-base font-semibold tracking-tight">Assist guide</h2>
               <p className="text-xs text-white/70">Hiring · Applying · Honest reads</p>
             </div>
             <button
@@ -351,7 +351,7 @@ export default function TalaChatWidget() {
           <span className="block font-mono text-[10px] uppercase tracking-[0.28em] text-white/85">
             Tala
           </span>
-          <span className="block text-sm font-semibold">Placement guide</span>
+          <span className="block text-sm font-semibold">Assist guide</span>
         </span>
       </button>
     </div>

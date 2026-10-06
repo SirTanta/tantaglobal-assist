@@ -84,7 +84,7 @@ export default function ContactForm() {
       const msg =
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again or email hello@tantaglobal.com.";
+          : "Something went wrong. Please try again or email info@tanta-holdings.com.";
       setState({ status: "error", errorMessage: msg });
     }
   }
@@ -206,8 +206,8 @@ export default function ContactForm() {
         </button>
         <p className="text-xs mt-3" style={{ color: "#94a3b8" }}>
           Prefer email? Reach us directly at{" "}
-          <a href="mailto:hello@tantaglobal.com" style={{ color: "#0D5C63" }}>
-            hello@tantaglobal.com
+          <a href="mailto:info@tanta-holdings.com" style={{ color: "#0D5C63" }}>
+            info@tanta-holdings.com
           </a>
           .
         </p>

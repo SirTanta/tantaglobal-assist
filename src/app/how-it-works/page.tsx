@@ -25,7 +25,7 @@ const steps = [
     step: '02',
     title: 'Complete TGA Academy certification',
     body:
-      'Qualified candidates move to the academy step so the placement pipeline starts from a stronger baseline than raw intake.',
+      'Qualified candidates move to the academy step so the certification pathway starts from a stronger baseline than raw intake.',
   },
   {
     step: '03',
@@ -43,7 +43,7 @@ export default function HowItWorksPage() {
       <section className="section-pad">
         <div className="section-container max-w-4xl space-y-6">
           <p className="eyebrow">How it works</p>
-          <h1>Three steps. One clear path from intake to placement.</h1>
+          <h1>Three steps. One clear path from intake to certification.</h1>
           <p className="max-w-3xl text-lg leading-8 text-slate-600">
             The workflow is designed to avoid noise. We start with a clean application or role brief,
             move candidates through certification, then contact waitlisted employers when certified VAs are available.
@@ -77,7 +77,7 @@ export default function HowItWorksPage() {
               to decide whether you move to the academy step and how you should be considered.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/apply" data-ga4-action="click_cta__global_assist__how-it-works" data-ga4-label="Apply for placement" data-ga4-destination="/apply" data-ga4-zone="Z1" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-primary">Apply for placement</Link>
+              <Link href="/apply" data-ga4-action="click_cta__global_assist__how-it-works" data-ga4-label="Apply for placement" data-ga4-destination="/apply" data-ga4-zone="Z1" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-primary">Apply to the VA Pathway</Link>
               <Link href="/contact" data-ga4-action="click_cta__global_assist__how-it-works" data-ga4-label="Ask a question" data-ga4-destination="/contact" data-ga4-zone="Z1" data-ga4-page-type="SECTION" data-ga4-ia-level="2" data-ga4-element-type="button" className="instr-btn-ghost">Ask a question</Link>
             </div>
           </div>
@@ -105,7 +105,7 @@ export default function HowItWorksPage() {
               <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#0d5c63] underline-offset-4 hover:underline">
                 academy.tantaglobal.com
               </a>
-              . The placement workflow here only opens after the academy step has been completed.
+              . Employer matching only opens after the academy step has been completed and certified VAs are available.
             </p>
           </div>
         </div>

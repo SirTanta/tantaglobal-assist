@@ -128,7 +128,7 @@ export const FAQ_KB = [
   {
     topic: "How do I contact the right person?",
     answer:
-      "Employer questions: employers@tantaglobal.com. Candidate questions: candidates@tantaglobal.com. General: hello@tantaglobal.com. Or use the form at /contact.",
+      "Email info@tanta-holdings.com or use the form at /contact.",
   },
   {
     topic: "Who runs TGA Assist?",

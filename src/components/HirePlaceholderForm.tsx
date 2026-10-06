@@ -141,11 +141,11 @@ export default function HirePlaceholderForm() {
           <p className="text-sm" style={{ color: "#0D5C63" }}>
             <strong>Form coming soon.</strong> In the meantime, email us at{" "}
             <a
-              href="mailto:hire@tantaglobal.com"
+              href="mailto:info@tanta-holdings.com"
               style={{ color: "#0D5C63" }}
               className="font-semibold underline"
             >
-              hire@tantaglobal.com
+              info@tanta-holdings.com
             </a>{" "}
             with your requirements.
           </p>

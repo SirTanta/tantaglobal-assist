@@ -92,7 +92,7 @@ export default function HireForm() {
       const msg =
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again or email hire@tantaglobal.com.";
+          : "Something went wrong. Please try again or email info@tanta-holdings.com.";
       setState({ status: "error", errorMessage: msg });
     }
   }

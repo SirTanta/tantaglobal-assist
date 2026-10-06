@@ -80,7 +80,7 @@ function generateFallbackReply(prompt: string): string {
     return "Tala here. For a scoped conversation: employers submit a brief at /hire, candidates apply at /apply. General contact form is at /contact. I don't book calls directly — the brief or application is what lets the team match the right person to talk to.";
   }
   if (/(contact|reach (out|you)|email|phone|talk to (a |the )?(human|team|person)|speak (with|to))/i.test(t)) {
-    return "Tala here. Employer questions go to employers@tantaglobal.com, candidate questions to candidates@tantaglobal.com, general to hello@tantaglobal.com — or use the form at /contact. If you tell me which side you're on, I can point you more precisely.";
+    return "Tala here. Email info@tanta-holdings.com or use the form at /contact. If you tell me which side you're on, I can point you more precisely.";
   }
 
   // ─── Specific-case prediction / guarantee guards ───────────────────

@@ -27,7 +27,7 @@ const groups: Array<{ title: string; description: string; links: SitemapLink[] }
     description: "An overview of how TantaGlobal Assist works and who we support.",
     links: [
       { href: "/", label: "Home", description: "Choose an employer or candidate path." },
-      { href: "/how-it-works", label: "How it works", description: "Understand the placement process." },
+      { href: "/how-it-works", label: "How it works", description: "Understand the pathway and waitlist process." },
       { href: "/about", label: "About", description: "Meet the TantaGlobal Assist approach." },
     ],
   },
@@ -42,9 +42,9 @@ const groups: Array<{ title: string; description: string; links: SitemapLink[] }
   },
   {
     title: "For candidates",
-    description: "Prepare for placement, then begin an application when ready.",
+    description: "Prepare through the certification pathway, then begin an application when ready.",
     links: [
-      { href: "/apply", label: "Apply for placement", description: "Start a candidate application." },
+      { href: "/apply", label: "Apply to the VA Pathway", description: "Start a candidate application." },
       { href: site.academyUrl, label: "TGA Academy", description: "Explore certification-led training.", external: true },
       { href: "/contact", label: "Candidate support", description: "Get help with a candidate question." },
     ],
@@ -75,7 +75,7 @@ export default function SitemapPage() {
               Find the right next step.
             </h1>
             <p className="mt-5 font-sans text-lg leading-relaxed text-instruments-shadow max-w-2xl">
-              Explore the real TantaGlobal Assist routes for hiring, placement, guidance, and support.
+              Explore the real TantaGlobal Assist routes for the employer waitlist, the certification pathway, guidance, and support.
             </p>
           </div>
         </div>

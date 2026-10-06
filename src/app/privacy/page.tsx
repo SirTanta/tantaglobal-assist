@@ -44,8 +44,8 @@ export default function PrivacyPage() {
             <p className="eyebrow">How it is used</p>
             <h2 className="mt-3">To respond, route, and review submissions.</h2>
             <p className="mt-4 leading-8 text-slate-600">
-              Submitted information is used to respond to inquiries and support the placement workflow.
-              If you want data removed or corrected, contact {site.emailGeneral}.
+              Submitted information is used to respond to inquiries and support the waitlist and application workflow.
+              If you want data removed or corrected, contact {site.email}.
             </p>
           </div>
         </div>

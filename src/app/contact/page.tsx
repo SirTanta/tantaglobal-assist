@@ -35,25 +35,28 @@ export default function ContactPage() {
           {[
             {
               title: 'Employers',
-              body: 'Questions about role briefs, the employer waitlist, or the placement workflow.',
-              email: site.emailEmployer,
+              body: 'Questions about role briefs or the employer waitlist.',
+              email: site.email,
+              subject: 'Employer question',
             },
             {
               title: 'Candidates',
-              body: 'Questions about the application path, academy step, or placement expectations.',
-              email: site.emailCandidates,
+              body: 'Questions about the certification pathway application or the academy step.',
+              email: site.email,
+              subject: 'Candidate question',
             },
             {
               title: 'General',
               body: 'Partnerships, general questions, and anything that does not fit the two routes above.',
-              email: site.emailGeneral,
+              email: site.email,
+              subject: 'General question',
             },
           ].map((card) => (
             <div key={card.title} className="surface p-6">
               <p className="eyebrow">Direct route</p>
               <h2 className="mt-3 text-2xl">{card.title}</h2>
               <p className="mt-3 leading-7 text-slate-600">{card.body}</p>
-              <a className="mt-5 inline-flex font-semibold text-[#0d5c63] underline-offset-4 hover:underline" href={`mailto:${card.email}`}>
+              <a className="mt-5 inline-flex font-semibold text-[#0d5c63] underline-offset-4 hover:underline" href={`mailto:${card.email}?subject=${encodeURIComponent(card.subject)}`}>
                 {card.email}
               </a>
             </div>

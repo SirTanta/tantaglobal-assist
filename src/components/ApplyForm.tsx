@@ -100,7 +100,7 @@ export default function ApplyForm() {
       const msg =
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again or email apply@tantaglobal.com.";
+          : "Something went wrong. Please try again or email info@tanta-holdings.com.";
       setState({ status: "error", errorMessage: msg });
     }
   }
@@ -145,7 +145,7 @@ export default function ApplyForm() {
             Candidate updates, free
           </p>
           <p className="text-xs mb-3" style={{ color: "#3D3932" }}>
-            Get practical readiness tips and placement updates while you wait.
+            Get practical readiness tips and pathway updates while you wait.
           </p>
           {newsletterStatus === "success" ? (
             <p className="text-xs" style={{ color: "#16a34a" }}>You&apos;re subscribed. Check your inbox.</p>
