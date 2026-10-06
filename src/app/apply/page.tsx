@@ -5,9 +5,9 @@ import ApplyForm from '@/components/ApplyForm';
 const tallyFormUrl = 'https://tally.so/r/VLVZbE';
 
 export const metadata = pageMetadata({
-  title: 'Apply for Placement',
+  title: 'Apply to the VA Pathway',
   description:
-    'Apply to TantaGlobal Assist, complete the TGA Academy certification step, and enter a certification-led virtual assistant placement pipeline for US clients.',
+    'Apply to TantaGlobal Assist and complete the TGA Academy certification step. We have not placed any VAs yet, and placement is not guaranteed for anyone.',
   path: '/apply',
   image: '/og-home.png',
 });
@@ -20,14 +20,14 @@ const breadcrumbs = breadcrumbJsonLd([
 const applicationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Virtual assistant application and placement',
+  name: 'Virtual assistant certification pathway application',
   provider: {
     '@type': 'Organization',
     name: site.name,
     url: site.url,
   },
   areaServed: 'Worldwide',
-  serviceType: 'Virtual assistant application and placement',
+  serviceType: 'Candidate application',
 };
 
 export default function ApplyPage() {

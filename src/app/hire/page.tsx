@@ -3,7 +3,7 @@ import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 import HireForm from '@/components/HireForm';
 
 export const metadata = pageMetadata({
-  title: 'Hire a Virtual Assistant',
+  title: 'Employer Waitlist',
   description:
     'Tell TantaGlobal Assist about the role, hours, and tools you need covered. We are building our certified VA pool and will contact you when matching opens.',
   path: '/hire',
@@ -18,14 +18,14 @@ const breadcrumbs = breadcrumbJsonLd([
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Virtual assistant placement',
+  name: 'Employer waitlist for certified virtual assistants',
   provider: {
     '@type': 'Organization',
     name: site.name,
     url: site.url,
   },
   areaServed: 'Worldwide',
-  serviceType: 'Virtual assistant placement',
+  serviceType: 'Employer waitlist',
 };
 
 export default function HirePage() {

@@ -4,7 +4,7 @@ import { pageMetadata, breadcrumbJsonLd, site } from '@/lib/seo';
 export const metadata = pageMetadata({
   title: 'About',
   description:
-    'TantaGlobal Assist connects training, screening, and placement so US businesses can work toward hiring dependable virtual assistants. Join our waitlist.',
+    'TantaGlobal Assist is building a certification pathway for virtual assistants. Employers can join our waitlist while we build our pool; no VAs placed yet.',
   path: '/about',
   image: '/og-home.png',
 });
